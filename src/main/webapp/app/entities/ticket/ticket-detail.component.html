@@ -48,11 +48,9 @@
                 <a [routerLink]="['/request', ticket.ticketRequst?.id]">{{ticket.ticketRequst?.id}}</a>
             </div>
         </dd>
-        <dt><span>Employee Request</span></dt>
+        <dt><span>User</span></dt>
         <dd>
-            <div *ngIf="ticket.employeeRequest">
-                <a [routerLink]="['/employee', ticket.employeeRequest?.id]">{{ticket.employeeRequest?.id}}</a>
-            </div>
+            {{ticket.user?.login}}
         </dd>
     </dl>
 

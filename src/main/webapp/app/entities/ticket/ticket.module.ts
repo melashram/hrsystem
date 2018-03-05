@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { HrsystemSharedModule } from '../../shared';
+import { HrsystemAdminModule } from '../../admin/admin.module';
 import {
     TicketService,
     TicketPopupService,
@@ -23,6 +24,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         HrsystemSharedModule,
+        HrsystemAdminModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [

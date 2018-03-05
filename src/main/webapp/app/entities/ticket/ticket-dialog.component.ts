@@ -11,7 +11,7 @@ import { TicketPopupService } from './ticket-popup.service';
 import { TicketService } from './ticket.service';
 import { HumanResourceUser, HumanResourceUserService } from '../human-resource-user';
 import { Request, RequestService } from '../request';
-import { Employee, EmployeeService } from '../employee';
+import { User, UserService } from '../../shared';
 
 @Component({
     selector: 'jhi-ticket-dialog',
@@ -26,7 +26,7 @@ export class TicketDialogComponent implements OnInit {
 
     ticketrequsts: Request[];
 
-    employees: Employee[];
+    users: User[];
     acceptanceDateDp: any;
 
     constructor(
@@ -35,7 +35,7 @@ export class TicketDialogComponent implements OnInit {
         private ticketService: TicketService,
         private humanResourceUserService: HumanResourceUserService,
         private requestService: RequestService,
-        private employeeService: EmployeeService,
+        private userService: UserService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -68,8 +68,8 @@ export class TicketDialogComponent implements OnInit {
                         }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
                 }
             }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.employeeService.query()
-            .subscribe((res: HttpResponse<Employee[]>) => { this.employees = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.userService.query()
+            .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -114,7 +114,7 @@ export class TicketDialogComponent implements OnInit {
         return item.id;
     }
 
-    trackEmployeeById(index: number, item: Employee) {
+    trackUserById(index: number, item: User) {
         return item.id;
     }
 }

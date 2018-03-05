@@ -3,6 +3,7 @@ package com.hrsystem.web.rest;
 import com.hrsystem.HrsystemApp;
 
 import com.hrsystem.domain.Ticket;
+import com.hrsystem.domain.User;
 import com.hrsystem.repository.TicketRepository;
 import com.hrsystem.web.rest.errors.ExceptionTranslator;
 
@@ -112,6 +113,11 @@ public class TicketResourceIntTest {
             .acceptanceDate(DEFAULT_ACCEPTANCE_DATE)
             .ticketStatus(DEFAULT_TICKET_STATUS)
             .description(DEFAULT_DESCRIPTION);
+        // Add required entity
+        User user = UserResourceIntTest.createEntity(em);
+        em.persist(user);
+        em.flush();
+        ticket.setUser(user);
         return ticket;
     }
 

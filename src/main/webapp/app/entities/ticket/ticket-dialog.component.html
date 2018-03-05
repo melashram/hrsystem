@@ -28,6 +28,13 @@
                 [(ngModel)]="ticket.comment" />
         </div>
         <div class="form-group">
+            <label class="form-control-label" for="field_creationdate">Creationdate</label>
+            <div class="d-flex">
+                <input id="field_creationdate" type="datetime-local" class="form-control" name="creationdate" [(ngModel)]="ticket.creationdate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
             <label class="form-control-label" for="field_requestStatus">Request Status</label>
             <input type="text" class="form-control" name="requestStatus" id="field_requestStatus"
                 [(ngModel)]="ticket.requestStatus" />
@@ -68,11 +75,17 @@
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_employeeRequest">Employee Request</label>
-            <select class="form-control" id="field_employeeRequest" name="employeeRequest" [(ngModel)]="ticket.employeeRequest" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="employeeOption.id === ticket.employeeRequest?.id ? ticket.employeeRequest : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.id}}</option>
+            <label class="form-control-label" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="ticket.user"  required>
+                <option *ngIf="!editForm.value.user" [ngValue]="null" selected></option>
+                <option [ngValue]="userOption.id === ticket.user?.id ? ticket.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
             </select>
+        </div>
+        <div [hidden]="!(editForm.controls.user?.dirty && editForm.controls.user?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.user?.errors?.required">
+                This field is required.
+            </small>
         </div>
     </div>
     <div class="modal-footer">

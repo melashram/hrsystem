@@ -27,7 +27,7 @@
             <th><span>Description</span></th>
             <th><span>Assigend To</span></th>
             <th><span>Ticket Requst</span></th>
-            <th><span>Employee Request</span></th>
+            <th><span>User</span></th>
             <th></th>
             </tr>
             </thead>
@@ -53,9 +53,7 @@
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="ticket.employeeRequest">
-                        <a [routerLink]="['../employee', ticket.employeeRequest?.id ]" >{{ticket.employeeRequest?.id}}</a>
-                    </div>
+                    {{ticket.user?.login}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

@@ -18,10 +18,15 @@
             "otherEntityRelationshipName": "ticket"
         },
         {
+            "relationshipName": "user",
+            "otherEntityName": "user",
             "relationshipType": "many-to-one",
-            "relationshipName": "employeeRequest",
-            "otherEntityName": "employee",
-            "otherEntityField": "id"
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "ticket"
         }
     ],
     "fields": [
@@ -59,9 +64,9 @@
         }
     ],
     "changelogDate": "20180305083017",
-    "entityTableName": "ticket",
     "dto": "no",
-    "pagination": "no",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "ticket",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }

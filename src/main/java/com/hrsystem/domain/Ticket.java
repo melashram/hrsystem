@@ -2,6 +2,7 @@ package com.hrsystem.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -53,8 +54,9 @@ public class Ticket implements Serializable {
     @JoinColumn(unique = true)
     private Request ticketRequst;
 
-    @ManyToOne
-    private Employee employeeRequest;
+    @ManyToOne(optional = false)
+    @NotNull
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -195,17 +197,17 @@ public class Ticket implements Serializable {
         this.ticketRequst = request;
     }
 
-    public Employee getEmployeeRequest() {
-        return employeeRequest;
+    public User getUser() {
+        return user;
     }
 
-    public Ticket employeeRequest(Employee employee) {
-        this.employeeRequest = employee;
+    public Ticket user(User user) {
+        this.user = user;
         return this;
     }
 
-    public void setEmployeeRequest(Employee employee) {
-        this.employeeRequest = employee;
+    public void setUser(User user) {
+        this.user = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
