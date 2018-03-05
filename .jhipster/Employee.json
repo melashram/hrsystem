@@ -1,0 +1,72 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "employee"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "personalPhoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "workPhoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dOB",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "hireDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "socialInsuranceNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nationality",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nationalIdNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "passportNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cibAcountNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cityCountry",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "homeAddress",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180305083012",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "employee",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

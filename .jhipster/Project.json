@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "projectName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectCompany",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectCity",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180302145012",
+    "entityTableName": "project",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

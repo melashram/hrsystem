@@ -1,0 +1,84 @@
+<div>
+    <h2>
+        <span>Employees</span>
+        <button class="btn btn-primary float-right jh-create-entity create-employee" [routerLink]="['/', { outlets: { popup: ['employee-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Employee
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="employees">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Personal Phone Number</span></th>
+            <th><span>Work Phone Number</span></th>
+            <th><span>D OB</span></th>
+            <th><span>Hire Date</span></th>
+            <th><span>Title</span></th>
+            <th><span>Social Insurance Number</span></th>
+            <th><span>Nationality</span></th>
+            <th><span>National Id Number</span></th>
+            <th><span>Passport Number</span></th>
+            <th><span>Cib Acount Number</span></th>
+            <th><span>City Country</span></th>
+            <th><span>Home Address</span></th>
+            <th><span>User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let employee of employees ;trackBy: trackId">
+                <td><a [routerLink]="['../employee', employee.id ]">{{employee.id}}</a></td>
+                <td>{{employee.personalPhoneNumber}}</td>
+                <td>{{employee.workPhoneNumber}}</td>
+                <td>{{employee.dOB | date:'mediumDate'}}</td>
+                <td>{{employee.hireDate | date:'mediumDate'}}</td>
+                <td>{{employee.title}}</td>
+                <td>{{employee.socialInsuranceNumber}}</td>
+                <td>{{employee.nationality}}</td>
+                <td>{{employee.nationalIdNumber}}</td>
+                <td>{{employee.passportNumber}}</td>
+                <td>{{employee.cibAcountNumber}}</td>
+                <td>{{employee.cityCountry}}</td>
+                <td>{{employee.homeAddress}}</td>
+                <td>
+                    {{employee.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../employee', employee.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'employee/'+ employee.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'employee/'+ employee.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

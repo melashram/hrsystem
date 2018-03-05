@@ -1,0 +1,74 @@
+
+<div *ngIf="employee">
+    <h2><span>Employee</span> {{employee.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Personal Phone Number</span></dt>
+        <dd>
+            <span>{{employee.personalPhoneNumber}}</span>
+        </dd>
+        <dt><span>Work Phone Number</span></dt>
+        <dd>
+            <span>{{employee.workPhoneNumber}}</span>
+        </dd>
+        <dt><span>D OB</span></dt>
+        <dd>
+            <span>{{employee.dOB | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Hire Date</span></dt>
+        <dd>
+            <span>{{employee.hireDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Title</span></dt>
+        <dd>
+            <span>{{employee.title}}</span>
+        </dd>
+        <dt><span>Social Insurance Number</span></dt>
+        <dd>
+            <span>{{employee.socialInsuranceNumber}}</span>
+        </dd>
+        <dt><span>Nationality</span></dt>
+        <dd>
+            <span>{{employee.nationality}}</span>
+        </dd>
+        <dt><span>National Id Number</span></dt>
+        <dd>
+            <span>{{employee.nationalIdNumber}}</span>
+        </dd>
+        <dt><span>Passport Number</span></dt>
+        <dd>
+            <span>{{employee.passportNumber}}</span>
+        </dd>
+        <dt><span>Cib Acount Number</span></dt>
+        <dd>
+            <span>{{employee.cibAcountNumber}}</span>
+        </dd>
+        <dt><span>City Country</span></dt>
+        <dd>
+            <span>{{employee.cityCountry}}</span>
+        </dd>
+        <dt><span>Home Address</span></dt>
+        <dd>
+            <span>{{employee.homeAddress}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{employee.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'employee/'+ employee.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

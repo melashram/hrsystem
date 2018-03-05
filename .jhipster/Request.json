@@ -1,0 +1,16 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "requestType",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180305083015",
+    "entityTableName": "request",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

@@ -1,0 +1,52 @@
+entity Employee {
+	personalPhoneNumber String,
+    workPhoneNumber String,
+    DOB LocalDate,
+	hireDate LocalDate,
+    title String,
+    socialInsuranceNumber String,
+    nationality String,
+    nationalIdNumber String,
+    passportNumber String,
+    cibAcountNumber String,
+    cityCountry String,
+    homeAddress String
+    
+}
+
+entity ItUser{
+	itPositon String
+}
+entity HumanResourceUser{
+	humanResourcesPosition String
+}
+
+entity Request{
+	requestType String
+}
+
+entity Project{
+	projectName String,
+    description String,
+    projectAddress String,
+    projectCompany String,
+    projectCity String
+}
+entity Ticket {
+	reason String,
+    toWhom String,
+    comment String,
+    creationdate Instant, 
+    requestStatus String,
+    acceptanceDate LocalDate,
+    ticketStatus String,
+    description String,
+}
+
+relationship OneToOne{
+    Ticket {assigendTo} to  HumanResourceUser,
+    Ticket {ticketRequst} to Request
+}
+relationship ManyToOne{
+	Ticket{employeeRequest} to Employee
+}

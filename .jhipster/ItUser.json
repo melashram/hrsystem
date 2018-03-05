@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "itUser"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "itPositon",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180305083013",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "it_user",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}
