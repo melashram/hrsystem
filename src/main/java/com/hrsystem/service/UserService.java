@@ -2,9 +2,11 @@ package com.hrsystem.service;
 
 import com.hrsystem.config.CacheConfiguration;
 import com.hrsystem.domain.Authority;
+import com.hrsystem.domain.Employee;
 import com.hrsystem.domain.User;
 import com.hrsystem.repository.AuthorityRepository;
 import com.hrsystem.config.Constants;
+import com.hrsystem.repository.EmployeeRepository;
 import com.hrsystem.repository.UserRepository;
 import com.hrsystem.security.AuthoritiesConstants;
 import com.hrsystem.security.SecurityUtils;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,11 +46,15 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private final EmployeeRepository employeeRepository;
+
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager ,EmployeeRepository employeeRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.employeeRepository = employeeRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -91,7 +98,11 @@ public class UserService {
             });
     }
 
-    public User registerUser(UserDTO userDTO, String password) {
+    public User registerUser(UserDTO userDTO, String password , String personalPhoneNumber  ,
+                             String workPhoneNumber , LocalDate dob , LocalDate hireDate , String title ,
+                             String socialInsuranceNumber , String nationality , String nationalIdNumber ,
+                             String passportNumber , String cibAccountNumber , String cityCountry,
+                             String homeAddress) {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
@@ -115,6 +126,29 @@ public class UserService {
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(newUser.getEmail());
         log.debug("Created Information for User: {}", newUser);
+
+        //User Extra details
+
+        Employee newEmployee = new Employee();
+
+        newEmployee.setUser(newUser);
+        newEmployee.setPersonalPhoneNumber("1111");
+        newEmployee.setWorkPhoneNumber("1111");
+        newEmployee.setdOB(LocalDate.now());
+        newEmployee.setHireDate(LocalDate.now());
+        newEmployee.setTitle("Junior");
+        newEmployee.setSocialInsuranceNumber("2222");
+        newEmployee.setNationality("Egyptian");
+        newEmployee.setNationalIdNumber("4567");
+        newEmployee.setPassportNumber("1234");
+        newEmployee.setCibAcountNumber("564");
+        newEmployee.setCityCountry("Cairo");
+        newEmployee.setHomeAddress("New Cairo");
+
+        employeeRepository.save(newEmployee);
+
+        log.debug("Created Information for Employee: {}", newEmployee);
+
         return newUser;
     }
 

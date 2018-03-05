@@ -2,7 +2,6 @@ package com.hrsystem.domain;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -18,7 +17,6 @@ public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "personal_phone_number")
@@ -57,9 +55,8 @@ public class Employee implements Serializable {
     @Column(name = "home_address")
     private String homeAddress;
 
-    @OneToOne(optional = false)
-    @NotNull
-    @JoinColumn(unique = true)
+    @OneToOne
+    @MapsId
     private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -231,14 +228,10 @@ public class Employee implements Serializable {
         return user;
     }
 
-    public Employee user(User user) {
-        this.user = user;
-        return this;
-    }
-
     public void setUser(User user) {
         this.user = user;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

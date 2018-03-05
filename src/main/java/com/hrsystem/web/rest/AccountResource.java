@@ -61,7 +61,11 @@ public class AccountResource {
         }
         userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
-        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword() , managedUserVM.getPersonalPhoneNumber() ,
+            managedUserVM.getWorkPhoneNumber() , managedUserVM.getDob() , managedUserVM.getHireDate() , managedUserVM.getTitle() ,
+            managedUserVM.getSocialInsuranceNumber() , managedUserVM.getNationality() , managedUserVM.getNationalIdNumber() ,
+            managedUserVM.getPassportNumber() , managedUserVM.getCibAccountNumber() , managedUserVM.getCityCountry(),
+            managedUserVM.getHomeAddress());
         mailService.sendActivationEmail(user);
     }
 
