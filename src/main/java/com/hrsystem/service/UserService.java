@@ -136,7 +136,7 @@ public class UserService {
         newEmployee.setWorkPhoneNumber("1111");
         newEmployee.setdOB(LocalDate.now());
         newEmployee.setHireDate(LocalDate.now());
-        newEmployee.setTitle("Junior");
+        newEmployee.setTitle(title);
         newEmployee.setSocialInsuranceNumber("2222");
         newEmployee.setNationality("Egyptian");
         newEmployee.setNationalIdNumber("4567");
