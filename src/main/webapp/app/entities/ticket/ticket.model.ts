@@ -7,7 +7,6 @@ export class Ticket implements BaseEntity {
         public toWhom?: string,
         public comment?: string,
         public creationdate?: any,
-        public requestStatus?: string,
         public acceptanceDate?: any,
         public ticketStatus?: string,
         public description?: string,

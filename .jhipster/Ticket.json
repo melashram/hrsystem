@@ -47,10 +47,6 @@
             "fieldType": "Instant"
         },
         {
-            "fieldName": "requestStatus",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "acceptanceDate",
             "fieldType": "LocalDate"
         },

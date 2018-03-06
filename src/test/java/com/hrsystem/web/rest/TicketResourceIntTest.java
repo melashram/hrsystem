@@ -55,9 +55,6 @@ public class TicketResourceIntTest {
     private static final Instant DEFAULT_CREATIONDATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATIONDATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_REQUEST_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_REQUEST_STATUS = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_ACCEPTANCE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_ACCEPTANCE_DATE = LocalDate.now(ZoneId.systemDefault());
 
@@ -109,7 +106,6 @@ public class TicketResourceIntTest {
             .toWhom(DEFAULT_TO_WHOM)
             .comment(DEFAULT_COMMENT)
             .creationdate(DEFAULT_CREATIONDATE)
-            .requestStatus(DEFAULT_REQUEST_STATUS)
             .acceptanceDate(DEFAULT_ACCEPTANCE_DATE)
             .ticketStatus(DEFAULT_TICKET_STATUS)
             .description(DEFAULT_DESCRIPTION);
@@ -145,7 +141,6 @@ public class TicketResourceIntTest {
         assertThat(testTicket.getToWhom()).isEqualTo(DEFAULT_TO_WHOM);
         assertThat(testTicket.getComment()).isEqualTo(DEFAULT_COMMENT);
         assertThat(testTicket.getCreationdate()).isEqualTo(DEFAULT_CREATIONDATE);
-        assertThat(testTicket.getRequestStatus()).isEqualTo(DEFAULT_REQUEST_STATUS);
         assertThat(testTicket.getAcceptanceDate()).isEqualTo(DEFAULT_ACCEPTANCE_DATE);
         assertThat(testTicket.getTicketStatus()).isEqualTo(DEFAULT_TICKET_STATUS);
         assertThat(testTicket.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
@@ -185,7 +180,6 @@ public class TicketResourceIntTest {
             .andExpect(jsonPath("$.[*].toWhom").value(hasItem(DEFAULT_TO_WHOM.toString())))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())))
             .andExpect(jsonPath("$.[*].creationdate").value(hasItem(DEFAULT_CREATIONDATE.toString())))
-            .andExpect(jsonPath("$.[*].requestStatus").value(hasItem(DEFAULT_REQUEST_STATUS.toString())))
             .andExpect(jsonPath("$.[*].acceptanceDate").value(hasItem(DEFAULT_ACCEPTANCE_DATE.toString())))
             .andExpect(jsonPath("$.[*].ticketStatus").value(hasItem(DEFAULT_TICKET_STATUS.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
@@ -206,7 +200,6 @@ public class TicketResourceIntTest {
             .andExpect(jsonPath("$.toWhom").value(DEFAULT_TO_WHOM.toString()))
             .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT.toString()))
             .andExpect(jsonPath("$.creationdate").value(DEFAULT_CREATIONDATE.toString()))
-            .andExpect(jsonPath("$.requestStatus").value(DEFAULT_REQUEST_STATUS.toString()))
             .andExpect(jsonPath("$.acceptanceDate").value(DEFAULT_ACCEPTANCE_DATE.toString()))
             .andExpect(jsonPath("$.ticketStatus").value(DEFAULT_TICKET_STATUS.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
@@ -236,7 +229,6 @@ public class TicketResourceIntTest {
             .toWhom(UPDATED_TO_WHOM)
             .comment(UPDATED_COMMENT)
             .creationdate(UPDATED_CREATIONDATE)
-            .requestStatus(UPDATED_REQUEST_STATUS)
             .acceptanceDate(UPDATED_ACCEPTANCE_DATE)
             .ticketStatus(UPDATED_TICKET_STATUS)
             .description(UPDATED_DESCRIPTION);
@@ -254,7 +246,6 @@ public class TicketResourceIntTest {
         assertThat(testTicket.getToWhom()).isEqualTo(UPDATED_TO_WHOM);
         assertThat(testTicket.getComment()).isEqualTo(UPDATED_COMMENT);
         assertThat(testTicket.getCreationdate()).isEqualTo(UPDATED_CREATIONDATE);
-        assertThat(testTicket.getRequestStatus()).isEqualTo(UPDATED_REQUEST_STATUS);
         assertThat(testTicket.getAcceptanceDate()).isEqualTo(UPDATED_ACCEPTANCE_DATE);
         assertThat(testTicket.getTicketStatus()).isEqualTo(UPDATED_TICKET_STATUS);
         assertThat(testTicket.getDescription()).isEqualTo(UPDATED_DESCRIPTION);

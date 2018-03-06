@@ -34,9 +34,6 @@ public class Ticket implements Serializable {
     @Column(name = "creationdate")
     private Instant creationdate;
 
-    @Column(name = "request_status")
-    private String requestStatus;
-
     @Column(name = "acceptance_date")
     private LocalDate acceptanceDate;
 
@@ -117,19 +114,6 @@ public class Ticket implements Serializable {
 
     public void setCreationdate(Instant creationdate) {
         this.creationdate = creationdate;
-    }
-
-    public String getRequestStatus() {
-        return requestStatus;
-    }
-
-    public Ticket requestStatus(String requestStatus) {
-        this.requestStatus = requestStatus;
-        return this;
-    }
-
-    public void setRequestStatus(String requestStatus) {
-        this.requestStatus = requestStatus;
     }
 
     public LocalDate getAcceptanceDate() {
@@ -239,7 +223,6 @@ public class Ticket implements Serializable {
             ", toWhom='" + getToWhom() + "'" +
             ", comment='" + getComment() + "'" +
             ", creationdate='" + getCreationdate() + "'" +
-            ", requestStatus='" + getRequestStatus() + "'" +
             ", acceptanceDate='" + getAcceptanceDate() + "'" +
             ", ticketStatus='" + getTicketStatus() + "'" +
             ", description='" + getDescription() + "'" +
