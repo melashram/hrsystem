@@ -132,18 +132,18 @@ public class UserService {
         Employee newEmployee = new Employee();
 
         newEmployee.setUser(newUser);
-        newEmployee.setPersonalPhoneNumber("1111");
-        newEmployee.setWorkPhoneNumber("1111");
+        newEmployee.setPersonalPhoneNumber(personalPhoneNumber);
+        newEmployee.setWorkPhoneNumber(workPhoneNumber);
         newEmployee.setdOB(LocalDate.now());
         newEmployee.setHireDate(LocalDate.now());
         newEmployee.setTitle(title);
-        newEmployee.setSocialInsuranceNumber("2222");
-        newEmployee.setNationality("Egyptian");
-        newEmployee.setNationalIdNumber("4567");
-        newEmployee.setPassportNumber("1234");
-        newEmployee.setCibAcountNumber("564");
-        newEmployee.setCityCountry("Cairo");
-        newEmployee.setHomeAddress("New Cairo");
+        newEmployee.setSocialInsuranceNumber(socialInsuranceNumber);
+        newEmployee.setNationality(nationality);
+        newEmployee.setNationalIdNumber(nationalIdNumber);
+        newEmployee.setPassportNumber(passportNumber);
+        newEmployee.setCibAcountNumber(cibAccountNumber);
+        newEmployee.setCityCountry(cityCountry);
+        newEmployee.setHomeAddress(homeAddress);
 
         employeeRepository.save(newEmployee);
 
@@ -151,6 +151,56 @@ public class UserService {
 
         return newUser;
     }
+
+//    public User registerUser(UserDTO userDTO, String password , Employee employee) {
+//
+//        User newUser = new User();
+//        Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+//        Set<Authority> authorities = new HashSet<>();
+//        String encryptedPassword = passwordEncoder.encode(password);
+//        newUser.setLogin(userDTO.getLogin());
+//        // new user gets initially a generated password
+//        newUser.setPassword(encryptedPassword);
+//        newUser.setFirstName(userDTO.getFirstName());
+//        newUser.setLastName(userDTO.getLastName());
+//        newUser.setEmail(userDTO.getEmail());
+//        newUser.setImageUrl(userDTO.getImageUrl());
+//        newUser.setLangKey(userDTO.getLangKey());
+//        // new user is not active
+//        newUser.setActivated(false);
+//        // new user gets registration key
+//        newUser.setActivationKey(RandomUtil.generateActivationKey());
+//        authorities.add(authority);
+//        newUser.setAuthorities(authorities);
+//        userRepository.save(newUser);
+//        cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());
+//        cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(newUser.getEmail());
+//        log.debug("Created Information for User: {}", newUser);
+//
+//        //User Extra details
+//
+//        Employee newEmployee = new Employee();
+//
+//        newEmployee.setUser(newUser);
+//        newEmployee.setPersonalPhoneNumber("1111");
+//        newEmployee.setWorkPhoneNumber("1111");
+//        newEmployee.setdOB(LocalDate.now());
+//        newEmployee.setHireDate(LocalDate.now());
+//        newEmployee.setTitle(employee.getTitle());
+//        newEmployee.setSocialInsuranceNumber("2222");
+//        newEmployee.setNationality("Egyptian");
+//        newEmployee.setNationalIdNumber("4567");
+//        newEmployee.setPassportNumber("1234");
+//        newEmployee.setCibAcountNumber("564");
+//        newEmployee.setCityCountry("Cairo");
+//        newEmployee.setHomeAddress("New Cairo");
+//
+//        employeeRepository.save(newEmployee);
+//
+//        log.debug("Created Information for Employee: {}", newEmployee);
+//
+//        return newUser;
+//    }
 
     public User createUser(UserDTO userDTO) {
         User user = new User();

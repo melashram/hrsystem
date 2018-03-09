@@ -2,6 +2,7 @@ package com.hrsystem.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 
+import com.hrsystem.domain.Employee;
 import com.hrsystem.domain.User;
 import com.hrsystem.repository.UserRepository;
 import com.hrsystem.security.SecurityUtils;
@@ -66,6 +67,10 @@ public class AccountResource {
             managedUserVM.getSocialInsuranceNumber() , managedUserVM.getNationality() , managedUserVM.getNationalIdNumber() ,
             managedUserVM.getPassportNumber() , managedUserVM.getCibAccountNumber() , managedUserVM.getCityCountry(),
             managedUserVM.getHomeAddress());
+//        Employee employee = new Employee();
+//        employee.getTitle();
+//        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword() , employee);
+
         mailService.sendActivationEmail(user);
     }
 
