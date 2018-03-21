@@ -28,6 +28,7 @@ import {
     ErrorComponent
 } from './layouts';
 import { TicketAvailableComponent } from './ticket-available/ticket-available.component';
+import { CreateTicketComponent } from './create-ticket/create-ticket.component';
 
 @NgModule({
     imports: [
@@ -48,6 +49,7 @@ import { TicketAvailableComponent } from './ticket-available/ticket-available.co
         ErrorComponent,
         PageRibbonComponent,
         FooterComponent,
+        CreateTicketComponent,
     ],
     providers: [
         ProfileService,
