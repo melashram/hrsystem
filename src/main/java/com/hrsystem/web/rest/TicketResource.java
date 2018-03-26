@@ -14,18 +14,12 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.ShellProperties;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.service.OAuth;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.security.Principal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -59,19 +53,22 @@ public class TicketResource {
      */
     @PostMapping("/tickets")
     @Timed
-    public ResponseEntity<Ticket> createTicket(@Valid @RequestBody Ticket ticket) throws URISyntaxException {
+    public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) throws URISyntaxException {
         log.debug("REST request to save Ticket : {}", ticket);
         if (ticket.getId() != null) {
             throw new BadRequestAlertException("A new ticket cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
         ticket.setCreationdate(Instant.now());
 
         final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
         Optional<User> currentLoggedInUser = userRepository.findOneByLogin(userLogin);
 
-//        User user = currentLoggedInUser.map()
-//
-//        ticket.setUser((User) currentLoggedInUser);
+        User emptyUser = new User();
+        User userLoggedIn = currentLoggedInUser.orElse(emptyUser);
+        userLoggedIn.setAuthorities(null);
+
+        ticket.setUser(userLoggedIn);
 
         Ticket result = ticketRepository.save(ticket);
         return ResponseEntity.created(new URI("/api/tickets/" + result.getId()))
@@ -90,11 +87,12 @@ public class TicketResource {
      */
     @PutMapping("/tickets")
     @Timed
-    public ResponseEntity<Ticket> updateTicket(@Valid @RequestBody Ticket ticket) throws URISyntaxException {
+    public ResponseEntity<Ticket> updateTicket(@RequestBody Ticket ticket) throws URISyntaxException {
         log.debug("REST request to update Ticket : {}", ticket);
         if (ticket.getId() == null) {
             return createTicket(ticket);
         }
+
         Ticket result = ticketRepository.save(ticket);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, ticket.getId().toString()))

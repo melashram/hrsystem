@@ -2,13 +2,11 @@ package com.hrsystem.domain;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * A Ticket.
@@ -52,8 +50,7 @@ public class Ticket implements Serializable {
     @JoinColumn(unique = true)
     private Request ticketRequst;
 
-    @ManyToOne(optional = false)
-    @NotNull
+    @ManyToOne
     private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -194,7 +191,6 @@ public class Ticket implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
