@@ -18,6 +18,7 @@
             <tr>
             <th><span>ID</span></th>
             <th><span>Request Type</span></th>
+            <th><span>Department</span></th>
             <th></th>
             </tr>
             </thead>
@@ -25,6 +26,7 @@
             <tr *ngFor="let request of requests ;trackBy: trackId">
                 <td><a [routerLink]="['../request', request.id ]">{{request.id}}</a></td>
                 <td>{{request.requestType}}</td>
+                <td>{{request.department}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

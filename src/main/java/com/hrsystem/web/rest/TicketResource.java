@@ -111,6 +111,14 @@ public class TicketResource {
         return ticketRepository.findAll();
         }
 
+
+    @GetMapping("/tickets/hrtickets")
+    @Timed
+    public List<Ticket> getAllHRTickets() {
+        log.debug("REST request to get HR Tickets");
+        return ticketRepository.findHrTickets();
+    }
+
     /**
      * GET  /tickets/:id : get the "id" ticket.
      *

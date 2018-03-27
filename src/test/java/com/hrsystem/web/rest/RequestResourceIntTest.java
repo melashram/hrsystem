@@ -41,6 +41,9 @@ public class RequestResourceIntTest {
     private static final String DEFAULT_REQUEST_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_REQUEST_TYPE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_DEPARTMENT = "AAAAAAAAAA";
+    private static final String UPDATED_DEPARTMENT = "BBBBBBBBBB";
+
     @Autowired
     private RequestRepository requestRepository;
 
@@ -79,7 +82,8 @@ public class RequestResourceIntTest {
      */
     public static Request createEntity(EntityManager em) {
         Request request = new Request()
-            .requestType(DEFAULT_REQUEST_TYPE);
+            .requestType(DEFAULT_REQUEST_TYPE)
+            .department(DEFAULT_DEPARTMENT);
         return request;
     }
 
@@ -104,6 +108,7 @@ public class RequestResourceIntTest {
         assertThat(requestList).hasSize(databaseSizeBeforeCreate + 1);
         Request testRequest = requestList.get(requestList.size() - 1);
         assertThat(testRequest.getRequestType()).isEqualTo(DEFAULT_REQUEST_TYPE);
+        assertThat(testRequest.getDepartment()).isEqualTo(DEFAULT_DEPARTMENT);
     }
 
     @Test
@@ -136,7 +141,8 @@ public class RequestResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(request.getId().intValue())))
-            .andExpect(jsonPath("$.[*].requestType").value(hasItem(DEFAULT_REQUEST_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].requestType").value(hasItem(DEFAULT_REQUEST_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].department").value(hasItem(DEFAULT_DEPARTMENT.toString())));
     }
 
     @Test
@@ -150,7 +156,8 @@ public class RequestResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(request.getId().intValue()))
-            .andExpect(jsonPath("$.requestType").value(DEFAULT_REQUEST_TYPE.toString()));
+            .andExpect(jsonPath("$.requestType").value(DEFAULT_REQUEST_TYPE.toString()))
+            .andExpect(jsonPath("$.department").value(DEFAULT_DEPARTMENT.toString()));
     }
 
     @Test
@@ -173,7 +180,8 @@ public class RequestResourceIntTest {
         // Disconnect from session so that the updates on updatedRequest are not directly saved in db
         em.detach(updatedRequest);
         updatedRequest
-            .requestType(UPDATED_REQUEST_TYPE);
+            .requestType(UPDATED_REQUEST_TYPE)
+            .department(UPDATED_DEPARTMENT);
 
         restRequestMockMvc.perform(put("/api/requests")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -185,6 +193,7 @@ public class RequestResourceIntTest {
         assertThat(requestList).hasSize(databaseSizeBeforeUpdate);
         Request testRequest = requestList.get(requestList.size() - 1);
         assertThat(testRequest.getRequestType()).isEqualTo(UPDATED_REQUEST_TYPE);
+        assertThat(testRequest.getDepartment()).isEqualTo(UPDATED_DEPARTMENT);
     }
 
     @Test

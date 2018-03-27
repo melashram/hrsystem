@@ -9,7 +9,6 @@ import { JhiEventManager } from 'ng-jhipster';
 import { Request } from './request.model';
 import { RequestPopupService } from './request-popup.service';
 import { RequestService } from './request.service';
-import {User, UserService} from "../../shared";
 
 @Component({
     selector: 'jhi-request-dialog',
@@ -19,13 +18,10 @@ export class RequestDialogComponent implements OnInit {
 
     request: Request;
     isSaving: boolean;
-    user: User;
-    authorities: any[];
 
     constructor(
         public activeModal: NgbActiveModal,
         private requestService: RequestService,
-        private userService: UserService,
         private eventManager: JhiEventManager
     ) {
     }

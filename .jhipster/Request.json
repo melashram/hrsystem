@@ -5,12 +5,16 @@
         {
             "fieldName": "requestType",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "department",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20180305083015",
-    "entityTableName": "request",
     "dto": "no",
-    "pagination": "no",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "request",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }
