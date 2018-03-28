@@ -8,40 +8,38 @@
         <dd>
             <span>{{ticket.reason}}</span>
         </dd>
-        <dt><span>To Whom</span></dt>
-        <dd>
-            <span>{{ticket.toWhom}}</span>
-        </dd>
         <dt><span>Comment</span></dt>
         <dd>
             <span>{{ticket.comment}}</span>
         </dd>
         <dt><span>Creationdate</span></dt>
         <dd>
-            <span>{{ticket.creationdate | date:'medium'}}</span>
+            <span>{{ticket.creationdate | date:'mediumDate'}}</span>
         </dd>
         <dt><span>Acceptance Date</span></dt>
         <dd>
             <span>{{ticket.acceptanceDate | date:'mediumDate'}}</span>
         </dd>
-        <dt><span>Ticket Status</span></dt>
-        <dd>
-            <span>{{ticket.ticketStatus}}</span>
-        </dd>
         <dt><span>Description</span></dt>
         <dd>
             <span>{{ticket.description}}</span>
         </dd>
-        <dt><span>Assigend To</span></dt>
+        <dt><span>Request</span></dt>
         <dd>
-            <div *ngIf="ticket.assigendTo">
-                <a [routerLink]="['/human-resource-user', ticket.assigendTo?.id]">{{ticket.assigendTo?.id}}</a>
+            <div *ngIf="ticket.request">
+                <a [routerLink]="['/request', ticket.request?.id]">{{ticket.request?.id}}</a>
             </div>
         </dd>
-        <dt><span>Ticket Requst</span></dt>
+        <dt><span>Ticket Status</span></dt>
         <dd>
-            <div *ngIf="ticket.ticketRequst">
-                <a [routerLink]="['/request', ticket.ticketRequst?.id]">{{ticket.ticketRequst?.id}}</a>
+            <div *ngIf="ticket.ticketStatus">
+                <a [routerLink]="['/ticket-status', ticket.ticketStatus?.id]">{{ticket.ticketStatus?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Assigned To</span></dt>
+        <dd>
+            <div *ngIf="ticket.assignedTo">
+                <a [routerLink]="['/human-resource-user', ticket.assignedTo?.id]">{{ticket.assignedTo?.id}}</a>
             </div>
         </dd>
         <dt><span>User</span></dt>

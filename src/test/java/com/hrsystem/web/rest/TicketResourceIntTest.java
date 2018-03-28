@@ -22,9 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
-import java.time.Instant;
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.hrsystem.web.rest.TestUtil.createFormattingConversionService;
@@ -45,20 +43,14 @@ public class TicketResourceIntTest {
     private static final String DEFAULT_REASON = "AAAAAAAAAA";
     private static final String UPDATED_REASON = "BBBBBBBBBB";
 
-    private static final String DEFAULT_TO_WHOM = "AAAAAAAAAA";
-    private static final String UPDATED_TO_WHOM = "BBBBBBBBBB";
-
     private static final String DEFAULT_COMMENT = "AAAAAAAAAA";
     private static final String UPDATED_COMMENT = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_CREATIONDATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATIONDATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final LocalDate DEFAULT_CREATIONDATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CREATIONDATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final LocalDate DEFAULT_ACCEPTANCE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_ACCEPTANCE_DATE = LocalDate.now(ZoneId.systemDefault());
-
-    private static final String DEFAULT_TICKET_STATUS = "AAAAAAAAAA";
-    private static final String UPDATED_TICKET_STATUS = "BBBBBBBBBB";
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -102,11 +94,9 @@ public class TicketResourceIntTest {
     public static Ticket createEntity(EntityManager em) {
         Ticket ticket = new Ticket()
             .reason(DEFAULT_REASON)
-            .toWhom(DEFAULT_TO_WHOM)
             .comment(DEFAULT_COMMENT)
             .creationdate(DEFAULT_CREATIONDATE)
             .acceptanceDate(DEFAULT_ACCEPTANCE_DATE)
-            .ticketStatus(DEFAULT_TICKET_STATUS)
             .description(DEFAULT_DESCRIPTION);
         return ticket;
     }
@@ -132,11 +122,9 @@ public class TicketResourceIntTest {
         assertThat(ticketList).hasSize(databaseSizeBeforeCreate + 1);
         Ticket testTicket = ticketList.get(ticketList.size() - 1);
         assertThat(testTicket.getReason()).isEqualTo(DEFAULT_REASON);
-        assertThat(testTicket.getToWhom()).isEqualTo(DEFAULT_TO_WHOM);
         assertThat(testTicket.getComment()).isEqualTo(DEFAULT_COMMENT);
         assertThat(testTicket.getCreationdate()).isEqualTo(DEFAULT_CREATIONDATE);
         assertThat(testTicket.getAcceptanceDate()).isEqualTo(DEFAULT_ACCEPTANCE_DATE);
-        assertThat(testTicket.getTicketStatus()).isEqualTo(DEFAULT_TICKET_STATUS);
         assertThat(testTicket.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
@@ -171,11 +159,9 @@ public class TicketResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ticket.getId().intValue())))
             .andExpect(jsonPath("$.[*].reason").value(hasItem(DEFAULT_REASON.toString())))
-            .andExpect(jsonPath("$.[*].toWhom").value(hasItem(DEFAULT_TO_WHOM.toString())))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())))
             .andExpect(jsonPath("$.[*].creationdate").value(hasItem(DEFAULT_CREATIONDATE.toString())))
             .andExpect(jsonPath("$.[*].acceptanceDate").value(hasItem(DEFAULT_ACCEPTANCE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].ticketStatus").value(hasItem(DEFAULT_TICKET_STATUS.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
@@ -191,11 +177,9 @@ public class TicketResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(ticket.getId().intValue()))
             .andExpect(jsonPath("$.reason").value(DEFAULT_REASON.toString()))
-            .andExpect(jsonPath("$.toWhom").value(DEFAULT_TO_WHOM.toString()))
             .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT.toString()))
             .andExpect(jsonPath("$.creationdate").value(DEFAULT_CREATIONDATE.toString()))
             .andExpect(jsonPath("$.acceptanceDate").value(DEFAULT_ACCEPTANCE_DATE.toString()))
-            .andExpect(jsonPath("$.ticketStatus").value(DEFAULT_TICKET_STATUS.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
@@ -220,11 +204,9 @@ public class TicketResourceIntTest {
         em.detach(updatedTicket);
         updatedTicket
             .reason(UPDATED_REASON)
-            .toWhom(UPDATED_TO_WHOM)
             .comment(UPDATED_COMMENT)
             .creationdate(UPDATED_CREATIONDATE)
             .acceptanceDate(UPDATED_ACCEPTANCE_DATE)
-            .ticketStatus(UPDATED_TICKET_STATUS)
             .description(UPDATED_DESCRIPTION);
 
         restTicketMockMvc.perform(put("/api/tickets")
@@ -237,11 +219,9 @@ public class TicketResourceIntTest {
         assertThat(ticketList).hasSize(databaseSizeBeforeUpdate);
         Ticket testTicket = ticketList.get(ticketList.size() - 1);
         assertThat(testTicket.getReason()).isEqualTo(UPDATED_REASON);
-        assertThat(testTicket.getToWhom()).isEqualTo(UPDATED_TO_WHOM);
         assertThat(testTicket.getComment()).isEqualTo(UPDATED_COMMENT);
         assertThat(testTicket.getCreationdate()).isEqualTo(UPDATED_CREATIONDATE);
         assertThat(testTicket.getAcceptanceDate()).isEqualTo(UPDATED_ACCEPTANCE_DATE);
-        assertThat(testTicket.getTicketStatus()).isEqualTo(UPDATED_TICKET_STATUS);
         assertThat(testTicket.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 

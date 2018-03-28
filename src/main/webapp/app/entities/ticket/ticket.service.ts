@@ -64,7 +64,7 @@ export class TicketService {
     private convertItemFromServer(ticket: Ticket): Ticket {
         const copy: Ticket = Object.assign({}, ticket);
         copy.creationdate = this.dateUtils
-            .convertDateTimeFromServer(ticket.creationdate);
+            .convertLocalDateFromServer(ticket.creationdate);
         copy.acceptanceDate = this.dateUtils
             .convertLocalDateFromServer(ticket.acceptanceDate);
         return copy;
@@ -75,8 +75,8 @@ export class TicketService {
      */
     private convert(ticket: Ticket): Ticket {
         const copy: Ticket = Object.assign({}, ticket);
-
-        copy.creationdate = this.dateUtils.toDate(ticket.creationdate);
+        copy.creationdate = this.dateUtils
+            .convertLocalDateToServer(ticket.creationdate);
         copy.acceptanceDate = this.dateUtils
             .convertLocalDateToServer(ticket.acceptanceDate);
         return copy;

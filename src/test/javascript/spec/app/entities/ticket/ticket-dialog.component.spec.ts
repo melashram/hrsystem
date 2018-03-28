@@ -9,8 +9,9 @@ import { HrsystemTestModule } from '../../../test.module';
 import { TicketDialogComponent } from '../../../../../../main/webapp/app/entities/ticket/ticket-dialog.component';
 import { TicketService } from '../../../../../../main/webapp/app/entities/ticket/ticket.service';
 import { Ticket } from '../../../../../../main/webapp/app/entities/ticket/ticket.model';
-import { HumanResourceUserService } from '../../../../../../main/webapp/app/entities/human-resource-user';
 import { RequestService } from '../../../../../../main/webapp/app/entities/request';
+import { TicketStatusService } from '../../../../../../main/webapp/app/entities/ticket-status';
+import { HumanResourceUserService } from '../../../../../../main/webapp/app/entities/human-resource-user';
 import { UserService } from '../../../../../../main/webapp/app/shared';
 
 describe('Component Tests', () => {
@@ -27,8 +28,9 @@ describe('Component Tests', () => {
                 imports: [HrsystemTestModule],
                 declarations: [TicketDialogComponent],
                 providers: [
-                    HumanResourceUserService,
                     RequestService,
+                    TicketStatusService,
+                    HumanResourceUserService,
                     UserService,
                     TicketService
                 ]

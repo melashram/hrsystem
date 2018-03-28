@@ -4,7 +4,6 @@ package com.hrsystem.domain;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -24,31 +23,29 @@ public class Ticket implements Serializable {
     @Column(name = "reason")
     private String reason;
 
-    @Column(name = "to_whom")
-    private String toWhom;
-
     @Column(name = "jhi_comment")
     private String comment;
 
     @Column(name = "creationdate")
-    private Instant creationdate;
+    private LocalDate creationdate;
 
     @Column(name = "acceptance_date")
     private LocalDate acceptanceDate;
-
-    @Column(name = "ticket_status")
-    private String ticketStatus;
 
     @Column(name = "description")
     private String description;
 
     @OneToOne
     @JoinColumn(unique = true)
-    private HumanResourceUser assigendTo;
+    private Request request;
 
     @OneToOne
     @JoinColumn(unique = true)
-    private Request ticketRequst;
+    private TicketStatus ticketStatus;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private HumanResourceUser assignedTo;
 
     @ManyToOne
     private User user;
@@ -75,19 +72,6 @@ public class Ticket implements Serializable {
         this.reason = reason;
     }
 
-    public String getToWhom() {
-        return toWhom;
-    }
-
-    public Ticket toWhom(String toWhom) {
-        this.toWhom = toWhom;
-        return this;
-    }
-
-    public void setToWhom(String toWhom) {
-        this.toWhom = toWhom;
-    }
-
     public String getComment() {
         return comment;
     }
@@ -101,16 +85,16 @@ public class Ticket implements Serializable {
         this.comment = comment;
     }
 
-    public Instant getCreationdate() {
+    public LocalDate getCreationdate() {
         return creationdate;
     }
 
-    public Ticket creationdate(Instant creationdate) {
+    public Ticket creationdate(LocalDate creationdate) {
         this.creationdate = creationdate;
         return this;
     }
 
-    public void setCreationdate(Instant creationdate) {
+    public void setCreationdate(LocalDate creationdate) {
         this.creationdate = creationdate;
     }
 
@@ -127,19 +111,6 @@ public class Ticket implements Serializable {
         this.acceptanceDate = acceptanceDate;
     }
 
-    public String getTicketStatus() {
-        return ticketStatus;
-    }
-
-    public Ticket ticketStatus(String ticketStatus) {
-        this.ticketStatus = ticketStatus;
-        return this;
-    }
-
-    public void setTicketStatus(String ticketStatus) {
-        this.ticketStatus = ticketStatus;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -153,30 +124,43 @@ public class Ticket implements Serializable {
         this.description = description;
     }
 
-    public HumanResourceUser getAssigendTo() {
-        return assigendTo;
+    public Request getRequest() {
+        return request;
     }
 
-    public Ticket assigendTo(HumanResourceUser humanResourceUser) {
-        this.assigendTo = humanResourceUser;
+    public Ticket request(Request request) {
+        this.request = request;
         return this;
     }
 
-    public void setAssigendTo(HumanResourceUser humanResourceUser) {
-        this.assigendTo = humanResourceUser;
+    public void setRequest(Request request) {
+        this.request = request;
     }
 
-    public Request getTicketRequst() {
-        return ticketRequst;
+    public TicketStatus getTicketStatus() {
+        return ticketStatus;
     }
 
-    public Ticket ticketRequst(Request request) {
-        this.ticketRequst = request;
+    public Ticket ticketStatus(TicketStatus ticketStatus) {
+        this.ticketStatus = ticketStatus;
         return this;
     }
 
-    public void setTicketRequst(Request request) {
-        this.ticketRequst = request;
+    public void setTicketStatus(TicketStatus ticketStatus) {
+        this.ticketStatus = ticketStatus;
+    }
+
+    public HumanResourceUser getAssignedTo() {
+        return assignedTo;
+    }
+
+    public Ticket assignedTo(HumanResourceUser humanResourceUser) {
+        this.assignedTo = humanResourceUser;
+        return this;
+    }
+
+    public void setAssignedTo(HumanResourceUser humanResourceUser) {
+        this.assignedTo = humanResourceUser;
     }
 
     public User getUser() {
@@ -218,11 +202,9 @@ public class Ticket implements Serializable {
         return "Ticket{" +
             "id=" + getId() +
             ", reason='" + getReason() + "'" +
-            ", toWhom='" + getToWhom() + "'" +
             ", comment='" + getComment() + "'" +
             ", creationdate='" + getCreationdate() + "'" +
             ", acceptanceDate='" + getAcceptanceDate() + "'" +
-            ", ticketStatus='" + getTicketStatus() + "'" +
             ", description='" + getDescription() + "'" +
             "}";
     }

@@ -16,7 +16,4 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     @Query("select ticket from Ticket ticket where ticket.user.login = ?#{principal.username}")
     List<Ticket> findByUserIsCurrentUser();
 
-    @Query("select ticket from Ticket ticket where ticket.ticketRequst.department ='HR'")
-    List<Ticket>findHrTickets();
-
 }

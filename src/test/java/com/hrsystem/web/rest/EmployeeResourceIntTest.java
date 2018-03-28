@@ -3,7 +3,6 @@ package com.hrsystem.web.rest;
 import com.hrsystem.HrsystemApp;
 
 import com.hrsystem.domain.Employee;
-import com.hrsystem.domain.User;
 import com.hrsystem.repository.EmployeeRepository;
 import com.hrsystem.web.rest.errors.ExceptionTranslator;
 
@@ -127,11 +126,6 @@ public class EmployeeResourceIntTest {
             .cibAcountNumber(DEFAULT_CIB_ACOUNT_NUMBER)
             .cityCountry(DEFAULT_CITY_COUNTRY)
             .homeAddress(DEFAULT_HOME_ADDRESS);
-        // Add required entity
-        User user = UserResourceIntTest.createEntity(em);
-        em.persist(user);
-        em.flush();
-        employee.setUser(user);
         return employee;
     }
 

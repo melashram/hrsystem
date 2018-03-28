@@ -4,13 +4,15 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span>Request Type</span></dt>
+        <dt><span>Type</span></dt>
         <dd>
-            <span>{{request.requestType}}</span>
+            <span>{{request.type}}</span>
         </dd>
         <dt><span>Department</span></dt>
         <dd>
-            <span>{{request.department}}</span>
+            <div *ngIf="request.department">
+                <a [routerLink]="['/department', request.department?.id]">{{request.department?.id}}</a>
+            </div>
         </dd>
     </dl>
 

@@ -18,14 +18,19 @@
                 [(ngModel)]="ticket.reason" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_toWhom">To Whom</label>
-            <input type="text" class="form-control" name="toWhom" id="field_toWhom"
-                [(ngModel)]="ticket.toWhom" />
-        </div>
-        <div class="form-group">
             <label class="form-control-label" for="field_comment">Comment</label>
             <input type="text" class="form-control" name="comment" id="field_comment"
                 [(ngModel)]="ticket.comment" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_creationdate">Creationdate</label>
+            <div class="input-group">
+                <input id="field_creationdate" type="text" class="form-control" name="creationdate" ngbDatepicker  #creationdateDp="ngbDatepicker" [(ngModel)]="ticket.creationdate"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="creationdateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" for="field_acceptanceDate">Acceptance Date</label>
@@ -38,31 +43,39 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_ticketStatus">Ticket Status</label>
-            <input type="text" class="form-control" name="ticketStatus" id="field_ticketStatus"
-                [(ngModel)]="ticket.ticketStatus" />
-        </div>
-        <div class="form-group">
             <label class="form-control-label" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
                 [(ngModel)]="ticket.description" />
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" for="field_assigendTo">Assigend To</label>
-            <select class="form-control" id="field_assigendTo" name="assigendTo" [(ngModel)]="ticket.assigendTo">
+            <label class="form-control-label" for="field_request">Request</label>
+            <select class="form-control" id="field_request" name="request" [(ngModel)]="ticket.request">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="humanResourceUserOption.id === ticket.assigendTo?.id ? ticket.assigendTo : humanResourceUserOption" *ngFor="let humanResourceUserOption of assigendtos; trackBy: trackHumanResourceUserById">{{humanResourceUserOption.id}}</option>
+                <option [ngValue]="requestOption.id === ticket.request?.id ? ticket.request : requestOption" *ngFor="let requestOption of requests; trackBy: trackRequestById">{{requestOption.id}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_ticketRequst">Ticket Requst</label>
-            <select class="form-control" id="field_ticketRequst" name="ticketRequst" [(ngModel)]="ticket.ticketRequst">
+            <label class="form-control-label" for="field_ticketStatus">Ticket Status</label>
+            <select class="form-control" id="field_ticketStatus" name="ticketStatus" [(ngModel)]="ticket.ticketStatus">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="requestOption.id === ticket.ticketRequst?.id ? ticket.ticketRequst : requestOption" *ngFor="let requestOption of ticketrequsts; trackBy: trackRequestById">{{requestOption.id}}</option>
+                <option [ngValue]="ticketStatusOption.id === ticket.ticketStatus?.id ? ticket.ticketStatus : ticketStatusOption" *ngFor="let ticketStatusOption of ticketstatuses; trackBy: trackTicketStatusById">{{ticketStatusOption.id}}</option>
             </select>
         </div>
-
+        <div class="form-group">
+            <label class="form-control-label" for="field_assignedTo">Assigned To</label>
+            <select class="form-control" id="field_assignedTo" name="assignedTo" [(ngModel)]="ticket.assignedTo">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="humanResourceUserOption.id === ticket.assignedTo?.id ? ticket.assignedTo : humanResourceUserOption" *ngFor="let humanResourceUserOption of assignedtos; trackBy: trackHumanResourceUserById">{{humanResourceUserOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="ticket.user" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === ticket.user?.id ? ticket.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
