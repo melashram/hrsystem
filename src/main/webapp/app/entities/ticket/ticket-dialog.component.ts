@@ -30,8 +30,6 @@ export class TicketDialogComponent implements OnInit {
     assignedtos: HumanResourceUser[];
 
     users: User[];
-    creationdateDp: any;
-    acceptanceDateDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

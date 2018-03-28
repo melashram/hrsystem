@@ -3,18 +3,24 @@ package com.hrsystem.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.hrsystem.domain.Ticket;
 
+import com.hrsystem.domain.User;
 import com.hrsystem.repository.TicketRepository;
+import com.hrsystem.repository.UserRepository;
+import com.hrsystem.security.SecurityUtils;
 import com.hrsystem.web.rest.errors.BadRequestAlertException;
+import com.hrsystem.web.rest.errors.InternalServerErrorException;
 import com.hrsystem.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +36,9 @@ public class TicketResource {
     private static final String ENTITY_NAME = "ticket";
 
     private final TicketRepository ticketRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public TicketResource(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
@@ -49,6 +58,16 @@ public class TicketResource {
         if (ticket.getId() != null) {
             throw new BadRequestAlertException("A new ticket cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        ticket.setCreationdate(Instant.now());
+
+        final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
+        Optional<User> currentLoggedInUser = userRepository.findOneByLogin(userLogin);
+
+        User emptyUser = new User();
+        User userLoggedIn = currentLoggedInUser.orElse(emptyUser);
+        userLoggedIn.setAuthorities(null);
+
+        ticket.setUser(userLoggedIn);
         Ticket result = ticketRepository.save(ticket);
         return ResponseEntity.created(new URI("/api/tickets/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

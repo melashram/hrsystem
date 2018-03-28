@@ -28,7 +28,7 @@
                 <td>{{request.type}}</td>
                 <td>
                     <div *ngIf="request.department">
-                        <a [routerLink]="['../department', request.department?.id ]" >{{request.department?.id}}</a>
+                        <a [routerLink]="['../department', request.department?.id ]" >{{request.department?.name}}</a>
                     </div>
                 </td>
                 <td class="text-right">

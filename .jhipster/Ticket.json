@@ -44,16 +44,16 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "creationdate",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "acceptanceDate",
-            "fieldType": "LocalDate"
-        },
-        {
             "fieldName": "description",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "creationdate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "acceptancedate",
+            "fieldType": "Instant"
         }
     ],
     "changelogDate": "20180305083017",

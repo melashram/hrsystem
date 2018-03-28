@@ -22,7 +22,7 @@
             <label class="form-control-label" for="field_department">Department</label>
             <select class="form-control" id="field_department" name="department" [(ngModel)]="request.department">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="departmentOption.id === request.department?.id ? request.department : departmentOption" *ngFor="let departmentOption of departments; trackBy: trackDepartmentById">{{departmentOption.id}}</option>
+                <option [ngValue]="departmentOption.id === request.department?.id ? request.department : departmentOption" *ngFor="let departmentOption of departments; trackBy: trackDepartmentById">{{departmentOption.name}}</option>
             </select>
         </div>
     </div>

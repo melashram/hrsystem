@@ -4,7 +4,7 @@ package com.hrsystem.domain;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -26,14 +26,14 @@ public class Ticket implements Serializable {
     @Column(name = "jhi_comment")
     private String comment;
 
-    @Column(name = "creationdate")
-    private LocalDate creationdate;
-
-    @Column(name = "acceptance_date")
-    private LocalDate acceptanceDate;
-
     @Column(name = "description")
     private String description;
+
+    @Column(name = "creationdate")
+    private Instant creationdate;
+
+    @Column(name = "acceptancedate")
+    private Instant acceptancedate;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -85,32 +85,6 @@ public class Ticket implements Serializable {
         this.comment = comment;
     }
 
-    public LocalDate getCreationdate() {
-        return creationdate;
-    }
-
-    public Ticket creationdate(LocalDate creationdate) {
-        this.creationdate = creationdate;
-        return this;
-    }
-
-    public void setCreationdate(LocalDate creationdate) {
-        this.creationdate = creationdate;
-    }
-
-    public LocalDate getAcceptanceDate() {
-        return acceptanceDate;
-    }
-
-    public Ticket acceptanceDate(LocalDate acceptanceDate) {
-        this.acceptanceDate = acceptanceDate;
-        return this;
-    }
-
-    public void setAcceptanceDate(LocalDate acceptanceDate) {
-        this.acceptanceDate = acceptanceDate;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -122,6 +96,32 @@ public class Ticket implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Instant getCreationdate() {
+        return creationdate;
+    }
+
+    public Ticket creationdate(Instant creationdate) {
+        this.creationdate = creationdate;
+        return this;
+    }
+
+    public void setCreationdate(Instant creationdate) {
+        this.creationdate = creationdate;
+    }
+
+    public Instant getAcceptancedate() {
+        return acceptancedate;
+    }
+
+    public Ticket acceptancedate(Instant acceptancedate) {
+        this.acceptancedate = acceptancedate;
+        return this;
+    }
+
+    public void setAcceptancedate(Instant acceptancedate) {
+        this.acceptancedate = acceptancedate;
     }
 
     public Request getRequest() {
@@ -203,9 +203,9 @@ public class Ticket implements Serializable {
             "id=" + getId() +
             ", reason='" + getReason() + "'" +
             ", comment='" + getComment() + "'" +
-            ", creationdate='" + getCreationdate() + "'" +
-            ", acceptanceDate='" + getAcceptanceDate() + "'" +
             ", description='" + getDescription() + "'" +
+            ", creationdate='" + getCreationdate() + "'" +
+            ", acceptancedate='" + getAcceptancedate() + "'" +
             "}";
     }
 }
