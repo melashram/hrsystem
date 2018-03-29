@@ -9,18 +9,24 @@
     <changeSet id="20180305083015-2" author="jhipster">
         
 <<<<<<< HEAD
+<<<<<<< HEAD
         <addForeignKeyConstraint baseColumnNames="authority_id"
                                  baseTableName="request"
                                  constraintName="fk_request_authority_id"
                                  referencedColumnNames="id"
                                  referencedTableName="authority"/>
 =======
+=======
+>>>>>>> remotes/origin/newbranch
         <addForeignKeyConstraint baseColumnNames="department_id"
                                  baseTableName="request"
                                  constraintName="fk_request_department_id"
                                  referencedColumnNames="id"
                                  referencedTableName="department"/>
+<<<<<<< HEAD
 >>>>>>> 629c3fc3391b6a4a3ed336f6cfe6e2eea7ff9ed8
+=======
+>>>>>>> remotes/origin/newbranch
 
     </changeSet>
 </databaseChangeLog>
