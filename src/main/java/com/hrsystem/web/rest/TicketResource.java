@@ -128,8 +128,8 @@ public class TicketResource {
     @Timed
     public List<Ticket> getAllHRTickets() {
         log.debug("REST request to get all HR Tickets");
-        List<Ticket>Hrtickets = ticketRepository.findByRequestDepartment("IT");
-        return ticketRepository.findByRequestDepartment("IT");
+        List<Ticket>Hrtickets = ticketRepository.findByRequestDepartment("HR");
+        return ticketRepository.findByRequestDepartment("HR");
     }
 
     @GetMapping("/tickets/ittickets")
