@@ -34,13 +34,31 @@ export class TicketAvailableComponent implements OnInit {
         );
     }
 
+    loadHRTickets() {
+        this.ticketService.HRTicketquery().subscribe(
+            (res: HttpResponse<Ticket[]>) => {
+                this.tickets = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+    loadITTickets() {
+        this.ticketService.HRTicketquery().subscribe(
+            (res: HttpResponse<Ticket[]>) => {
+                this.tickets = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
     ngOnInit() {
-        this.loadAll();
+        this.loadHRTickets();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
         this.registerChangeInTickets();
     }
+
 
     trackId(index: number, item: Ticket) {
         return item.id;

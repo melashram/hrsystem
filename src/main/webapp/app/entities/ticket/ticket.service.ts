@@ -40,6 +40,18 @@ export class TicketService {
             .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
     }
 
+    HRTicketquery(req?: any): Observable<HttpResponse<Ticket[]>> {
+        const options = createRequestOption(req);
+
+        return this.http.get<Ticket[]>(this.resourceUrl+'/hrtickets', { params: options, observe: 'response' })
+            .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
+    }
+    ITTicketquery(req?: any): Observable<HttpResponse<Ticket[]>> {
+        const options = createRequestOption(req);
+
+        return this.http.get<Ticket[]>(this.resourceUrl+'/ittickets', { params: options, observe: 'response' })
+            .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
+    }
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }
