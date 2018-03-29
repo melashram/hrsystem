@@ -3,16 +3,24 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "assigendTo",
-            "otherEntityName": "humanResourceUser",
+            "relationshipName": "request",
+            "otherEntityName": "request",
             "otherEntityField": "id",
             "ownerSide": true,
             "otherEntityRelationshipName": "ticket"
         },
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "ticketRequst",
-            "otherEntityName": "request",
+            "relationshipName": "ticketStatus",
+            "otherEntityName": "ticketStatus",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "ticket"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "assignedTo",
+            "otherEntityName": "humanResourceUser",
             "otherEntityField": "id",
             "ownerSide": true,
             "otherEntityRelationshipName": "ticket"
@@ -32,24 +40,16 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "toWhom",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "comment",
             "fieldType": "String"
         },
         {
             "fieldName": "creationdate",
-            "fieldType": "Instant"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "acceptanceDate",
             "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "ticketStatus",
-            "fieldType": "String"
         },
         {
             "fieldName": "description",

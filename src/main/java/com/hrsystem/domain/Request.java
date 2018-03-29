@@ -19,11 +19,12 @@ public class Request implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "request_type")
-    private String requestType;
+    @Column(name = "jhi_type")
+    private String type;
 
-    @Column(name = "department")
-    private String department;
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Department department;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -34,29 +35,29 @@ public class Request implements Serializable {
         this.id = id;
     }
 
-    public String getRequestType() {
-        return requestType;
+    public String getType() {
+        return type;
     }
 
-    public Request requestType(String requestType) {
-        this.requestType = requestType;
+    public Request type(String type) {
+        this.type = type;
         return this;
     }
 
-    public void setRequestType(String requestType) {
-        this.requestType = requestType;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public Request department(String department) {
+    public Request department(Department department) {
         this.department = department;
         return this;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
@@ -85,8 +86,7 @@ public class Request implements Serializable {
     public String toString() {
         return "Request{" +
             "id=" + getId() +
-            ", requestType='" + getRequestType() + "'" +
-            ", department='" + getDepartment() + "'" +
+            ", type='" + getType() + "'" +
             "}";
     }
 }

@@ -9,6 +9,7 @@ import { HrsystemTestModule } from '../../../test.module';
 import { RequestDialogComponent } from '../../../../../../main/webapp/app/entities/request/request-dialog.component';
 import { RequestService } from '../../../../../../main/webapp/app/entities/request/request.service';
 import { Request } from '../../../../../../main/webapp/app/entities/request/request.model';
+import { DepartmentService } from '../../../../../../main/webapp/app/entities/department';
 
 describe('Component Tests', () => {
 
@@ -24,6 +25,7 @@ describe('Component Tests', () => {
                 imports: [HrsystemTestModule],
                 declarations: [RequestDialogComponent],
                 providers: [
+                    DepartmentService,
                     RequestService
                 ]
             })

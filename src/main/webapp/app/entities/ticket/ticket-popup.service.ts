@@ -2,7 +2,6 @@ import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HttpResponse } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { Ticket } from './ticket.model';
 import { TicketService } from './ticket.service';
 
@@ -11,7 +10,6 @@ export class TicketPopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
-        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private ticketService: TicketService
@@ -31,8 +29,13 @@ export class TicketPopupService {
                 this.ticketService.find(id)
                     .subscribe((ticketResponse: HttpResponse<Ticket>) => {
                         const ticket: Ticket = ticketResponse.body;
-                        ticket.creationdate = this.datePipe
-                            .transform(ticket.creationdate, 'yyyy-MM-ddTHH:mm:ss');
+                        if (ticket.creationdate) {
+                            ticket.creationdate = {
+                                year: ticket.creationdate.getFullYear(),
+                                month: ticket.creationdate.getMonth() + 1,
+                                day: ticket.creationdate.getDate()
+                            };
+                        }
                         if (ticket.acceptanceDate) {
                             ticket.acceptanceDate = {
                                 year: ticket.acceptanceDate.getFullYear(),

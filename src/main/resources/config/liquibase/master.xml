@@ -11,6 +11,8 @@
     <include file="config/liquibase/changelog/20180305083014_added_entity_HumanResourceUser.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180305083015_added_entity_Request.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180305083017_added_entity_Ticket.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180328124134_added_entity_TicketStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180328124133_added_entity_Department.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180305083017_added_entity_constraints_Ticket.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180305083012_added_entity_constraints_Employee.xml" relativeToChangelogFile="false"/>

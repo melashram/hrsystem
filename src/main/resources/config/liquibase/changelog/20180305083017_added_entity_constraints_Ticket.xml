@@ -8,17 +8,23 @@
     -->
     <changeSet id="20180305083017-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="assigend_to_id"
+        <addForeignKeyConstraint baseColumnNames="request_id"
                                  baseTableName="ticket"
-                                 constraintName="fk_ticket_assigend_to_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="human_resource_user"/>
-
-        <addForeignKeyConstraint baseColumnNames="ticket_requst_id"
-                                 baseTableName="ticket"
-                                 constraintName="fk_ticket_ticket_requst_id"
+                                 constraintName="fk_ticket_request_id"
                                  referencedColumnNames="id"
                                  referencedTableName="request"/>
+
+        <addForeignKeyConstraint baseColumnNames="ticket_status_id"
+                                 baseTableName="ticket"
+                                 constraintName="fk_ticket_ticket_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ticket_status"/>
+
+        <addForeignKeyConstraint baseColumnNames="assigned_to_id"
+                                 baseTableName="ticket"
+                                 constraintName="fk_ticket_assigned_to_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="human_resource_user"/>
 
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="ticket"

@@ -4,11 +4,12 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { Request } from './request.model';
 import { RequestPopupService } from './request-popup.service';
 import { RequestService } from './request.service';
+import { Department, DepartmentService } from '../department';
 
 @Component({
     selector: 'jhi-request-dialog',
@@ -19,15 +20,32 @@ export class RequestDialogComponent implements OnInit {
     request: Request;
     isSaving: boolean;
 
+    departments: Department[];
+
     constructor(
         public activeModal: NgbActiveModal,
+        private jhiAlertService: JhiAlertService,
         private requestService: RequestService,
+        private departmentService: DepartmentService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.departmentService
+            .query({filter: 'request-is-null'})
+            .subscribe((res: HttpResponse<Department[]>) => {
+                if (!this.request.department || !this.request.department.id) {
+                    this.departments = res.body;
+                } else {
+                    this.departmentService
+                        .find(this.request.department.id)
+                        .subscribe((subRes: HttpResponse<Department>) => {
+                            this.departments = [subRes.body].concat(res.body);
+                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
+                }
+            }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -58,6 +76,14 @@ export class RequestDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(error: any) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackDepartmentById(index: number, item: Department) {
+        return item.id;
     }
 }
 

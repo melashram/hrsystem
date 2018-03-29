@@ -2,13 +2,10 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "user",
-            "otherEntityName": "user",
             "relationshipType": "one-to-one",
-            "relationshipValidateRules": [
-                "required"
-            ],
-            "otherEntityField": "login",
+            "relationshipName": "humanResourceUser",
+            "otherEntityName": "employee",
+            "otherEntityField": "id",
             "ownerSide": true,
             "otherEntityRelationshipName": "humanResourceUser"
         }
@@ -20,9 +17,9 @@
         }
     ],
     "changelogDate": "20180305083014",
-    "dto": "no",
-    "service": "no",
     "entityTableName": "human_resource_user",
-    "jpaMetamodelFiltering": false,
-    "pagination": "no"
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
 }

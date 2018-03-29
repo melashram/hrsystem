@@ -9,8 +9,9 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Ticket } from './ticket.model';
 import { TicketPopupService } from './ticket-popup.service';
 import { TicketService } from './ticket.service';
-import { HumanResourceUser, HumanResourceUserService } from '../human-resource-user';
 import { Request, RequestService } from '../request';
+import { TicketStatus, TicketStatusService } from '../ticket-status';
+import { HumanResourceUser, HumanResourceUserService } from '../human-resource-user';
 import { User, UserService } from '../../shared';
 
 @Component({
@@ -22,19 +23,23 @@ export class TicketDialogComponent implements OnInit {
     ticket: Ticket;
     isSaving: boolean;
 
-    assigendtos: HumanResourceUser[];
+    requests: Request[];
 
-    ticketrequsts: Request[];
+    ticketstatuses: TicketStatus[];
+
+    assignedtos: HumanResourceUser[];
 
     users: User[];
+    creationdateDp: any;
     acceptanceDateDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private ticketService: TicketService,
-        private humanResourceUserService: HumanResourceUserService,
         private requestService: RequestService,
+        private ticketStatusService: TicketStatusService,
+        private humanResourceUserService: HumanResourceUserService,
         private userService: UserService,
         private eventManager: JhiEventManager
     ) {
@@ -42,29 +47,42 @@ export class TicketDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.humanResourceUserService
-            .query({filter: 'ticket-is-null'})
-            .subscribe((res: HttpResponse<HumanResourceUser[]>) => {
-                if (!this.ticket.assigendTo || !this.ticket.assigendTo.id) {
-                    this.assigendtos = res.body;
-                } else {
-                    this.humanResourceUserService
-                        .find(this.ticket.assigendTo.id)
-                        .subscribe((subRes: HttpResponse<HumanResourceUser>) => {
-                            this.assigendtos = [subRes.body].concat(res.body);
-                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
-                }
-            }, (res: HttpErrorResponse) => this.onError(res.message));
         this.requestService
             .query({filter: 'ticket-is-null'})
             .subscribe((res: HttpResponse<Request[]>) => {
-                if (!this.ticket.ticketRequst || !this.ticket.ticketRequst.id) {
-                    this.ticketrequsts = res.body;
+                if (!this.ticket.request || !this.ticket.request.id) {
+                    this.requests = res.body;
                 } else {
                     this.requestService
-                        .find(this.ticket.ticketRequst.id)
+                        .find(this.ticket.request.id)
                         .subscribe((subRes: HttpResponse<Request>) => {
-                            this.ticketrequsts = [subRes.body].concat(res.body);
+                            this.requests = [subRes.body].concat(res.body);
+                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
+                }
+            }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.ticketStatusService
+            .query({filter: 'ticket-is-null'})
+            .subscribe((res: HttpResponse<TicketStatus[]>) => {
+                if (!this.ticket.ticketStatus || !this.ticket.ticketStatus.id) {
+                    this.ticketstatuses = res.body;
+                } else {
+                    this.ticketStatusService
+                        .find(this.ticket.ticketStatus.id)
+                        .subscribe((subRes: HttpResponse<TicketStatus>) => {
+                            this.ticketstatuses = [subRes.body].concat(res.body);
+                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
+                }
+            }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.humanResourceUserService
+            .query({filter: 'ticket-is-null'})
+            .subscribe((res: HttpResponse<HumanResourceUser[]>) => {
+                if (!this.ticket.assignedTo || !this.ticket.assignedTo.id) {
+                    this.assignedtos = res.body;
+                } else {
+                    this.humanResourceUserService
+                        .find(this.ticket.assignedTo.id)
+                        .subscribe((subRes: HttpResponse<HumanResourceUser>) => {
+                            this.assignedtos = [subRes.body].concat(res.body);
                         }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
                 }
             }, (res: HttpErrorResponse) => this.onError(res.message));
@@ -106,11 +124,15 @@ export class TicketDialogComponent implements OnInit {
         this.jhiAlertService.error(error.message, null, null);
     }
 
-    trackHumanResourceUserById(index: number, item: HumanResourceUser) {
+    trackRequestById(index: number, item: Request) {
         return item.id;
     }
 
-    trackRequestById(index: number, item: Request) {
+    trackTicketStatusById(index: number, item: TicketStatus) {
+        return item.id;
+    }
+
+    trackHumanResourceUserById(index: number, item: HumanResourceUser) {
         return item.id;
     }
 

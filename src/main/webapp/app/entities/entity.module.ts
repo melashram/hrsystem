@@ -6,6 +6,8 @@ import { HrsystemItUserModule } from './it-user/it-user.module';
 import { HrsystemHumanResourceUserModule } from './human-resource-user/human-resource-user.module';
 import { HrsystemRequestModule } from './request/request.module';
 import { HrsystemTicketModule } from './ticket/ticket.module';
+import { HrsystemTicketStatusModule } from './ticket-status/ticket-status.module';
+import { HrsystemDepartmentModule } from './department/department.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -16,6 +18,8 @@ import { HrsystemTicketModule } from './ticket/ticket.module';
         HrsystemHumanResourceUserModule,
         HrsystemRequestModule,
         HrsystemTicketModule,
+        HrsystemTicketStatusModule,
+        HrsystemDepartmentModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
