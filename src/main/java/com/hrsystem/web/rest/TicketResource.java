@@ -136,7 +136,7 @@ public class TicketResource {
     @Timed
     public List<Ticket> getAllITTickets() {
         log.debug("REST request to get all IT Tickets");
-        List<Ticket>Hrtickets = ticketRepository.findByRequestDepartment("IT");
+        List<Ticket>Ittickets = ticketRepository.findByRequestDepartment("IT");
         return ticketRepository.findByRequestDepartment("IT");
     }
 

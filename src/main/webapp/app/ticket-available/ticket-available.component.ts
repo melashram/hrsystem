@@ -13,7 +13,8 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 })
 export class TicketAvailableComponent implements OnInit {
 
-    tickets: Ticket[];
+    HRtickets: Ticket[];
+    ITtickets: Ticket[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
@@ -25,19 +26,19 @@ export class TicketAvailableComponent implements OnInit {
     ) {
     }
 
-    loadAll() {
-        this.ticketService.query().subscribe(
-            (res: HttpResponse<Ticket[]>) => {
-                this.tickets = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-    }
+    // loadAll() {
+    //     this.ticketService.query().subscribe(
+    //         (res: HttpResponse<Ticket[]>) => {
+    //             this.tickets = res.body;
+    //         },
+    //         (res: HttpErrorResponse) => this.onError(res.message)
+    //     );
+    // }
 
     loadHRTickets() {
         this.ticketService.HRTicketquery().subscribe(
             (res: HttpResponse<Ticket[]>) => {
-                this.tickets = res.body;
+                this.HRtickets = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -45,7 +46,7 @@ export class TicketAvailableComponent implements OnInit {
     loadITTickets() {
         this.ticketService.HRTicketquery().subscribe(
             (res: HttpResponse<Ticket[]>) => {
-                this.tickets = res.body;
+                this.ITtickets = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -53,6 +54,7 @@ export class TicketAvailableComponent implements OnInit {
 
     ngOnInit() {
         this.loadHRTickets();
+        this.loadITTickets();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
@@ -64,7 +66,8 @@ export class TicketAvailableComponent implements OnInit {
         return item.id;
     }
     registerChangeInTickets() {
-        this.eventSubscriber = this.eventManager.subscribe('ticketListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('ticketListModification', (response) => this.loadHRTickets());
+        this.eventSubscriber = this.eventManager.subscribe('ticketListModification', (response) => this.loadITTickets());
     }
 
     private onError(error) {
