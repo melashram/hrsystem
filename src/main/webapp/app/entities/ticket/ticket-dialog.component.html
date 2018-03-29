@@ -27,40 +27,27 @@
             <input type="text" class="form-control" name="description" id="field_description"
                 [(ngModel)]="ticket.description" />
         </div>
-        <div class="form-group">
-            <label class="form-control-label" for="field_creationDate">Creation Date</label>
-            <div class="d-flex">
-                <input id="field_creationDate" type="datetime-local" class="form-control" name="creationDate" [(ngModel)]="ticket.creationDate"
-                />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" for="field_acceptanceDate">Acceptance Date</label>
-            <div class="d-flex">
-                <input id="field_acceptanceDate" type="datetime-local" class="form-control" name="acceptanceDate" [(ngModel)]="ticket.acceptanceDate"
-                />
-            </div>
-        </div>
+
 
         <div class="form-group">
             <label class="form-control-label" for="field_request">Request</label>
             <select class="form-control" id="field_request" name="request" [(ngModel)]="ticket.request">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="requestOption.id === ticket.request?.id ? ticket.request : requestOption" *ngFor="let requestOption of requests; trackBy: trackRequestById">{{requestOption.id}}</option>
+                <option [ngValue]="requestOption.id === ticket.request?.id ? ticket.request : requestOption" *ngFor="let requestOption of requests; trackBy: trackRequestById">{{requestOption.type}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" for="field_ticketStatus">Ticket Status</label>
             <select class="form-control" id="field_ticketStatus" name="ticketStatus" [(ngModel)]="ticket.ticketStatus">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="ticketStatusOption.id === ticket.ticketStatus?.id ? ticket.ticketStatus : ticketStatusOption" *ngFor="let ticketStatusOption of ticketstatuses; trackBy: trackTicketStatusById">{{ticketStatusOption.id}}</option>
+                <option [ngValue]="ticketStatusOption.id === ticket.ticketStatus?.id ? ticket.ticketStatus : ticketStatusOption" *ngFor="let ticketStatusOption of ticketstatuses; trackBy: trackTicketStatusById">{{ticketStatusOption.ticketStatus}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" for="field_assignedTo">Assigned To</label>
             <select class="form-control" id="field_assignedTo" name="assignedTo" [(ngModel)]="ticket.assignedTo">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="humanResourceUserOption.id === ticket.assignedTo?.id ? ticket.assignedTo : humanResourceUserOption" *ngFor="let humanResourceUserOption of assignedtos; trackBy: trackHumanResourceUserById">{{humanResourceUserOption.id}}</option>
+                <option [ngValue]="humanResourceUserOption.id === ticket.assignedTo?.id ? ticket.assignedTo : humanResourceUserOption" *ngFor="let humanResourceUserOption of assignedtos; trackBy: trackHumanResourceUserById">{{humanResourceUserOption.user.login}}</option>
             </select>
         </div>
         <div class="form-group">

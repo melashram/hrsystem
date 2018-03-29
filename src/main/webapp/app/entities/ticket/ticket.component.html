@@ -39,17 +39,17 @@
                 <td>{{ticket.acceptanceDate | date:'medium'}}</td>
                 <td>
                     <div *ngIf="ticket.request">
-                        <a [routerLink]="['../request', ticket.request?.id ]" >{{ticket.request?.id}}</a>
+                        <a [routerLink]="['../request', ticket.request?.id ]" >{{ticket.request?.type}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="ticket.ticketStatus">
-                        <a [routerLink]="['../ticket-status', ticket.ticketStatus?.id ]" >{{ticket.ticketStatus?.id}}</a>
+                        <a [routerLink]="['../ticket-status', ticket.ticketStatus?.id ]" >{{ticket.ticketStatus?.ticketStatus}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="ticket.assignedTo">
-                        <a [routerLink]="['../human-resource-user', ticket.assignedTo?.id ]" >{{ticket.assignedTo?.id}}</a>
+                        <a [routerLink]="['../human-resource-user', ticket.assignedTo?.id ]" >{{ticket.assignedTo?.user.login}}</a>
                     </div>
                 </td>
                 <td>
