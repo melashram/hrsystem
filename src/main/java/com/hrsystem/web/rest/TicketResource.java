@@ -70,8 +70,6 @@ public class TicketResource {
         ticket.setUser(userLoggedIn);
 
         Ticket result = ticketRepository.save(ticket);
-
-        Ticket result = ticketRepository.save(ticket);
         return ResponseEntity.created(new URI("/api/tickets/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
