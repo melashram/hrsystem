@@ -63,10 +63,10 @@ export class TicketService {
      */
     private convertItemFromServer(ticket: Ticket): Ticket {
         const copy: Ticket = Object.assign({}, ticket);
-        copy.creationdate = this.dateUtils
-            .convertLocalDateFromServer(ticket.creationdate);
+        copy.creationDate = this.dateUtils
+            .convertDateTimeFromServer(ticket.creationDate);
         copy.acceptanceDate = this.dateUtils
-            .convertLocalDateFromServer(ticket.acceptanceDate);
+            .convertDateTimeFromServer(ticket.acceptanceDate);
         return copy;
     }
 
@@ -75,10 +75,10 @@ export class TicketService {
      */
     private convert(ticket: Ticket): Ticket {
         const copy: Ticket = Object.assign({}, ticket);
-        copy.creationdate = this.dateUtils
-            .convertLocalDateToServer(ticket.creationdate);
-        copy.acceptanceDate = this.dateUtils
-            .convertLocalDateToServer(ticket.acceptanceDate);
+
+        copy.creationDate = this.dateUtils.toDate(ticket.creationDate);
+
+        copy.acceptanceDate = this.dateUtils.toDate(ticket.acceptanceDate);
         return copy;
     }
 }
