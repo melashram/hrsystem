@@ -49,11 +49,11 @@ public class TicketResourceIntTest {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_CREATIONDATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATIONDATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATION_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATION_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Instant DEFAULT_ACCEPTANCEDATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_ACCEPTANCEDATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_ACCEPTANCE_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_ACCEPTANCE_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private TicketRepository ticketRepository;
@@ -96,8 +96,8 @@ public class TicketResourceIntTest {
             .reason(DEFAULT_REASON)
             .comment(DEFAULT_COMMENT)
             .description(DEFAULT_DESCRIPTION)
-            .creationdate(DEFAULT_CREATIONDATE)
-            .acceptancedate(DEFAULT_ACCEPTANCEDATE);
+            .creationDate(DEFAULT_CREATION_DATE)
+            .acceptanceDate(DEFAULT_ACCEPTANCE_DATE);
         return ticket;
     }
 
@@ -124,8 +124,8 @@ public class TicketResourceIntTest {
         assertThat(testTicket.getReason()).isEqualTo(DEFAULT_REASON);
         assertThat(testTicket.getComment()).isEqualTo(DEFAULT_COMMENT);
         assertThat(testTicket.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testTicket.getCreationdate()).isEqualTo(DEFAULT_CREATIONDATE);
-        assertThat(testTicket.getAcceptancedate()).isEqualTo(DEFAULT_ACCEPTANCEDATE);
+        assertThat(testTicket.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
+        assertThat(testTicket.getAcceptanceDate()).isEqualTo(DEFAULT_ACCEPTANCE_DATE);
     }
 
     @Test
@@ -161,8 +161,8 @@ public class TicketResourceIntTest {
             .andExpect(jsonPath("$.[*].reason").value(hasItem(DEFAULT_REASON.toString())))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].creationdate").value(hasItem(DEFAULT_CREATIONDATE.toString())))
-            .andExpect(jsonPath("$.[*].acceptancedate").value(hasItem(DEFAULT_ACCEPTANCEDATE.toString())));
+            .andExpect(jsonPath("$.[*].creationDate").value(hasItem(DEFAULT_CREATION_DATE.toString())))
+            .andExpect(jsonPath("$.[*].acceptanceDate").value(hasItem(DEFAULT_ACCEPTANCE_DATE.toString())));
     }
 
     @Test
@@ -179,8 +179,8 @@ public class TicketResourceIntTest {
             .andExpect(jsonPath("$.reason").value(DEFAULT_REASON.toString()))
             .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
-            .andExpect(jsonPath("$.creationdate").value(DEFAULT_CREATIONDATE.toString()))
-            .andExpect(jsonPath("$.acceptancedate").value(DEFAULT_ACCEPTANCEDATE.toString()));
+            .andExpect(jsonPath("$.creationDate").value(DEFAULT_CREATION_DATE.toString()))
+            .andExpect(jsonPath("$.acceptanceDate").value(DEFAULT_ACCEPTANCE_DATE.toString()));
     }
 
     @Test
@@ -206,8 +206,8 @@ public class TicketResourceIntTest {
             .reason(UPDATED_REASON)
             .comment(UPDATED_COMMENT)
             .description(UPDATED_DESCRIPTION)
-            .creationdate(UPDATED_CREATIONDATE)
-            .acceptancedate(UPDATED_ACCEPTANCEDATE);
+            .creationDate(UPDATED_CREATION_DATE)
+            .acceptanceDate(UPDATED_ACCEPTANCE_DATE);
 
         restTicketMockMvc.perform(put("/api/tickets")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -221,8 +221,8 @@ public class TicketResourceIntTest {
         assertThat(testTicket.getReason()).isEqualTo(UPDATED_REASON);
         assertThat(testTicket.getComment()).isEqualTo(UPDATED_COMMENT);
         assertThat(testTicket.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testTicket.getCreationdate()).isEqualTo(UPDATED_CREATIONDATE);
-        assertThat(testTicket.getAcceptancedate()).isEqualTo(UPDATED_ACCEPTANCEDATE);
+        assertThat(testTicket.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
+        assertThat(testTicket.getAcceptanceDate()).isEqualTo(UPDATED_ACCEPTANCE_DATE);
     }
 
     @Test

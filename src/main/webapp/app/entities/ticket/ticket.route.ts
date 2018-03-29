@@ -11,7 +11,7 @@ export const ticketRoute: Routes = [
         path: 'ticket',
         component: TicketComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService]
@@ -31,7 +31,7 @@ export const ticketPopupRoute: Routes = [
         path: 'ticket-new',
         component: TicketPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService],

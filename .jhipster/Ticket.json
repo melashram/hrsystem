@@ -48,11 +48,11 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "creationdate",
+            "fieldName": "creationDate",
             "fieldType": "Instant"
         },
         {
-            "fieldName": "acceptancedate",
+            "fieldName": "acceptanceDate",
             "fieldType": "Instant"
         }
     ],

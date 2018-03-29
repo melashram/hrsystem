@@ -40,6 +40,18 @@ export class TicketService {
             .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
     }
 
+    HRTicketquery(req?: any): Observable<HttpResponse<Ticket[]>> {
+        const options = createRequestOption(req);
+
+        return this.http.get<Ticket[]>(this.resourceUrl+'/hrtickets', { params: options, observe: 'response' })
+            .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
+    }
+    ITTicketquery(req?: any): Observable<HttpResponse<Ticket[]>> {
+        const options = createRequestOption(req);
+
+        return this.http.get<Ticket[]>(this.resourceUrl+'/ittickets', { params: options, observe: 'response' })
+            .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
+    }
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }
@@ -63,10 +75,10 @@ export class TicketService {
      */
     private convertItemFromServer(ticket: Ticket): Ticket {
         const copy: Ticket = Object.assign({}, ticket);
-        copy.creationdate = this.dateUtils
-            .convertDateTimeFromServer(ticket.creationdate);
-        copy.acceptancedate = this.dateUtils
-            .convertDateTimeFromServer(ticket.acceptancedate);
+        copy.creationDate = this.dateUtils
+            .convertDateTimeFromServer(ticket.creationDate);
+        copy.acceptanceDate = this.dateUtils
+            .convertDateTimeFromServer(ticket.acceptanceDate);
         return copy;
     }
 
@@ -76,9 +88,9 @@ export class TicketService {
     private convert(ticket: Ticket): Ticket {
         const copy: Ticket = Object.assign({}, ticket);
 
-        copy.creationdate = this.dateUtils.toDate(ticket.creationdate);
+        copy.creationDate = this.dateUtils.toDate(ticket.creationDate);
 
-        copy.acceptancedate = this.dateUtils.toDate(ticket.acceptancedate);
+        copy.acceptanceDate = this.dateUtils.toDate(ticket.acceptanceDate);
         return copy;
     }
 }

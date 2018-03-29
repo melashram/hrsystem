@@ -13,7 +13,8 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 })
 export class TicketAvailableComponent implements OnInit {
 
-    tickets: Ticket[];
+    HRtickets: Ticket[];
+    ITtickets: Ticket[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
@@ -25,28 +26,48 @@ export class TicketAvailableComponent implements OnInit {
     ) {
     }
 
-    loadAll() {
-        this.ticketService.query().subscribe(
+    // loadAll() {
+    //     this.ticketService.query().subscribe(
+    //         (res: HttpResponse<Ticket[]>) => {
+    //             this.tickets = res.body;
+    //         },
+    //         (res: HttpErrorResponse) => this.onError(res.message)
+    //     );
+    // }
+
+    loadHRTickets() {
+        this.ticketService.HRTicketquery().subscribe(
             (res: HttpResponse<Ticket[]>) => {
-                this.tickets = res.body;
+                this.HRtickets = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+    loadITTickets() {
+        this.ticketService.HRTicketquery().subscribe(
+            (res: HttpResponse<Ticket[]>) => {
+                this.ITtickets = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
 
     ngOnInit() {
-        this.loadAll();
+        this.loadHRTickets();
+        this.loadITTickets();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
         this.registerChangeInTickets();
     }
 
+
     trackId(index: number, item: Ticket) {
         return item.id;
     }
     registerChangeInTickets() {
-        this.eventSubscriber = this.eventManager.subscribe('ticketListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('ticketListModification', (response) => this.loadHRTickets());
+        this.eventSubscriber = this.eventManager.subscribe('ticketListModification', (response) => this.loadITTickets());
     }
 
     private onError(error) {

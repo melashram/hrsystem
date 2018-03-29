@@ -29,11 +29,11 @@ public class Ticket implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "creationdate")
-    private Instant creationdate;
+    @Column(name = "creation_date")
+    private Instant creationDate;
 
-    @Column(name = "acceptancedate")
-    private Instant acceptancedate;
+    @Column(name = "acceptance_date")
+    private Instant acceptanceDate;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -98,30 +98,30 @@ public class Ticket implements Serializable {
         this.description = description;
     }
 
-    public Instant getCreationdate() {
-        return creationdate;
+    public Instant getCreationDate() {
+        return creationDate;
     }
 
-    public Ticket creationdate(Instant creationdate) {
-        this.creationdate = creationdate;
+    public Ticket creationDate(Instant creationDate) {
+        this.creationDate = creationDate;
         return this;
     }
 
-    public void setCreationdate(Instant creationdate) {
-        this.creationdate = creationdate;
+    public void setCreationDate(Instant creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public Instant getAcceptancedate() {
-        return acceptancedate;
+    public Instant getAcceptanceDate() {
+        return acceptanceDate;
     }
 
-    public Ticket acceptancedate(Instant acceptancedate) {
-        this.acceptancedate = acceptancedate;
+    public Ticket acceptanceDate(Instant acceptanceDate) {
+        this.acceptanceDate = acceptanceDate;
         return this;
     }
 
-    public void setAcceptancedate(Instant acceptancedate) {
-        this.acceptancedate = acceptancedate;
+    public void setAcceptanceDate(Instant acceptanceDate) {
+        this.acceptanceDate = acceptanceDate;
     }
 
     public Request getRequest() {
@@ -204,8 +204,8 @@ public class Ticket implements Serializable {
             ", reason='" + getReason() + "'" +
             ", comment='" + getComment() + "'" +
             ", description='" + getDescription() + "'" +
-            ", creationdate='" + getCreationdate() + "'" +
-            ", acceptancedate='" + getAcceptancedate() + "'" +
+            ", creationDate='" + getCreationDate() + "'" +
+            ", acceptanceDate='" + getAcceptanceDate() + "'" +
             "}";
     }
 }

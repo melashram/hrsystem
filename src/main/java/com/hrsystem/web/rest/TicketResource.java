@@ -58,7 +58,7 @@ public class TicketResource {
         if (ticket.getId() != null) {
             throw new BadRequestAlertException("A new ticket cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ticket.setCreationdate(Instant.now());
+        ticket.setCreationDate(Instant.now());
 
         final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
         Optional<User> currentLoggedInUser = userRepository.findOneByLogin(userLogin);
@@ -68,6 +68,7 @@ public class TicketResource {
         userLoggedIn.setAuthorities(null);
 
         ticket.setUser(userLoggedIn);
+
         Ticket result = ticketRepository.save(ticket);
         return ResponseEntity.created(new URI("/api/tickets/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -105,6 +106,7 @@ public class TicketResource {
     @Timed
     public List<Ticket> getAllTickets() {
         log.debug("REST request to get all Tickets");
+        List<Ticket>tickets = ticketRepository.findAll();
         return ticketRepository.findAll();
         }
 
@@ -120,6 +122,22 @@ public class TicketResource {
         log.debug("REST request to get Ticket : {}", id);
         Ticket ticket = ticketRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(ticket));
+    }
+
+    @GetMapping("/tickets/hrtickets")
+    @Timed
+    public List<Ticket> getAllHRTickets() {
+        log.debug("REST request to get all HR Tickets");
+        List<Ticket>Hrtickets = ticketRepository.findByRequestDepartment("IT");
+        return ticketRepository.findByRequestDepartment("IT");
+    }
+
+    @GetMapping("/tickets/ittickets")
+    @Timed
+    public List<Ticket> getAllITTickets() {
+        log.debug("REST request to get all IT Tickets");
+        List<Ticket>Ittickets = ticketRepository.findByRequestDepartment("IT");
+        return ticketRepository.findByRequestDepartment("IT");
     }
 
     /**

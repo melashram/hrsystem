@@ -31,10 +31,10 @@ export class TicketPopupService {
                 this.ticketService.find(id)
                     .subscribe((ticketResponse: HttpResponse<Ticket>) => {
                         const ticket: Ticket = ticketResponse.body;
-                        ticket.creationdate = this.datePipe
-                            .transform(ticket.creationdate, 'yyyy-MM-ddTHH:mm:ss');
-                        ticket.acceptancedate = this.datePipe
-                            .transform(ticket.acceptancedate, 'yyyy-MM-ddTHH:mm:ss');
+                        ticket.creationDate = this.datePipe
+                            .transform(ticket.creationDate, 'yyyy-MM-ddTHH:mm:ss');
+                        ticket.acceptanceDate = this.datePipe
+                            .transform(ticket.acceptanceDate, 'yyyy-MM-ddTHH:mm:ss');
                         this.ngbModalRef = this.ticketModalRef(component, ticket);
                         resolve(this.ngbModalRef);
                     });

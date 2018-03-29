@@ -19,9 +19,9 @@
             <th><span>ID</span></th>
             <th><span>Reason</span></th>
             <th><span>Comment</span></th>
-            <th><span>Creationdate</span></th>
-            <th><span>Acceptance Date</span></th>
             <th><span>Description</span></th>
+            <th><span>Creation Date</span></th>
+            <th><span>Acceptance Date</span></th>
             <th><span>Request</span></th>
             <th><span>Ticket Status</span></th>
             <th><span>Assigned To</span></th>
@@ -34,22 +34,22 @@
                 <td><a [routerLink]="['../ticket', ticket.id ]">{{ticket.id}}</a></td>
                 <td>{{ticket.reason}}</td>
                 <td>{{ticket.comment}}</td>
-                <td>{{ticket.creationdate | date:'mediumDate'}}</td>
-                <td>{{ticket.acceptanceDate | date:'mediumDate'}}</td>
                 <td>{{ticket.description}}</td>
+                <td>{{ticket.creationDate | date:'medium'}}</td>
+                <td>{{ticket.acceptanceDate | date:'medium'}}</td>
                 <td>
                     <div *ngIf="ticket.request">
-                        <a [routerLink]="['../request', ticket.request?.id ]" >{{ticket.request?.id}}</a>
+                        <a [routerLink]="['../request', ticket.request?.id ]" >{{ticket.request?.type}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="ticket.ticketStatus">
-                        <a [routerLink]="['../ticket-status', ticket.ticketStatus?.id ]" >{{ticket.ticketStatus?.id}}</a>
+                        <a [routerLink]="['../ticket-status', ticket.ticketStatus?.id ]" >{{ticket.ticketStatus?.ticketStatus}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="ticket.assignedTo">
-                        <a [routerLink]="['../human-resource-user', ticket.assignedTo?.id ]" >{{ticket.assignedTo?.id}}</a>
+                        <a [routerLink]="['../human-resource-user', ticket.assignedTo?.id ]" >{{ticket.assignedTo?.user.login}}</a>
                     </div>
                 </td>
                 <td>
