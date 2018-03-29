@@ -11,7 +11,7 @@
         <dt><span>Department</span></dt>
         <dd>
             <div *ngIf="request.department">
-                <a [routerLink]="['/department', request.department?.id]">{{request.department?.id}}</a>
+                <a [routerLink]="['/department', request.department?.id]">{{request.department?.name}}</a>
             </div>
         </dd>
     </dl>
