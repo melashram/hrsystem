@@ -44,7 +44,7 @@ export class TicketAvailableComponent implements OnInit {
         );
     }
     loadITTickets() {
-        this.ticketService.HRTicketquery().subscribe(
+        this.ticketService.ITTicketquery().subscribe(
             (res: HttpResponse<Ticket[]>) => {
                 this.ITtickets = res.body;
             },

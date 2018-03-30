@@ -6,13 +6,17 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Ticket } from './ticket.model';
 import { TicketService } from './ticket.service';
 import { Principal } from '../../shared';
+import {Observable} from "rxjs/Observable";
 
 @Component({
     selector: 'jhi-ticket',
     templateUrl: './ticket.component.html'
 })
 export class TicketComponent implements OnInit, OnDestroy {
-tickets: Ticket[];
+
+    tickets: Ticket[];
+    ticket: Ticket;
+    isSaving: boolean;
     currentAccount: any;
     eventSubscriber: Subscription;
 
@@ -33,11 +37,37 @@ tickets: Ticket[];
         );
     }
     ngOnInit() {
+        this.isSaving = false;
         this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
         this.registerChangeInTickets();
+    }
+
+    save() {
+        this.isSaving = true;
+        if (this.ticket.id !== undefined) {
+            this.subscribeToSaveResponse(
+                this.ticketService.update(this.ticket));
+        } else {
+            this.subscribeToSaveResponse(
+                this.ticketService.create(this.ticket));
+        }
+    }
+
+    private subscribeToSaveResponse(result: Observable<HttpResponse<Ticket>>) {
+        result.subscribe((res: HttpResponse<Ticket>) =>
+            this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
+    }
+
+    private onSaveSuccess(result: Ticket) {
+        this.eventManager.broadcast({ name: 'ticketListModification', content: 'OK'});
+        this.isSaving = false;
+    }
+
+    private onSaveError() {
+        this.isSaving = false;
     }
 
     ngOnDestroy() {

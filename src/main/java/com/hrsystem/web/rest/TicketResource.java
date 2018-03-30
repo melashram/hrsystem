@@ -97,6 +97,29 @@ public class TicketResource {
             .body(result);
     }
 
+    @PutMapping("/tickets/:id/assigntome")
+    @Timed
+    public ResponseEntity<Ticket> updateTicketAssignToMe(@RequestBody Ticket ticket) throws URISyntaxException {
+        log.debug("REST request to update Ticket : {}", ticket);
+        if (ticket.getId() == null) {
+            return createTicket(ticket);
+        }
+
+        ticket.setAcceptanceDate(Instant.now());
+        final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
+        Optional<User> currentLoggedInUser = userRepository.findOneByLogin(userLogin);
+
+        User emptyUser = new User();
+        User userLoggedIn = currentLoggedInUser.orElse(emptyUser);
+        userLoggedIn.setAuthorities(null);
+
+        ticket.setUser(userLoggedIn);
+        Ticket result = ticketRepository.save(ticket);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, ticket.getId().toString()))
+            .body(result);
+    }
+
     /**
      * GET  /tickets : get all the tickets.
      *

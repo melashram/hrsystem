@@ -19,11 +19,20 @@ export const ticketRoute: Routes = [
         path: 'ticket/:id',
         component: TicketDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_EMPLOYEE' , 'ROLE_IT' , 'ROLE_HR'],
+            pageTitle: 'Tickets'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'tickets/:id/assigntome',
+        component: TicketComponent,
+        data: {
+            authorities: ['ROLE_IT' , 'ROLE_HR'],
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService]
     }
+
 ];
 
 export const ticketPopupRoute: Routes = [
