@@ -6,7 +6,7 @@
     </div>
     <br/>
     <div class="table-responsive" >
-        <table *jhiHasAnyAuthority="'ROLE_IT'" class="table table-striped">
+        <table *jhiHasAnyAuthority="['ROLE_IT']" class="table table-striped">
             <thead>
             <tr>
                 <th><span>ID</span></th>
@@ -48,23 +48,23 @@
                 <td>
                     {{ticket.user?.login}}
                 </td>
-
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../ticket', ticket.id ]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline">Assign to me</span>
+                            <span class="d-none d-md-inline">View</span>
                         </button>
+
                     </div>
                 </td>
-
             </tr>
             </tbody>
         </table>
 
-        <table *jhiHasAnyAuthority="'ROLE_HR'" class="table table-striped">
+        <table *jhiHasAnyAuthority="['ROLE_HR']" class="table table-striped">
             <thead>
             <tr>
                 <th><span>ID</span></th>
@@ -106,18 +106,16 @@
                 <td>
                     {{ticket.user?.login}}
                 </td>
-
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../ticket', ticket.id ]"
+                                [routerLink]="['../ticket', ticket.id , '/assigntome']"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline">Assign to me</span>
+                            <span class="d-none d-md-inline">View</span>
                         </button>
                     </div>
                 </td>
-
             </tr>
             </tbody>
         </table>

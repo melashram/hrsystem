@@ -13,10 +13,14 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 })
 export class TicketAvailableComponent implements OnInit {
 
+    tickets: Ticket[];
+    ticket: Ticket;
     HRtickets: Ticket[];
     ITtickets: Ticket[];
     currentAccount: any;
     eventSubscriber: Subscription;
+
+    isSaving: boolean;
 
     constructor(
         private ticketService: TicketService,
@@ -25,15 +29,6 @@ export class TicketAvailableComponent implements OnInit {
         private principal: Principal
     ) {
     }
-
-    // loadAll() {
-    //     this.ticketService.query().subscribe(
-    //         (res: HttpResponse<Ticket[]>) => {
-    //             this.tickets = res.body;
-    //         },
-    //         (res: HttpErrorResponse) => this.onError(res.message)
-    //     );
-    // }
 
     loadHRTickets() {
         this.ticketService.HRTicketquery().subscribe(
@@ -51,8 +46,16 @@ export class TicketAvailableComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
-
+    loadAll() {
+        this.ticketService.query().subscribe(
+            (res: HttpResponse<Ticket[]>) => {
+                this.tickets = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     ngOnInit() {
+        this.loadAll();
         this.loadHRTickets();
         this.loadITTickets();
         this.principal.identity().then((account) => {
@@ -60,7 +63,6 @@ export class TicketAvailableComponent implements OnInit {
         });
         this.registerChangeInTickets();
     }
-
 
     trackId(index: number, item: Ticket) {
         return item.id;

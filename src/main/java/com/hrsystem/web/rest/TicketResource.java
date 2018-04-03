@@ -97,7 +97,7 @@ public class TicketResource {
             .body(result);
     }
 
-    @PutMapping("/tickets/:id/assigntome")
+    @PutMapping("/tickets/{id}/assigntome")
     @Timed
     public ResponseEntity<Ticket> updateTicketAssignToMe(@RequestBody Ticket ticket) throws URISyntaxException {
         log.debug("REST request to update Ticket : {}", ticket);

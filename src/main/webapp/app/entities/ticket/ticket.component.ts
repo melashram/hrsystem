@@ -6,7 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Ticket } from './ticket.model';
 import { TicketService } from './ticket.service';
 import { Principal } from '../../shared';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'jhi-ticket',

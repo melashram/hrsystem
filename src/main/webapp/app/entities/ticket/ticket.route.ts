@@ -1,10 +1,10 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
-import { UserRouteAccessService } from '../../shared';
-import { TicketComponent } from './ticket.component';
-import { TicketDetailComponent } from './ticket-detail.component';
-import { TicketPopupComponent } from './ticket-dialog.component';
-import { TicketDeletePopupComponent } from './ticket-delete-dialog.component';
+import {UserRouteAccessService} from '../../shared';
+import {TicketComponent} from './ticket.component';
+import {TicketDetailComponent} from './ticket-detail.component';
+import {TicketPopupComponent} from './ticket-dialog.component';
+import {TicketDeletePopupComponent} from './ticket-delete-dialog.component';
 
 export const ticketRoute: Routes = [
     {
@@ -19,20 +19,20 @@ export const ticketRoute: Routes = [
         path: 'ticket/:id',
         component: TicketDetailComponent,
         data: {
-            authorities: ['ROLE_EMPLOYEE' , 'ROLE_IT' , 'ROLE_HR'],
-            pageTitle: 'Tickets'
-        },
-        canActivate: [UserRouteAccessService]
-    }, {
-        path: 'tickets/:id/assigntome',
-        component: TicketComponent,
-        data: {
-            authorities: ['ROLE_IT' , 'ROLE_HR'],
+            authorities: ['ROLE_EMPLOYEE', 'ROLE_IT', 'ROLE_HR'],
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService]
     }
-
+    // , {
+    //     path: 'ticket/:id/assigntome',
+    //     component: TicketComponent,
+    //     data: {
+    //         authorities: ['ROLE_IT' , 'ROLE_HR'],
+    //         pageTitle: 'Tickets'
+    //     },
+    //     canActivate: [UserRouteAccessService]
+    // }
 ];
 
 export const ticketPopupRoute: Routes = [
