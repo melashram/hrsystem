@@ -12,8 +12,8 @@
     <div class="row">
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="tickets">
-        <table class="table table-striped">
+    <div  class="table-responsive" *ngIf="tickets">
+        <table class="table table-striped" *jhiHasAnyAuthority="['ROLE_ADMIN']">
             <thead>
             <tr>
             <th><span>ID</span></th>
