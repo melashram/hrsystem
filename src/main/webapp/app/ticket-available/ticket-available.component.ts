@@ -71,8 +71,11 @@ export class TicketAvailableComponent implements OnInit {
         this.eventSubscriber = this.eventManager.subscribe('ticketListModification', (response) => this.loadHRTickets());
         this.eventSubscriber = this.eventManager.subscribe('ticketListModification', (response) => this.loadITTickets());
     }
-
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
+    }
+
+    test(){
+        console.log("test");
     }
 }

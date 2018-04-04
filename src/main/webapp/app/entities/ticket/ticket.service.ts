@@ -31,6 +31,7 @@ export class TicketService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
+
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<Ticket>(`${this.resourceUrl}/${id}`, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));

@@ -24,15 +24,15 @@ export const ticketRoute: Routes = [
         },
         canActivate: [UserRouteAccessService]
     }
-    // , {
-    //     path: 'ticket/:id/assigntome',
-    //     component: TicketComponent,
-    //     data: {
-    //         authorities: ['ROLE_IT' , 'ROLE_HR'],
-    //         pageTitle: 'Tickets'
-    //     },
-    //     canActivate: [UserRouteAccessService]
-    // }
+    , {
+        path: 'ticket/:id/assigntome',
+        component: TicketComponent,
+        data: {
+            authorities: ['ROLE_IT' , 'ROLE_HR'],
+            pageTitle: 'Tickets'
+        },
+        canActivate: [UserRouteAccessService]
+    }
 ];
 
 export const ticketPopupRoute: Routes = [
@@ -50,7 +50,7 @@ export const ticketPopupRoute: Routes = [
         path: 'ticket/:id/edit',
         component: TicketPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_HR' , 'ROLE_IT'],
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService],
