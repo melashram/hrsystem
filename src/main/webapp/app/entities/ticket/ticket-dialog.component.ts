@@ -103,6 +103,17 @@ export class TicketDialogComponent implements OnInit {
         }
     }
 
+    saveHRIT() {
+        this.isSaving = true;
+        if (this.ticket.id !== undefined) {
+            this.subscribeToSaveResponse(
+                this.ticketService.updateHRIT(this.ticket));
+        } else {
+            this.subscribeToSaveResponse(
+                this.ticketService.create(this.ticket));
+        }
+    }
+
     private subscribeToSaveResponse(result: Observable<HttpResponse<Ticket>>) {
         result.subscribe((res: HttpResponse<Ticket>) =>
             this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());

@@ -31,6 +31,12 @@ export class TicketService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
+    updateHRIT(ticket: Ticket): Observable<EntityResponseType> {
+        console.log('update from HR IT');
+        const copy = this.convert(ticket);
+        return this.http.put<Ticket>(this.resourceUrl+'/hrit', copy, {observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
 
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<Ticket>(`${this.resourceUrl}/${id}`, {observe: 'response'})

@@ -98,6 +98,18 @@ public class TicketResource {
             .body(result);
     }
 
+    @PutMapping("/tickets/hrit")
+    @Timed
+    public ResponseEntity<Ticket> updateTicketHRIT(@RequestBody Ticket ticket) throws URISyntaxException {
+        log.debug("REST request to update Ticket : {}", ticket);
+
+
+        Ticket result = ticketRepository.save(ticket);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, ticket.getId().toString()))
+            .body(result);
+    }
+
 //    @PutMapping("/tickets/{id}/assigntome")
 //    @Timed
 //    public ResponseEntity<Ticket> updateTicketAssignToMe(@RequestBody Ticket ticket) throws URISyntaxException {
