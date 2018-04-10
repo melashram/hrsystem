@@ -98,6 +98,8 @@ public class TicketResource {
             .body(result);
     }
 
+
+
     @PutMapping("/tickets/hrit")
     @Timed
     public ResponseEntity<Ticket> updateTicketHRIT(@RequestBody Ticket ticket) throws URISyntaxException {
@@ -158,6 +160,14 @@ public class TicketResource {
         log.debug("REST request to get Ticket : {}", id);
         Ticket ticket = ticketRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(ticket));
+    }
+
+    @GetMapping("/tickets/usertickets")
+    @Timed
+    public List<Ticket> getTicketLoggedInUser(@PathVariable Long id) {
+        log.debug("REST request to get Ticket : {}", id);
+        List<Ticket> tickets = ticketRepository.findByUserIsCurrentUser();
+        return ticketRepository.findByUserIsCurrentUser();
     }
 
     @GetMapping("/tickets/hrtickets")

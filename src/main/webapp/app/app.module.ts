@@ -17,6 +17,7 @@ import { HrsystemAdminModule } from './admin/admin.module';
 import { HrsystemAccountModule } from './account/account.module';
 import { HrsystemEntityModule } from './entities/entity.module';
 import { HrsystemTicketAvailableModule} from './ticket-available';
+import { HrsystemTicketHritModule}from './ticket-hrit';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
@@ -29,6 +30,7 @@ import {
 } from './layouts';
 import { TicketAvailableComponent } from './ticket-available/ticket-available.component';
 import { CreateTicketComponent } from './create-ticket/create-ticket.component';
+import { TicketHritComponent } from './ticket-hrit/ticket-hrit.component';
 
 @NgModule({
     imports: [
@@ -41,6 +43,7 @@ import { CreateTicketComponent } from './create-ticket/create-ticket.component';
         HrsystemAccountModule,
         HrsystemEntityModule,
         HrsystemTicketAvailableModule,
+        //HrsystemTicketHritModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [

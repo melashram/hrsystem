@@ -16,6 +16,7 @@ export class TicketComponent implements OnInit, OnDestroy {
 
     tickets: Ticket[];
     ticket: Ticket;
+    userTickets:Ticket[];
     isSaving: boolean;
     currentAccount: any;
     eventSubscriber: Subscription;
@@ -26,6 +27,15 @@ export class TicketComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private principal: Principal
     ) {
+    }
+
+    loadUserTicket(){
+        this.ticketService.UserTicketquery().subscribe(
+            (res: HttpResponse<Ticket[]>) => {
+                this.userTickets = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     loadAll() {
@@ -39,6 +49,7 @@ export class TicketComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.isSaving = false;
         this.loadAll();
+        this.loadUserTicket();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });

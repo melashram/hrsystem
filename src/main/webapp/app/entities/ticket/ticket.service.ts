@@ -49,6 +49,12 @@ export class TicketService {
             .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
     }
 
+    UserTicketquery(req?: any): Observable<HttpResponse<Ticket[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Ticket[]>(this.resourceUrl+'/usertickets', {params: options, observe: 'response'})
+            .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
+    }
+
     HRTicketquery(req?: any): Observable<HttpResponse<Ticket[]>> {
         const options = createRequestOption(req);
 

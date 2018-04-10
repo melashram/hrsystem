@@ -22,7 +22,6 @@ export class TicketDialogComponent implements OnInit {
 
     ticket: Ticket;
     isSaving: boolean;
-
     requests: Request[];
 
     ticketstatuses: TicketStatus[];

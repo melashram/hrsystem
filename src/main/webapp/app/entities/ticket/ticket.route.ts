@@ -41,6 +41,14 @@ export const ticketRoute: Routes = [
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService]
+    },{
+        path: 'ticket/userticket',
+        component: TicketComponent,
+        data: {
+            authorities: [ 'ROLE_EMPLOYEE'],
+            pageTitle: 'UserTickets'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
