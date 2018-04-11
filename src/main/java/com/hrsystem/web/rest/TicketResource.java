@@ -105,6 +105,7 @@ public class TicketResource {
     public ResponseEntity<Ticket> updateTicketHRIT(@RequestBody Ticket ticket) throws URISyntaxException {
         log.debug("REST request to update Ticket : {}", ticket);
 
+        ticket.setAcceptanceDate(Instant.now());
 
         Ticket result = ticketRepository.save(ticket);
         return ResponseEntity.ok()
@@ -164,8 +165,8 @@ public class TicketResource {
 
     @GetMapping("/tickets/usertickets")
     @Timed
-    public List<Ticket> getTicketLoggedInUser(@PathVariable Long id) {
-        log.debug("REST request to get Ticket : {}", id);
+    public List<Ticket> getTicketLoggedInUser() {
+        log.debug("REST request to get User Tickets : {}");
         List<Ticket> tickets = ticketRepository.findByUserIsCurrentUser();
         return ticketRepository.findByUserIsCurrentUser();
     }
