@@ -13,3 +13,10 @@ export const ticketAvailableRoute: Routes = [
         canActivate: [UserRouteAccessService]
     }
 ];
+
+export const ticketPopupRoute: Routes = [
+    {
+        path: 'ticket-available/:id/edit',
+        component: TicketAvailablePopupComponent
+    }
+]
