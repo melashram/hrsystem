@@ -5,10 +5,14 @@ import {HrsystemSharedModule} from '../shared';
 import {
     TicketAvailableComponent,
     ticketAvailableRoute,
+    ticketAvailablePopupRoute,
+    TicketAvailablePopupService
 } from './';
+import {TicketAvailablePopupComponent} from './ticket-available-dialog.component';
 
 const ENTITY_STATES = [
     ...ticketAvailableRoute,
+    ...ticketAvailableRoute
 ];
 @NgModule({
     imports: [
@@ -17,9 +21,14 @@ const ENTITY_STATES = [
     ],
     declarations: [
         TicketAvailableComponent,
+        TicketAvailablePopupComponent
     ],
     entryComponents: [
         TicketAvailableComponent,
+        TicketAvailablePopupComponent
+    ],
+    providers:[
+        TicketAvailablePopupComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

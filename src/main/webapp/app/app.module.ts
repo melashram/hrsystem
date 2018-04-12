@@ -16,7 +16,7 @@ import { HrsystemHomeModule } from './home/home.module';
 import { HrsystemAdminModule } from './admin/admin.module';
 import { HrsystemAccountModule } from './account/account.module';
 import { HrsystemEntityModule } from './entities/entity.module';
-import { HrsystemTicketAvailableModule} from './ticket-available';
+import {HrsystemTicketAvailableModule, TicketAvailablePopupComponent} from './ticket-available';
 import { HrsystemTicketHritModule} from './ticket-hrit';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
@@ -44,7 +44,7 @@ import { TicketHritComponent } from './ticket-hrit/ticket-hrit.component';
         HrsystemAccountModule,
         HrsystemEntityModule,
         HrsystemTicketAvailableModule,
-        HrsystemTicketHritModule
+        HrsystemTicketHritModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -54,6 +54,7 @@ import { TicketHritComponent } from './ticket-hrit/ticket-hrit.component';
         PageRibbonComponent,
         FooterComponent,
         CreateTicketComponent,
+
     ],
     providers: [
         ProfileService,
