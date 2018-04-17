@@ -21,7 +21,7 @@
                 </a>
             </li>
 
-            <li class="nav-item" *jhiHasAnyAuthority="['ROLE_EMPLOYEE']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li class="nav-item" *jhiHasAnyAuthority="['ROLE_EMPLOYEE' , 'ROLE_HR','ROLE_IT']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="../ticket-hrit" >
                     <span>
                         <i class="fa fa-home" aria-hidden="true"></i>

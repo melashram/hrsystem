@@ -5,6 +5,7 @@ import {TicketComponent} from './ticket.component';
 import {TicketDetailComponent} from './ticket-detail.component';
 import {TicketPopupComponent} from './ticket-dialog.component';
 import {TicketDeletePopupComponent} from './ticket-delete-dialog.component';
+import {TickethritPopupComponent} from "./ticket-dialoghrit.component";
 
 export const ticketRoute: Routes = [
     {
@@ -45,7 +46,7 @@ export const ticketRoute: Routes = [
         path: 'ticket/userticket',
         component: TicketComponent,
         data: {
-            authorities: [ 'ROLE_EMPLOYEE'],
+            authorities: ['ROLE_EMPLOYEE' , 'ROLE_IT'  ,'ROLE_HR'],
             pageTitle: 'UserTickets'
         },
         canActivate: [UserRouteAccessService]

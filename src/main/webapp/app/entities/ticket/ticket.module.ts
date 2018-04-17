@@ -12,6 +12,7 @@ import {
     TicketPopupComponent,
     TicketDeletePopupComponent,
     TicketDeleteDialogComponent,
+    TickethritPopupComponent,
     ticketRoute,
     ticketPopupRoute,
 } from './';
@@ -34,6 +35,8 @@ const ENTITY_STATES = [
         TicketDeleteDialogComponent,
         TicketPopupComponent,
         TicketDeletePopupComponent,
+        TickethritPopupComponent,
+
     ],
     entryComponents: [
         TicketComponent,
@@ -41,6 +44,7 @@ const ENTITY_STATES = [
         TicketPopupComponent,
         TicketDeleteDialogComponent,
         TicketDeletePopupComponent,
+        TickethritPopupComponent
     ],
     providers: [
         TicketService,

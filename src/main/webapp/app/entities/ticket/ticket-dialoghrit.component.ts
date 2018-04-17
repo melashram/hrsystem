@@ -16,7 +16,7 @@ import { User, UserService } from '../../shared';
 
 @Component({
     selector: 'jhi-ticket-dialog',
-    templateUrl: './ticket-dialog.component.html'
+    templateUrl: './ticket-dialoghrit.component.html'
 })
 export class TicketDialoghritComponent implements OnInit {
 

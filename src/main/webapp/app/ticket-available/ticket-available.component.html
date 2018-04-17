@@ -51,7 +51,7 @@
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../', { outlets: { popup: 'tickethrit/'+ ticket.id + '/edit'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'tickethrit/'+ ticket.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-primary btn-sm">
@@ -109,7 +109,7 @@
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'ticket/'+ ticket.id + '/edit'} }]"
+                                [routerLink]="['/ticket-available', { outlets: { popup: 'tickethrit/'+ ticket.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-primary btn-sm">
