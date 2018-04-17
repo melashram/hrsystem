@@ -10,8 +10,8 @@ export class Ticket implements BaseEntity {
         public acceptanceDate?: any,
         public request?: BaseEntity,
         public ticketStatus?: BaseEntity,
-        public assignedTo?: BaseEntity,
         public user?: User,
+        public assignedUser?: User,
     ) {
     }
 }

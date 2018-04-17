@@ -71,19 +71,6 @@ export class TicketAvailableDialogComponent implements OnInit{
                         }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
                 }
             }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.humanResourceUserService
-            .query({filter: 'ticket-is-null'})
-            .subscribe((res: HttpResponse<HumanResourceUser[]>) => {
-                if (!this.ticket.assignedTo || !this.ticket.assignedTo.id) {
-                    this.assignedtos = res.body;
-                } else {
-                    this.humanResourceUserService
-                        .find(this.ticket.assignedTo.id)
-                        .subscribe((subRes: HttpResponse<HumanResourceUser>) => {
-                            this.assignedtos = [subRes.body].concat(res.body);
-                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
-                }
-            }, (res: HttpErrorResponse) => this.onError(res.message));
         this.userService.query()
             .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }

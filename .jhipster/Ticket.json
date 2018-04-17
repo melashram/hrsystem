@@ -18,15 +18,15 @@
             "otherEntityRelationshipName": "ticket"
         },
         {
-            "relationshipType": "one-to-one",
-            "relationshipName": "assignedTo",
-            "otherEntityName": "humanResourceUser",
-            "otherEntityField": "id",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
             "ownerSide": true,
             "otherEntityRelationshipName": "ticket"
         },
         {
-            "relationshipName": "user",
+            "relationshipName": "assignedUser",
             "otherEntityName": "user",
             "relationshipType": "many-to-one",
             "otherEntityField": "login",

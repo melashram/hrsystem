@@ -11,7 +11,6 @@ import { TicketService } from '../../../../../../main/webapp/app/entities/ticket
 import { Ticket } from '../../../../../../main/webapp/app/entities/ticket/ticket.model';
 import { RequestService } from '../../../../../../main/webapp/app/entities/request';
 import { TicketStatusService } from '../../../../../../main/webapp/app/entities/ticket-status';
-import { HumanResourceUserService } from '../../../../../../main/webapp/app/entities/human-resource-user';
 import { UserService } from '../../../../../../main/webapp/app/shared';
 
 describe('Component Tests', () => {
@@ -30,7 +29,6 @@ describe('Component Tests', () => {
                 providers: [
                     RequestService,
                     TicketStatusService,
-                    HumanResourceUserService,
                     UserService,
                     TicketService
                 ]

@@ -36,15 +36,13 @@
                 <a [routerLink]="['/ticket-status', ticket.ticketStatus?.id]">{{ticket.ticketStatus?.id}}</a>
             </div>
         </dd>
-        <dt><span>Assigned To</span></dt>
-        <dd>
-            <div *ngIf="ticket.assignedTo">
-                <a [routerLink]="['/human-resource-user', ticket.assignedTo?.id]">{{ticket.assignedTo?.id}}</a>
-            </div>
-        </dd>
         <dt><span>User</span></dt>
         <dd>
             {{ticket.user?.login}}
+        </dd>
+        <dt><span>Assigned User</span></dt>
+        <dd>
+            {{ticket.assignedUser?.login}}
         </dd>
     </dl>
 

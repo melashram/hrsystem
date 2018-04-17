@@ -36,16 +36,18 @@ public class Ticket implements Serializable {
     private Instant acceptanceDate;
 
     @OneToOne
+    @JoinColumn(unique = true)
     private Request request;
 
     @OneToOne
+    @JoinColumn(unique = true)
     private TicketStatus ticketStatus;
-
-    @OneToOne
-    private HumanResourceUser assignedTo;
 
     @ManyToOne
     private User user;
+
+    @ManyToOne
+    private User assignedUser;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -147,19 +149,6 @@ public class Ticket implements Serializable {
         this.ticketStatus = ticketStatus;
     }
 
-    public HumanResourceUser getAssignedTo() {
-        return assignedTo;
-    }
-
-    public Ticket assignedTo(HumanResourceUser humanResourceUser) {
-        this.assignedTo = humanResourceUser;
-        return this;
-    }
-
-    public void setAssignedTo(HumanResourceUser humanResourceUser) {
-        this.assignedTo = humanResourceUser;
-    }
-
     public User getUser() {
         return user;
     }
@@ -171,6 +160,19 @@ public class Ticket implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getAssignedUser() {
+        return assignedUser;
+    }
+
+    public Ticket assignedUser(User user) {
+        this.assignedUser = user;
+        return this;
+    }
+
+    public void setAssignedUser(User user) {
+        this.assignedUser = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
