@@ -41,8 +41,8 @@
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="ticket.assignedTo">
-                        <a [routerLink]="['../human-resource-user', ticket.assignedTo?.id ]" >{{ticket.assignedTo?.user.login}}</a>
+                    <div *ngIf="ticket.assignedUser">
+                        {{ticket.assignedUser?.login}}
                     </div>
                 </td>
                 <td>
@@ -99,8 +99,9 @@
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="ticket.assignedTo">
-                        <a [routerLink]="['../human-resource-user', ticket.assignedTo?.id ]" >{{ticket.assignedTo?.user.login}}</a>
+                    <div *ngIf="ticket.assignedUser">
+
+                        {{ticket.assignedUser?.login}}
                     </div>
                 </td>
                 <td>

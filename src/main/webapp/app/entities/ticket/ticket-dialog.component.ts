@@ -40,6 +40,7 @@ export class TicketDialogComponent implements OnInit {
     }
 
     ngOnInit() {
+
         this.isSaving = false;
         this.requestService
             .query({filter: 'ticket-is-null'})
@@ -80,6 +81,17 @@ export class TicketDialogComponent implements OnInit {
         if (this.ticket.id !== undefined) {
             this.subscribeToSaveResponse(
                 this.ticketService.update(this.ticket));
+        } else {
+            this.subscribeToSaveResponse(
+                this.ticketService.create(this.ticket));
+        }
+    }
+
+    saveHRIT() {
+        this.isSaving = true;
+        if (this.ticket.id !== undefined) {
+            this.subscribeToSaveResponse(
+                this.ticketService.updateHRIT(this.ticket));
         } else {
             this.subscribeToSaveResponse(
                 this.ticketService.create(this.ticket));
