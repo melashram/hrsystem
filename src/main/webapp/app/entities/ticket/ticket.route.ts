@@ -78,7 +78,7 @@ export const ticketPopupRoute: Routes = [
         path: 'ticket/:id/delete',
         component: TicketDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_IT' , 'ROLE_HR'],
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService],

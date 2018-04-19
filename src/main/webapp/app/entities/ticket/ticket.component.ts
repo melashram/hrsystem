@@ -6,6 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Ticket } from './ticket.model';
 import { TicketService } from './ticket.service';
 import { Principal } from '../../shared';
+import {TicketStatus, TicketStatusService} from "../ticket-status";
 
 @Component({
     selector: 'jhi-ticket',
@@ -16,10 +17,13 @@ tickets: Ticket[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
+    ticketstatuses: TicketStatus[];
+
     constructor(
         private ticketService: TicketService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
+        private ticketStatusService: TicketStatusService,
         private principal: Principal
     ) {
     }
@@ -34,10 +38,20 @@ tickets: Ticket[];
     }
     ngOnInit() {
         this.loadAll();
+        this.loadTicketStatus();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
         this.registerChangeInTickets();
+    }
+
+    loadTicketStatus(){
+        this.ticketStatusService.query().subscribe(
+            (res: HttpResponse<TicketStatus[]>) => {
+                this.ticketstatuses = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     ngOnDestroy() {

@@ -1,4 +1,10 @@
 <div>
+
+    <div class="form-group">
+        <label class="form-control-label" >SEARCH</label>
+        <input type="text" class="form-control" />
+    </div>
+
     <h2>
         <span>Tickets Available</span>
     </h2>
@@ -58,6 +64,14 @@
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'ticket/'+ ticket.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
                     </div>
                 </td>
             </tr>
@@ -116,6 +130,14 @@
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'ticket/'+ ticket.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
                         </button>
                     </div>
                 </td>
