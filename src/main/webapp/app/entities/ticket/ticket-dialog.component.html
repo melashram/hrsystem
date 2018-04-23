@@ -15,17 +15,17 @@
         <div class="form-group" [hidden]="ticket.id" >
             <label class="form-control-label" for="field_reason">Reason</label>
             <input type="text" class="form-control" name="reason" id="field_reason"
-                   [(ngModel)]="ticket.reason" />
+                   [(ngModel)]="ticket.reason" maxlength="100" />
         </div>
         <div class="form-group" [hidden]="ticket.id">
             <label class="form-control-label" for="field_comment">Comment</label>
             <input type="text" class="form-control" name="comment" id="field_comment"
-                   [(ngModel)]="ticket.comment" />
+                   [(ngModel)]="ticket.comment" maxlength="100" />
         </div>
         <div class="form-group" [hidden]="ticket.id">
             <label class="form-control-label" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
-                   [(ngModel)]="ticket.description" />
+                   [(ngModel)]="ticket.description" maxlength="150" />
         </div>
 
         <div class="form-group" [hidden]="!ticket.id"  >
@@ -74,17 +74,17 @@
         <div class="form-group" [hidden]="ticket.id" >
             <label class="form-control-label" for="field_reason">Reason</label>
             <input type="text" class="form-control" name="reason" id="field_reason1"
-                   [(ngModel)]="ticket.reason" />
+                   [(ngModel)]="ticket.reason"  maxlength="100" />
         </div>
         <div class="form-group" [hidden]="ticket.id">
             <label class="form-control-label" for="field_comment">Comment</label>
             <input type="text" class="form-control" name="comment" id="field_comment1"
-                   [(ngModel)]="ticket.comment" />
+                   [(ngModel)]="ticket.comment"  maxlength="100" />
         </div>
         <div class="form-group" [hidden]="ticket.id">
             <label class="form-control-label" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description1"
-                   [(ngModel)]="ticket.description" />
+                   [(ngModel)]="ticket.description"  maxlength="150" />
         </div>
 
         <div class="form-group" [hidden]="!ticket.id"  >
@@ -97,6 +97,65 @@
         <div class="form-group" [hidden]="ticket.id">
             <label class="form-control-label" for="field_request">Request</label>
             <select class="form-control" id="field_request1" name="request" [(ngModel)]="ticket.request">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="requestOption.id === ticket.request?.id ? ticket.request : requestOption" *ngFor="let requestOption of requests; trackBy: trackRequestById">{{requestOption.type}}</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
+
+
+<form *jhiHasAnyAuthority="['ROLE_ADMIN']" name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myTicketLabel2">ADMIN</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div  class="form-group" [hidden]="!ticket.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id2" name="id"
+                   [(ngModel)]="ticket.id" readonly />
+        </div>
+
+
+        <div class="form-group"  >
+            <label class="form-control-label" for="field_reason">Reason</label>
+            <input type="text" class="form-control" name="reason" id="field_reason2"
+                   [(ngModel)]="ticket.reason"  maxlength="100" />
+        </div>
+        <div class="form-group" >
+            <label class="form-control-label" for="field_comment">Comment</label>
+            <input type="text" class="form-control" name="comment" id="field_comment2"
+                   [(ngModel)]="ticket.comment"  maxlength="100" />
+        </div>
+        <div class="form-group" >
+            <label class="form-control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description2"
+                   [(ngModel)]="ticket.description"  maxlength="150" />
+        </div>
+
+        <div class="form-group"  >
+            <label class="form-control-label" for="field_ticketStatus">Ticket Status</label>
+            <select class="form-control" id="field_ticketStatus2" name="ticketStatus" [(ngModel)]="ticket.ticketStatus">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="ticketStatusOption.id === ticket.ticketStatus?.id ? ticket.ticketStatus : ticketStatusOption" *ngFor="let ticketStatusOption of ticketstatuses; trackBy: trackTicketStatusById">{{ticketStatusOption.ticketStatus}}</option>
+            </select>
+        </div>
+        <div class="form-group" >
+            <label class="form-control-label" for="field_request">Request</label>
+            <select class="form-control" id="field_request12" name="request" [(ngModel)]="ticket.request">
                 <option [ngValue]="null"></option>
                 <option [ngValue]="requestOption.id === ticket.request?.id ? ticket.request : requestOption" *ngFor="let requestOption of requests; trackBy: trackRequestById">{{requestOption.type}}</option>
             </select>
