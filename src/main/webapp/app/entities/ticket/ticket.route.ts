@@ -5,7 +5,7 @@ import {TicketComponent} from './ticket.component';
 import {TicketDetailComponent} from './ticket-detail.component';
 import {TicketPopupComponent} from './ticket-dialog.component';
 import {TicketDeletePopupComponent} from './ticket-delete-dialog.component';
-import {TickethritPopupComponent} from "./ticket-dialoghrit.component";
+import {TickethritPopupComponent} from './ticket-dialoghrit.component';
 
 export const ticketRoute: Routes = [
     {
