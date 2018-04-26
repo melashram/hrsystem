@@ -11,7 +11,6 @@ import com.hrsystem.web.rest.errors.BadRequestAlertException;
 import com.hrsystem.web.rest.errors.InternalServerErrorException;
 import com.hrsystem.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-import javafx.print.Collation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
-public class TicketResource implements Comparator<Ticket> {
+public class TicketResource {
 
     private final Logger log = LoggerFactory.getLogger(TicketResource.class);
 
@@ -177,7 +176,18 @@ public class TicketResource implements Comparator<Ticket> {
     public List<Ticket> getAllITTickets() {
         log.debug("REST request to get all IT Tickets");
         List<Ticket>Ittickets = ticketRepository.findByRequestDepartment("IT");
+        Collections.sort(Ittickets, new Comparator<Ticket>() {
+            @Override
+            public int compare(Ticket t1, Ticket t2) {
+//                long time1 = t1.getAcceptanceDate().toEpochMilli();
+//                long time2 = t2.getAcceptanceDate().toEpochMilli();
+//                long diff = time2-time1;
 
+                return t1.getAcceptanceDate().compareTo(t2.getAcceptanceDate());
+
+//                return (int) (time2-time1);
+            }
+        });
         return ticketRepository.findByRequestDepartment("IT");
     }
 
@@ -196,8 +206,5 @@ public class TicketResource implements Comparator<Ticket> {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    @Override
-    public int compare(Ticket o1, Ticket o2) {
-        Instant compareDate = ((Ticket))
-    }
+
 }
