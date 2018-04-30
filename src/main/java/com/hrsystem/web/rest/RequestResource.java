@@ -87,7 +87,23 @@ public class RequestResource {
     public List<Request> getAllRequests() {
         log.debug("REST request to get all Requests");
         return requestRepository.findAll();
-        }
+    }
+
+    @GetMapping("/requests/hrrequests")
+    @Timed
+    public List<Request> getAllHrRequests() {
+        log.debug("REST request to get all Requests");
+        List<Request> hrrequests = requestRepository.findRequestByDepartment("HR");
+        return requestRepository.findRequestByDepartment("HR");
+    }
+
+    @GetMapping("/requests/itrequests")
+    @Timed
+    public List<Request> getAllItRequests() {
+        log.debug("REST request to get all Requests");
+        List<Request> itrequests = requestRepository.findRequestByDepartment("IT");
+        return requestRepository.findRequestByDepartment("IT");
+    }
 
     /**
      * GET  /requests/:id : get the "id" request.

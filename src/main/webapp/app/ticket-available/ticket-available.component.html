@@ -21,9 +21,9 @@
             <thead>
             <tr>
                 <th><span>ID</span></th>
-                <th style=" width: 10%"><span>Reason</span></th>
-                <th style=" width: 10%"><span>Comment</span></th>
-                <th style=" width: 10%"><span>Description</span></th>
+                <th style=" width: 5%"><span>Reason</span></th>
+                <th style=" width: 5%"><span>Comment</span></th>
+                <th style=" width: 5%"><span>Description</span></th>
                 <th><span>Creation Date</span></th>
                 <th><span>Acceptance Date</span></th>
                 <th><span>Request</span></th>
@@ -67,7 +67,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline">Edit</span>
+                            <span class="d-none d-md-inline">Assign to me</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'ticket/'+ ticket.id + '/delete'} }]"
@@ -134,7 +134,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline">Edit</span>
+                            <span class="d-none d-md-inline">Assign to me</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'ticket/'+ ticket.id + '/delete'} }]"

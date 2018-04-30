@@ -22,7 +22,12 @@ export class TicketDialogComponent implements OnInit {
     ticket: Ticket;
     isSaving: boolean;
 
+    hrRequest: boolean;
+    itRequest: boolean;
     requests: Request[];
+
+    itRequests: Request[];
+    hrRequests: Request[];
 
     ticketstatuses: TicketStatus[];
 
@@ -41,7 +46,11 @@ export class TicketDialogComponent implements OnInit {
 
     ngOnInit() {
 
+        this.hrRequest=false;
+        this.itRequest=false;
         this.isSaving = false;
+        this.loadHrRequests();
+        this.loadItRequests();
         this.requestService
             .query({filter: 'ticket-is-null'})
             .subscribe((res: HttpResponse<Request[]>) => {
@@ -98,6 +107,24 @@ export class TicketDialogComponent implements OnInit {
         }
     }
 
+    loadHrRequests(){
+        this.requestService.hrRequestsQuery().subscribe(
+            (res: HttpResponse<Request[]>)=>{
+                this.hrRequests = res.body;
+            },
+            (res:HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    loadItRequests(){
+        this.requestService.itRequestsQuery().subscribe(
+            (res: HttpResponse<Request[]>)=>{
+                this.itRequests = res.body;
+            },
+            (res:HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
     private subscribeToSaveResponse(result: Observable<HttpResponse<Ticket>>) {
         result.subscribe((res: HttpResponse<Ticket>) =>
             this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
@@ -128,6 +155,14 @@ export class TicketDialogComponent implements OnInit {
     trackUserById(index: number, item: User) {
         return item.id;
     }
+
+    viewHrRequests(){
+        if(this.hrRequest== false){
+            this.hrRequest = true;
+        }else{
+            this.hrRequest=false;
+        }
+    }
 }
 
 @Component({
@@ -144,6 +179,7 @@ export class TicketPopupComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+
         this.routeSub = this.route.params.subscribe((params) => {
             if ( params['id'] ) {
                 this.ticketPopupService
@@ -154,7 +190,6 @@ export class TicketPopupComponent implements OnInit, OnDestroy {
             }
         });
     }
-
     ngOnDestroy() {
         this.routeSub.unsubscribe();
     }

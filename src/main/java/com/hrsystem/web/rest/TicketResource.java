@@ -176,18 +176,18 @@ public class TicketResource {
     public List<Ticket> getAllITTickets() {
         log.debug("REST request to get all IT Tickets");
         List<Ticket>Ittickets = ticketRepository.findByRequestDepartment("IT");
-        Collections.sort(Ittickets, new Comparator<Ticket>() {
-            @Override
-            public int compare(Ticket t1, Ticket t2) {
-//                long time1 = t1.getAcceptanceDate().toEpochMilli();
-//                long time2 = t2.getAcceptanceDate().toEpochMilli();
-//                long diff = time2-time1;
-
-                return t1.getAcceptanceDate().compareTo(t2.getAcceptanceDate());
-
-//                return (int) (time2-time1);
-            }
-        });
+//        Collections.sort(Ittickets, new Comparator<Ticket>() {
+//            @Override
+//            public int compare(Ticket t1, Ticket t2) {
+////                long time1 = t1.getAcceptanceDate().toEpochMilli();
+////                long time2 = t2.getAcceptanceDate().toEpochMilli();
+////                long diff = time2-time1;
+//
+//                return t1.getAcceptanceDate().compareTo(t2.getAcceptanceDate());
+//
+////                return (int) (time2-time1);
+//            }
+//        });
         return ticketRepository.findByRequestDepartment("IT");
     }
 

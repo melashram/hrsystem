@@ -38,6 +38,18 @@ export class RequestService {
             .map((res: HttpResponse<Request[]>) => this.convertArrayResponse(res));
     }
 
+    hrRequestsQuery(req?: any): Observable<HttpResponse<Request[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Request[]>(this.resourceUrl+'/hrrequests', { params: options, observe: 'response' })
+            .map((res: HttpResponse<Request[]>) => this.convertArrayResponse(res));
+    }
+
+    itRequestsQuery(req?: any): Observable<HttpResponse<Request[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Request[]>(this.resourceUrl+'/itrequests', { params: options, observe: 'response' })
+            .map((res: HttpResponse<Request[]>) => this.convertArrayResponse(res));
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }
