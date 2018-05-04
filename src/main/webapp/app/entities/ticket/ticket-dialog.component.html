@@ -60,6 +60,9 @@
     #element1 {display:inline-block;margin-right:10px;}
     #element2 {display:inline-block;}
     #element3 {display:inline-block;margin-up:50px;}
+    #element12 {display:inline-block;margin-right:10px;}
+    #element22 {display:inline-block;}
+    #element32 {display:inline-block;margin-up:50px;}
 </style>
 
 
@@ -93,16 +96,17 @@
         </div>
 
 
-
-        <div id="element1">
-            HR Requests
-        </div>
-        <label id = "element3" class="switch">
-            <input type="checkbox" (click) = "viewHrRequests()">
-            <span class="slider"></span>
-        </label>
-        <div id="element2">
-            IT Requests
+        <div [hidden]="ticket.id" >
+            <div id="element1">
+                IT Requests
+            </div>
+            <label id = "element3" class="switch">
+                <input type="checkbox" (click) = "viewHrRequests()">
+                <span class="slider"></span>
+            </label>
+            <div id="element2">
+                HR Requests
+            </div>
         </div>
 
         <div class="form-group" [hidden]="ticket.id || !hrRequest" >
@@ -127,13 +131,7 @@
             <option [ngValue]="ticketStatusOption.id === ticket.ticketStatus?.id ? ticket.ticketStatus : ticketStatusOption" *ngFor="let ticketStatusOption of ticketstatuses; trackBy: trackTicketStatusById">{{ticketStatusOption.ticketStatus}}</option>
         </select>
     </div>
-        <!--<div class="form-group" [hidden]="ticket.id">-->
-            <!--<label class="form-control-label" for="field_request">Request</label>-->
-            <!--<select class="form-control" id="field_request" name="request" [(ngModel)]="ticket.request">-->
-                <!--<option [ngValue]="null"></option>-->
-                <!--<option [ngValue]="requestOption.id === ticket.request?.id ? ticket.request : requestOption" *ngFor="let requestOption of requests; trackBy: trackRequestById">{{requestOption.type}}</option>-->
-            <!--</select>-->
-        <!--</div>-->
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
@@ -186,11 +184,32 @@
                 <option [ngValue]="ticketStatusOption.id === ticket.ticketStatus?.id ? ticket.ticketStatus : ticketStatusOption" *ngFor="let ticketStatusOption of ticketstatuses; trackBy: trackTicketStatusById">{{ticketStatusOption.ticketStatus}}</option>
             </select>
         </div>
-        <div class="form-group" [hidden]="ticket.id">
-            <label class="form-control-label" for="field_request">Request</label>
-            <select class="form-control" id="field_request1" name="request" [(ngModel)]="ticket.request">
+
+        <div [hidden]="ticket.id" >
+            <div id="element12">
+                IT Requests
+            </div>
+            <label id = "element32" class="switch">
+                <input type="checkbox" (click) = "viewHrRequests()">
+                <span class="slider"></span>
+            </label>
+            <div id="element22">
+                HR Requests
+            </div>
+        </div>
+
+        <div class="form-group" [hidden]="ticket.id || !hrRequest" >
+            <label class="form-control-label" for="field_request">HR Request</label>
+            <select class="form-control" id="field_request4" name="request" [(ngModel)]="ticket.request">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="requestOption.id === ticket.request?.id ? ticket.request : requestOption" *ngFor="let requestOption of requests; trackBy: trackRequestById">{{requestOption.type}}</option>
+                <option [ngValue]="requestOption.id === ticket.request?.id ? ticket.request : requestOption" *ngFor="let requestOption of hrRequests; trackBy: trackRequestById">{{requestOption.type}}</option>
+            </select>
+        </div>
+        <div class="form-group" [hidden]="ticket.id || hrRequest" >
+            <label class="form-control-label" for="field_request">IT Request</label>
+            <select class="form-control" id="field_request5" name="request" [(ngModel)]="ticket.request">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="requestOption.id === ticket.request?.id ? ticket.request : requestOption" *ngFor="let requestOption of itRequests; trackBy: trackRequestById">{{requestOption.type}}</option>
             </select>
         </div>
 

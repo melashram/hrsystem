@@ -17,6 +17,11 @@ export class TicketAvailableComponent implements OnInit {
     ticket: Ticket;
     HRtickets: Ticket[];
     ITtickets: Ticket[];
+
+    searchCategories =['A' , 'B' , 'C' , 'D'];
+
+    searchClicked : boolean;
+
     currentAccount: any;
     eventSubscriber: Subscription;
 
@@ -62,6 +67,19 @@ export class TicketAvailableComponent implements OnInit {
             this.currentAccount = account;
         });
         this.registerChangeInTickets();
+        this.searchClicked = false;
+        this.fillArray();
+    }
+
+    searchBarOnClick(){
+        this.searchClicked = true;
+        console.log("SearchClicked");
+    }
+
+    fillArray(){
+        this.searchCategories.push("Name");
+        this.searchCategories.push("Date");
+        this.searchCategories.push("Assigned to who");
     }
 
     trackId(index: number, item: Ticket) {
