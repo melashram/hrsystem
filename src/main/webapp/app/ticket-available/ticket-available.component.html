@@ -7,12 +7,18 @@
 <div>
 
     <div class="form-group" ><label class="form-control-label" >SEARCH</label>
-       <select  class="form-control" id ="searchCategory" name = "searchCategory"
-       [(ngModel)] = "searchCategory">
+       <select  (change) = "selectChangeHandler($event)" class="form-control" id ="searchCategory" name = "searchCategory">
            <option [value] = "1">Name</option>
            <option [value] = "2">Date</option>
        </select>
     </div>
+
+    <div class="form-group">
+        <label class="form-control-label" for="field_search">Search</label>
+        <input type="text" class="form-control" name="search" id="field_search"
+               [(ngModel)]="searchValue" maxlength="100" />
+    </div>
+
     <button (click) = "searchBarOnClick()"
             queryParamsHandling="merge"
             class="btn btn-primary btn-sm">

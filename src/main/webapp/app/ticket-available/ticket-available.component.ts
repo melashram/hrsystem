@@ -17,6 +17,9 @@ export class TicketAvailableComponent implements OnInit {
     ticket: Ticket;
     HRtickets: Ticket[];
     ITtickets: Ticket[];
+    searchTicketsName: Ticket[];
+
+    testString: '';
 
     searchCategories =['A' , 'B' , 'C' , 'D'];
 
@@ -25,6 +28,8 @@ export class TicketAvailableComponent implements OnInit {
     currentAccount: any;
     eventSubscriber: Subscription;
 
+
+    searchValue: String;
     isSaving: boolean;
 
     constructor(
@@ -59,6 +64,16 @@ export class TicketAvailableComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
+    loadSearchByName(){
+        this.ticketService.SearchNameTicketquery().subscribe(
+            (res: HttpResponse<Ticket[]>) => {
+                this.searchTicketsName = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
     ngOnInit() {
         this.loadAll();
         this.loadHRTickets();
@@ -71,15 +86,24 @@ export class TicketAvailableComponent implements OnInit {
         this.fillArray();
     }
 
+
+
     searchBarOnClick(){
         this.searchClicked = true;
         console.log("SearchClicked");
+        console.log(this.searchValue);
+        this.loadSearchByName();
     }
 
     fillArray(){
         this.searchCategories.push("Name");
         this.searchCategories.push("Date");
         this.searchCategories.push("Assigned to who");
+    }
+
+    selectChangeHandler(event: any){
+        //update the ui
+        this.testString = event.target.value;
     }
 
     trackId(index: number, item: Ticket) {
@@ -93,7 +117,11 @@ export class TicketAvailableComponent implements OnInit {
         this.jhiAlertService.error(error.message, null, null);
     }
 
-    test(){
-        console.log("test");
+    searchView(){
+        if(this.searchClicked == false){
+            this.searchClicked= true;
+        }else{
+            this.searchClicked=false;
+        }
     }
 }
