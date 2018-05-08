@@ -29,7 +29,7 @@ export class TicketAvailableComponent implements OnInit {
     eventSubscriber: Subscription;
 
 
-    searchValue: String;
+    searchValue: string;
     isSaving: boolean;
 
     constructor(
@@ -74,6 +74,17 @@ export class TicketAvailableComponent implements OnInit {
         );
     }
 
+
+
+    loadSearchByNameTest(searchValue: string){
+        this.ticketService.SearchNameTicketquerytest(searchValue).subscribe(
+            (res: HttpResponse<Ticket[]>) => {
+                this.searchTicketsName = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
     ngOnInit() {
         this.loadAll();
         this.loadHRTickets();
@@ -92,7 +103,7 @@ export class TicketAvailableComponent implements OnInit {
         this.searchClicked = true;
         console.log("SearchClicked");
         console.log(this.searchValue);
-        this.loadSearchByName();
+        this.loadSearchByNameTest(this.searchValue);
     }
 
     fillArray(){

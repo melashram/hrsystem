@@ -76,6 +76,16 @@ export class TicketService {
             .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
     }
 
+    SearchNameTicketquerytest(searchToken: string): Observable<EntityResponseType> {
+        const options = createRequestOption(searchToken);
+
+        return this.http.get<Ticket>(`${this.resourceUrl}+'/searchNameTest'+/${searchToken}`, {observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+
+        // return this.http.get<Ticket[]>(this.resourceUrl + '/searchNameItTest' + /${searchToken}, {params: options, observe: 'response'})
+        //     .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
+    }
+
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, {observe: 'response'});
