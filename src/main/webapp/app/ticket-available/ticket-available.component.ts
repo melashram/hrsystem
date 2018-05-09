@@ -66,7 +66,7 @@ export class TicketAvailableComponent implements OnInit {
     }
 
     loadSearchByName(){
-        this.ticketService.SearchNameTicketquery().subscribe(
+        this.ticketService.SearchNameTicketquery("employee").subscribe(
             (res: HttpResponse<Ticket[]>) => {
                 this.searchTicketsName = res.body;
             },
@@ -76,14 +76,14 @@ export class TicketAvailableComponent implements OnInit {
 
 
 
-    loadSearchByNameTest(searchValue: string){
-        this.ticketService.SearchNameTicketquerytest(searchValue).subscribe(
-            (res: HttpResponse<Ticket[]>) => {
-                this.searchTicketsName = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-    }
+    // loadSearchByNameTest(){
+    //     this.ticketService.SearchNameTicketquerytest(555).subscribe(
+    //         (res: HttpResponse<Ticket[]>) => {
+    //             this.searchTicketsName = res.body;
+    //         },
+    //         (res: HttpErrorResponse) => this.onError(res.message)
+    //     );
+    // }
 
     ngOnInit() {
         this.loadAll();
@@ -104,6 +104,8 @@ export class TicketAvailableComponent implements OnInit {
         console.log("SearchClicked");
         console.log(this.searchValue);
         //this.loadSearchByNameTest(this.searchValue);
+        //this.loadSearchByNameTest();
+        this.loadSearchByName();
     }
 
     fillArray(){

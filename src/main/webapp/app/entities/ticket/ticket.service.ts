@@ -69,22 +69,22 @@ export class TicketService {
             .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
     }
 
-    SearchNameTicketquery(req?: any): Observable<HttpResponse<Ticket[]>> {
-        const options = createRequestOption(req);
-
-        return this.http.get<Ticket[]>(this.resourceUrl + '/searchNameIt', {params: options, observe: 'response'})
-            .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
-    }
-
-    SearchNameTicketquerytest(searchToken: string): Observable<HttpResponse<Ticket[]>> {
+    SearchNameTicketquery(searchToken: string): Observable<HttpResponse<Ticket[]>> {
         const options = createRequestOption(searchToken);
 
-        return this.http.get<Ticket[]>(`${this.resourceUrl}/searchNameTest'${searchToken}`, {observe: 'response'})
+        return this.http.get<Ticket[]>(`${this.resourceUrl}/searchNameTest?searchToken=${searchToken}`, {params: options, observe: 'response'})
             .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
-
-        // return this.http.get<Ticket[]>(this.resourceUrl + '/searchNameItTest' + /${searchToken}, {params: options, observe: 'response'})
-        //     .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
     }
+
+    // SearchNameTicketquerytest(searchToken: number): Observable<HttpResponse<Ticket[]>> {
+    //     const options = createRequestOption(searchToken);
+    //
+    //     return this.http.get<Ticket[]>(`${this.resourceUrl}/searchNameTest?searchToken=${searchToken}`, {observe: 'response'})
+    //         .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
+    //
+    //     // return this.http.get<Ticket[]>(this.resourceUrl + '/searchNameItTest' + /${searchToken}, {params: options, observe: 'response'})
+    //     //     .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
+    // }
 
 
     delete(id: number): Observable<HttpResponse<any>> {

@@ -26,6 +26,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 /**
  * REST controller for managing Ticket.
  */
@@ -179,13 +181,22 @@ public class TicketResource {
         return ticketRepository.findByRequestDepartment("IT");
     }
 
-    @GetMapping("/tickets/searchNameIt")
-    @Timed
-    public List<Ticket> getTicketsSearchName() {
-        log.debug("REST request to get all IT Tickets for specific user");
-        List<Ticket> SearchedTicketByUserEmp = ticketRepository.findByUserSearch("employee" , "IT");
-        List<Ticket> SearchedTicketByUserIt = ticketRepository.findByUserSearch("it" , "IT");
-        return ticketRepository.findByUserSearch("employee" , "IT");
+//    @GetMapping("/tickets/searchNameIt")
+//    @Timed
+//    public List<Ticket> getTicketsSearchName() {
+//        log.debug("REST request to get all IT Tickets for specific user");
+//        List<Ticket> SearchedTicketByUserEmp = ticketRepository.findByUserSearch("employee" , "IT");
+//        List<Ticket> SearchedTicketByUserIt = ticketRepository.findByUserSearch("it" , "IT");
+//        List<Ticket> searchedTicketByNull = ticketRepository.findByUserSearch("" , "IT");
+//        return ticketRepository.findByUserSearch("employee" , "IT");
+//    }
+
+    @RequestMapping(value = "/tickets/searchNameTest", method = GET)
+    @ResponseBody
+    public String getBarBySimplePathWithRequestParam(
+        @RequestParam("searchToken") String  searchToken) {
+        log.debug(searchToken);
+        return "Get a specific Bar with id=" + searchToken;
     }
 
 
