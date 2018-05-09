@@ -29,7 +29,8 @@ export class TicketAvailableComponent implements OnInit {
     eventSubscriber: Subscription;
 
 
-    searchValue: string;
+    searchValueIt: string;
+    searchValueHr: string;
     isSaving: boolean;
 
     constructor(
@@ -65,8 +66,8 @@ export class TicketAvailableComponent implements OnInit {
         );
     }
 
-    loadSearchByName(){
-        this.ticketService.SearchNameTicketquery("employee").subscribe(
+    loadSearchByNameIt(){
+        this.ticketService.SearchNameTicketItquery(this.searchValueIt).subscribe(
             (res: HttpResponse<Ticket[]>) => {
                 this.searchTicketsName = res.body;
             },
@@ -74,16 +75,14 @@ export class TicketAvailableComponent implements OnInit {
         );
     }
 
-
-
-    // loadSearchByNameTest(){
-    //     this.ticketService.SearchNameTicketquerytest(555).subscribe(
-    //         (res: HttpResponse<Ticket[]>) => {
-    //             this.searchTicketsName = res.body;
-    //         },
-    //         (res: HttpErrorResponse) => this.onError(res.message)
-    //     );
-    // }
+    loadSearchByNameHr(){
+        this.ticketService.SearchNameTicketHrquery(this.searchValueHr).subscribe(
+            (res: HttpResponse<Ticket[]>) => {
+                this.searchTicketsName = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
 
     ngOnInit() {
         this.loadAll();
@@ -102,10 +101,20 @@ export class TicketAvailableComponent implements OnInit {
     searchBarOnClick(){
         this.searchClicked = true;
         console.log("SearchClicked");
-        console.log(this.searchValue);
         //this.loadSearchByNameTest(this.searchValue);
         //this.loadSearchByNameTest();
-        this.loadSearchByName();
+        // console.log(this.searchValueHr.length);
+        // console.log(this.searchValueIt.length);
+
+        if(this.searchValueIt!=undefined){
+           this.loadSearchByNameIt();
+        }
+
+        if(this.searchValueHr!=undefined){
+            this.loadSearchByNameHr()
+        }
+
+
     }
 
     fillArray(){

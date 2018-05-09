@@ -5,18 +5,22 @@
 </style>
 
 <div>
-
-    <div class="form-group" ><label class="form-control-label" >SEARCH</label>
-       <select  (change) = "selectChangeHandler($event)" class="form-control" id ="searchCategory" name = "searchCategory">
-           <option [value] = "1">Name</option>
-           <option [value] = "2">Date</option>
-       </select>
+    <!--<div class="form-group" ><label class="form-control-label" >SEARCH</label>-->
+       <!--<select  (change) = "selectChangeHandler($event)" class="form-control" id ="searchCategory" name = "searchCategory">-->
+           <!--<option [value] = "1">Name</option>-->
+           <!--<option [value] = "2">Date</option>-->
+       <!--</select>-->
+    <!--</div>-->
+    <div class="form-group" *jhiHasAnyAuthority="['ROLE_IT']">
+        <label class="form-control-label" for="field_searchIt">Search IT</label>
+        <input type="text" class="form-control" name="search" id="field_searchIt"
+               [(ngModel)]="searchValueIt" maxlength="100" />
     </div>
 
-    <div class="form-group">
-        <label class="form-control-label" for="field_search">Search</label>
-        <input type="text" class="form-control" name="search" id="field_search"
-               [(ngModel)]="searchValue" maxlength="100" />
+    <div class="form-group" *jhiHasAnyAuthority="['ROLE_HR']">
+        <label class="form-control-label" for="field_searchHr">Search HR</label>
+        <input type="text" class="form-control" name="search" id="field_searchHr"
+               [(ngModel)]="searchValueHr" maxlength="100" />
     </div>
 
     <button (click) = "searchBarOnClick()"

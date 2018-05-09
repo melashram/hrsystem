@@ -191,14 +191,24 @@ public class TicketResource {
 //        return ticketRepository.findByUserSearch("employee" , "IT");
 //    }
 
-    @RequestMapping(value = "/tickets/searchNameTest", method = GET)
+
+    @GetMapping("/tickets/searchNameIt")
     @ResponseBody
-    public String getBarBySimplePathWithRequestParam(
+    public  List<Ticket> SearchTicketsByNameIt(
         @RequestParam("searchToken") String  searchToken) {
         log.debug(searchToken);
-        return "Get a specific Bar with id=" + searchToken;
+        List<Ticket> SearchedTicketByUserEmp = ticketRepository.findByUserSearch(searchToken , "IT");
+        return SearchedTicketByUserEmp;
     }
 
+    @GetMapping("/tickets/searchNameHr")
+    @ResponseBody
+    public  List<Ticket> SearchTicketsByNameHr(
+        @RequestParam("searchToken") String  searchToken) {
+        log.debug(searchToken);
+        List<Ticket> SearchedTicketByUserEmp = ticketRepository.findByUserSearch(searchToken , "HR");
+        return SearchedTicketByUserEmp;
+    }
 
     /**
      * DELETE  /tickets/:id : delete the "id" ticket.
