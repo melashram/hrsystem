@@ -188,14 +188,6 @@ public class TicketResource {
         return ticketRepository.findByUserSearch("employee" , "IT");
     }
 
-    @GetMapping("/tickets/searchNameItTest/{searchToken}")
-    @Timed
-    public List<Ticket> getTicketsSearchNameTest(@PathVariable String searchToken) {
-        log.debug("REST request to get all IT Tickets for specific user" , searchToken);
-        List<Ticket> SearchedTicketByUserEmp = ticketRepository.findByUserSearch(searchToken , "IT");
-        List<Ticket> SearchedTicketByUserIt = ticketRepository.findByUserSearch("it" , "IT");
-        return ticketRepository.findByUserSearch("employee" , "IT");
-    }
 
     /**
      * DELETE  /tickets/:id : delete the "id" ticket.

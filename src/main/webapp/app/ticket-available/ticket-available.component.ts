@@ -103,7 +103,7 @@ export class TicketAvailableComponent implements OnInit {
         this.searchClicked = true;
         console.log("SearchClicked");
         console.log(this.searchValue);
-        this.loadSearchByNameTest(this.searchValue);
+        //this.loadSearchByNameTest(this.searchValue);
     }
 
     fillArray(){
