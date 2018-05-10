@@ -99,20 +99,22 @@ export class TicketAvailableComponent implements OnInit {
 
 
     searchBarOnClick(){
-        this.searchClicked = true;
-        console.log("SearchClicked");
-        //this.loadSearchByNameTest(this.searchValue);
-        //this.loadSearchByNameTest();
-        // console.log(this.searchValueHr.length);
-        // console.log(this.searchValueIt.length);
+        if(this.searchClicked == false){
+            this.searchClicked= true;
+            console.log("search clicked true");
+            if(this.searchValueIt!=undefined){
+                this.loadSearchByNameIt();
+            }
 
-        if(this.searchValueIt!=undefined){
-           this.loadSearchByNameIt();
+            if(this.searchValueHr!=undefined){
+                this.loadSearchByNameHr()
+            }
+        }else{
+            this.searchClicked=false;
+            console.log("search clicked false");
+
         }
 
-        if(this.searchValueHr!=undefined){
-            this.loadSearchByNameHr()
-        }
 
 
     }
@@ -142,8 +144,11 @@ export class TicketAvailableComponent implements OnInit {
     searchView(){
         if(this.searchClicked == false){
             this.searchClicked= true;
+            console.log("search clicked true");
         }else{
             this.searchClicked=false;
+            console.log("search clicked false");
+
         }
     }
 }

@@ -30,14 +30,11 @@
         <span class="d-none d-md-inline">search</span>
     </button>
 
-    <h2>
-        <span>Tickets Available</span>
-    </h2>
-    <div class="row">
-    </div>
-    <br/>
-    <div class="table-responsive" >
-        <table *jhiHasAnyAuthority="['ROLE_IT']" class="table table-striped">
+    <div [hidden]="!searchClicked">
+        <h2>
+            Search Results
+        </h2>
+        <table *jhiHasAnyAuthority="['ROLE_IT' , 'ROLE_HR']" class="table table-striped">
             <thead>
             <tr>
                 <th><span>ID</span></th>
@@ -54,7 +51,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let ticket of ITtickets ;trackBy: trackId">
+            <tr *ngFor="let ticket of searchTicketsName ;trackBy: trackId">
                 <td><a [routerLink]="['../ticket', ticket.id ]">{{ticket.id}}</a></td>
                 <td>{{ticket.reason}}</td>
                 <td>{{ticket.comment}}</td>
@@ -102,73 +99,215 @@
             </tr>
             </tbody>
         </table>
+    </div>
 
-        <table *jhiHasAnyAuthority="['ROLE_HR']" class="table table-striped">
-            <thead>
-            <tr>
-                <th><span>ID</span></th>
-                <th><span>Reason</span></th>
-                <th><span>Comment</span></th>
-                <th><span>Description</span></th>
-                <th><span>Creation Date</span></th>
-                <th><span>Acceptance Date</span></th>
-                <th><span>Request</span></th>
-                <th><span>Ticket Status</span></th>
-                <th><span>Assigned To</span></th>
-                <th><span>User</span></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let ticket of HRtickets ;trackBy: trackId">
-                <td><a [routerLink]="['../ticket', ticket.id ]">{{ticket.id}}</a></td>
-                <td>{{ticket.reason}}</td>
-                <td>{{ticket.comment}}</td>
-                <td>{{ticket.description}}</td>
-                <td>{{ticket.creationDate | date:'medium'}}</td>
-                <td>{{ticket.acceptanceDate | date:'medium'}}</td>
-                <td>
-                    <div *ngIf="ticket.request">
-                        <a [routerLink]="['../request', ticket.request?.id ]" >{{ticket.request?.type}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="ticket.ticketStatus">
-                        <a [routerLink]="['../ticket-status', ticket.ticketStatus?.id ]" >{{ticket.ticketStatus?.ticketStatus}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="ticket.assignedUser">
+    <div [hidden]="searchClicked">
+        <h2>
+            <span>Tickets Available</span>
+        </h2>
+        <div class="row">
+        </div>
+        <br/>
+        <div class="table-responsive" >
+            <table  *jhiHasAnyAuthority="['ROLE_IT']" class="table table-striped">
+                <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th style=" width: 5%"><span>Reason</span></th>
+                    <th style=" width: 5%"><span>Comment</span></th>
+                    <th style=" width: 5%"><span>Description</span></th>
+                    <th><span>Creation Date</span></th>
+                    <th><span>Acceptance Date</span></th>
+                    <th><span>Request</span></th>
+                    <th><span>Ticket Status</span></th>
+                    <th><span>Assigned To</span></th>
+                    <th><span>User</span></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let ticket of ITtickets ;trackBy: trackId">
+                    <td><a [routerLink]="['../ticket', ticket.id ]">{{ticket.id}}</a></td>
+                    <td>{{ticket.reason}}</td>
+                    <td>{{ticket.comment}}</td>
+                    <td>{{ticket.description}}</td>
+                    <td>{{ticket.creationDate | date:'medium'}}</td>
+                    <td>{{ticket.acceptanceDate | date:'medium'}}</td>
+                    <td>
+                        <div *ngIf="ticket.request">
+                            <a [routerLink]="['../request', ticket.request?.id ]" >{{ticket.request?.type}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="ticket.ticketStatus">
+                            <a [routerLink]="['../ticket-status', ticket.ticketStatus?.id ]" >{{ticket.ticketStatus?.ticketStatus}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="ticket.assignedUser">
+                            {{ticket.assignedUser?.login}}
+                        </div>
+                    </td>
+                    <td>
+                        {{ticket.user?.login}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'tickethrit/'+ ticket.id + '/edit'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-primary btn-sm">
+                                <span class="fa fa-pencil"></span>
+                                <span class="d-none d-md-inline">Assign to me</span>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'ticket/'+ ticket.id + '/delete'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <span class="fa fa-remove"></span>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
-                        {{ticket.assignedUser?.login}}
-                    </div>
-                </td>
-                <td>
-                    {{ticket.user?.login}}
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/ticket-available', { outlets: { popup: 'tickethrit/'+ ticket.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline">Assign to me</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'ticket/'+ ticket.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+            <table *jhiHasAnyAuthority="['ROLE_HR']" class="table table-striped">
+                <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Reason</span></th>
+                    <th><span>Comment</span></th>
+                    <th><span>Description</span></th>
+                    <th><span>Creation Date</span></th>
+                    <th><span>Acceptance Date</span></th>
+                    <th><span>Request</span></th>
+                    <th><span>Ticket Status</span></th>
+                    <th><span>Assigned To</span></th>
+                    <th><span>User</span></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let ticket of HRtickets ;trackBy: trackId">
+                    <td><a [routerLink]="['../ticket', ticket.id ]">{{ticket.id}}</a></td>
+                    <td>{{ticket.reason}}</td>
+                    <td>{{ticket.comment}}</td>
+                    <td>{{ticket.description}}</td>
+                    <td>{{ticket.creationDate | date:'medium'}}</td>
+                    <td>{{ticket.acceptanceDate | date:'medium'}}</td>
+                    <td>
+                        <div *ngIf="ticket.request">
+                            <a [routerLink]="['../request', ticket.request?.id ]" >{{ticket.request?.type}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="ticket.ticketStatus">
+                            <a [routerLink]="['../ticket-status', ticket.ticketStatus?.id ]" >{{ticket.ticketStatus?.ticketStatus}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="ticket.assignedUser">
 
+                            {{ticket.assignedUser?.login}}
+                        </div>
+                    </td>
+                    <td>
+                        {{ticket.user?.login}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    [routerLink]="['/ticket-available', { outlets: { popup: 'tickethrit/'+ ticket.id + '/edit'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-primary btn-sm">
+                                <span class="fa fa-pencil"></span>
+                                <span class="d-none d-md-inline">Assign to me</span>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'ticket/'+ ticket.id + '/delete'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <span class="fa fa-remove"></span>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <table  *jhiHasAnyAuthority="['ROLE_IT']" class="table table-striped">
+                <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th style=" width: 5%"><span>Reason</span></th>
+                    <th style=" width: 5%"><span>Comment</span></th>
+                    <th style=" width: 5%"><span>Description</span></th>
+                    <th><span>Creation Date</span></th>
+                    <th><span>Acceptance Date</span></th>
+                    <th><span>Request</span></th>
+                    <th><span>Ticket Status</span></th>
+                    <th><span>Assigned To</span></th>
+                    <th><span>User</span></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let ticket of ITtickets ;trackBy: trackId">
+                    <td><a [routerLink]="['../ticket', ticket.id ]">{{ticket.id}}</a></td>
+                    <td>{{ticket.reason}}</td>
+                    <td>{{ticket.comment}}</td>
+                    <td>{{ticket.description}}</td>
+                    <td>{{ticket.creationDate | date:'medium'}}</td>
+                    <td>{{ticket.acceptanceDate | date:'medium'}}</td>
+                    <td>
+                        <div *ngIf="ticket.request">
+                            <a [routerLink]="['../request', ticket.request?.id ]" >{{ticket.request?.type}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="ticket.ticketStatus">
+                            <a [routerLink]="['../ticket-status', ticket.ticketStatus?.id ]" >{{ticket.ticketStatus?.ticketStatus}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="ticket.assignedUser">
+                            {{ticket.assignedUser?.login}}
+                        </div>
+                    </td>
+                    <td>
+                        {{ticket.user?.login}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'tickethrit/'+ ticket.id + '/edit'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-primary btn-sm">
+                                <span class="fa fa-pencil"></span>
+                                <span class="d-none d-md-inline">Assign to me</span>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'ticket/'+ ticket.id + '/delete'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <span class="fa fa-remove"></span>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
