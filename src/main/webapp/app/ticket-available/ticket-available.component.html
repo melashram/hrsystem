@@ -5,30 +5,24 @@
 </style>
 
 <div>
-    <!--<div class="form-group" ><label class="form-control-label" >SEARCH</label>-->
-       <!--<select  (change) = "selectChangeHandler($event)" class="form-control" id ="searchCategory" name = "searchCategory">-->
-           <!--<option [value] = "1">Name</option>-->
-           <!--<option [value] = "2">Date</option>-->
-       <!--</select>-->
-    <!--</div>-->
-    <div class="form-group" *jhiHasAnyAuthority="['ROLE_IT']">
-        <label class="form-control-label" for="field_searchIt">Search IT</label>
-        <input type="text" class="form-control" name="search" id="field_searchIt"
-               [(ngModel)]="searchValueIt" maxlength="100" />
-    </div>
 
-    <div class="form-group" *jhiHasAnyAuthority="['ROLE_HR']">
-        <label class="form-control-label" for="field_searchHr">Search HR</label>
-        <input type="text" class="form-control" name="search" id="field_searchHr"
-               [(ngModel)]="searchValueHr" maxlength="100" />
-    </div>
-
-    <button (click) = "searchBarOnClick()"
-            queryParamsHandling="merge"
-            class="btn btn-primary btn-sm">
-        <span class="fa fa-pencil"></span>
-        <span class="d-none d-md-inline">search</span>
-    </button>
+    <form name="searchForm" role="form" novalidate (ngSubmit)="searchBarOnClick()" #searchForm="ngForm">
+        <div class="form-group" *jhiHasAnyAuthority="['ROLE_IT']">
+            <label class="form-control-label" for="field_searchIt">Search IT</label>
+            <input type="text" class="form-control" name="search" id="field_searchIt"
+                   [(ngModel)]="searchValueIt" maxlength="100" />
+        </div>
+        <div class="form-group" *jhiHasAnyAuthority="['ROLE_HR']">
+            <label class="form-control-label" for="field_searchHr">Search HR</label>
+            <input type="text" class="form-control" name="search" id="field_searchHr"
+                   [(ngModel)]="searchValueHr" maxlength="100" />
+        </div>
+        <div class="modal-footer">
+            <button type="submit" [disabled]="searchForm.form.invalid || isSaving" class="btn btn-primary" >
+                <span class="fa fa-search"></span>&nbsp;<span>Search</span>
+            </button>
+        </div>
+    </form>
 
     <div [hidden]="!searchClicked">
         <h2>

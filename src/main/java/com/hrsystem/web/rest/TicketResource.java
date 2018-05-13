@@ -198,6 +198,9 @@ public class TicketResource {
         @RequestParam("searchToken") String  searchToken) {
         log.debug(searchToken);
         List<Ticket> SearchedTicketByUserEmp = ticketRepository.findByUserSearch(searchToken , "IT");
+        List<Ticket> SearchTestStatus = ticketRepository.findByTicketStatusSearch("closed" , "IT");
+
+        List<Ticket> searchTestGeneral = ticketRepository.findByGeneralSearch("" , "closed" , "", "IT" );
         return SearchedTicketByUserEmp;
     }
 
