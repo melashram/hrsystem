@@ -34,7 +34,7 @@ export class TicketService {
     updateHRIT(ticket: Ticket): Observable<EntityResponseType> {
         console.log('update from HR IT');
         const copy = this.convert(ticket);
-        return this.http.put<Ticket>(this.resourceUrl+'/hrit', copy, {observe: 'response'})
+        return this.http.put<Ticket>(this.resourceUrl + '/hrit', copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
@@ -51,7 +51,7 @@ export class TicketService {
 
     UserTicketquery(req?: any): Observable<HttpResponse<Ticket[]>> {
         const options = createRequestOption(req);
-        return this.http.get<Ticket[]>(this.resourceUrl+'/usertickets', {params: options, observe: 'response'})
+        return this.http.get<Ticket[]>(this.resourceUrl + '/usertickets', {params: options, observe: 'response'})
             .map((res: HttpResponse<Ticket[]>) => this.convertArrayResponse(res));
     }
 

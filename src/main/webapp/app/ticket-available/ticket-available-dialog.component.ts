@@ -5,21 +5,21 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
-import {Ticket} from "../entities/ticket";
-import {Request, RequestService} from "../entities/request";
-import {User, UserService} from "../shared";
-import {TicketStatus, TicketStatusService} from "../entities/ticket-status";
-import {HumanResourceUser, HumanResourceUserService} from "../entities/human-resource-user";
-import {TicketService} from "../entities/ticket/ticket.service";
-import {TicketAvailablePopupService} from "./ticket-available-popup.service";
-import {TicketDialogComponent} from "../entities/ticket/ticket-dialog.component";
+import {Ticket} from '../entities/ticket';
+import {Request, RequestService} from '../entities/request';
+import {User, UserService} from '../shared';
+import {TicketStatus, TicketStatusService} from '../entities/ticket-status';
+import {HumanResourceUser, HumanResourceUserService} from '../entities/human-resource-user';
+import {TicketService} from '../entities/ticket/ticket.service';
+import {TicketAvailablePopupService} from './ticket-available-popup.service';
+import {TicketDialogComponent} from '../entities/ticket/ticket-dialog.component';
 
 @Component({
     selector: 'jhi-ticket-available-dialog',
     templateUrl: './ticket-available.component.html'
 })
 
-export class TicketAvailableDialogComponent implements OnInit{
+export class TicketAvailableDialogComponent implements OnInit {
 
     ticket: Ticket;
     isSaving: boolean;
@@ -142,14 +142,13 @@ export class TicketAvailableDialogComponent implements OnInit{
     template: ''
 })
 
-export class TicketAvailablePopupComponent implements OnInit , OnDestroy{
+export class TicketAvailablePopupComponent implements OnInit , OnDestroy {
     routeSub: any;
 
     constructor(
         private route: ActivatedRoute,
         private ticketAvailablePopupService: TicketAvailablePopupService
-    ){}
-
+    ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {

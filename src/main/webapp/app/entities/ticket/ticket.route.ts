@@ -42,11 +42,11 @@ export const ticketRoute: Routes = [
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService]
-    },{
+    }, {
         path: 'ticket/userticket',
         component: TicketComponent,
         data: {
-            authorities: ['ROLE_EMPLOYEE' , 'ROLE_IT'  ,'ROLE_HR'],
+            authorities: ['ROLE_EMPLOYEE', 'ROLE_IT', 'ROLE_HR'],
             pageTitle: 'UserTickets'
         },
         canActivate: [UserRouteAccessService]
@@ -83,7 +83,7 @@ export const ticketPopupRoute: Routes = [
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
-    },{
+    }, {
         path: 'tickethrit/:id/edit',
         component: TicketPopupComponent,
         data: {

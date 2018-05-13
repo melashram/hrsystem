@@ -32,7 +32,6 @@ import { TicketAvailableComponent } from './ticket-available/ticket-available.co
 import { CreateTicketComponent } from './create-ticket/create-ticket.component';
 import { TicketHritComponent } from './ticket-hrit/ticket-hrit.component';
 
-
 @NgModule({
     imports: [
         BrowserModule,

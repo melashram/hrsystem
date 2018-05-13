@@ -27,7 +27,7 @@ const ENTITY_STATES = [
         TicketAvailableComponent,
         TicketAvailablePopupComponent
     ],
-    providers:[
+    providers: [
         TicketAvailablePopupComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

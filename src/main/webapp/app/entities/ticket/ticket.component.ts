@@ -6,7 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Ticket } from './ticket.model';
 import { TicketService } from './ticket.service';
 import { Principal } from '../../shared';
-import {TicketStatus, TicketStatusService} from "../ticket-status";
+import {TicketStatus, TicketStatusService} from '../ticket-status';
 
 @Component({
     selector: 'jhi-ticket',
@@ -45,7 +45,7 @@ tickets: Ticket[];
         this.registerChangeInTickets();
     }
 
-    loadTicketStatus(){
+    loadTicketStatus() {
         this.ticketStatusService.query().subscribe(
             (res: HttpResponse<TicketStatus[]>) => {
                 this.ticketstatuses = res.body;

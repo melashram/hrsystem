@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Ticket} from "../entities/ticket/ticket.model";
-import {Subscribable} from "rxjs/Observable";
-import {Subscription} from "rxjs/Subscription";
-import {JhiAlertService, JhiEventManager} from "ng-jhipster";
-import {TicketService} from "../entities/ticket/ticket.service";
-import {Principal} from "../shared";
-import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {Ticket} from '../entities/ticket/ticket.model';
+import {Subscribable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
+import {TicketService} from '../entities/ticket/ticket.service';
+import {Principal} from '../shared';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'jhi-ticket-hrit',
@@ -14,7 +14,7 @@ import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 })
 export class TicketHritComponent implements OnInit {
 
-  userTickets:Ticket[];
+  userTickets: Ticket[];
   currentAccount: any;
   eventSubscriber: Subscription;
   constructor(
@@ -24,7 +24,7 @@ export class TicketHritComponent implements OnInit {
       private principal: Principal
   ) { }
 
-    loadUserTicket(){
+    loadUserTicket() {
         this.ticketService.UserTicketquery().subscribe(
             (res: HttpResponse<Ticket[]>) => {
                 this.userTickets = res.body;
