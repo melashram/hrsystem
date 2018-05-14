@@ -46,8 +46,8 @@ export class TicketDialogComponent implements OnInit {
 
     ngOnInit() {
 
-        this.hrRequest=false;
-        this.itRequest=false;
+        this.hrRequest = false;
+        this.itRequest = false;
         this.isSaving = false;
         this.loadHrRequests();
         this.loadItRequests();
@@ -107,21 +107,21 @@ export class TicketDialogComponent implements OnInit {
         }
     }
 
-    loadHrRequests(){
+    loadHrRequests() {
         this.requestService.hrRequestsQuery().subscribe(
-            (res: HttpResponse<Request[]>)=>{
+            (res: HttpResponse<Request[]>) => {
                 this.hrRequests = res.body;
             },
-            (res:HttpErrorResponse) => this.onError(res.message)
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
 
-    loadItRequests(){
+    loadItRequests() {
         this.requestService.itRequestsQuery().subscribe(
-            (res: HttpResponse<Request[]>)=>{
+            (res: HttpResponse<Request[]>) => {
                 this.itRequests = res.body;
             },
-            (res:HttpErrorResponse) => this.onError(res.message)
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
 
@@ -156,11 +156,11 @@ export class TicketDialogComponent implements OnInit {
         return item.id;
     }
 
-    viewHrRequests(){
-        if(this.hrRequest== false){
+    viewHrRequests() {
+        if (this.hrRequest === false) {
             this.hrRequest = true;
-        }else{
-            this.hrRequest=false;
+        }else {
+            this.hrRequest = false;
         }
     }
 }

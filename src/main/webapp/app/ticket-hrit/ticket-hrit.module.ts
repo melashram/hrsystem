@@ -24,4 +24,4 @@ const ENTITY_STATES = [
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
-export class HrsystemTicketHritModule{}
+export class HrsystemTicketHritModule {}

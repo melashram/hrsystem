@@ -21,14 +21,12 @@ export class TicketAvailableComponent implements OnInit {
 
     testString: '';
 
-    searchCategories =['A' , 'B' , 'C' , 'D'];
+    searchCategories = ['A' , 'B' , 'C' , 'D'];
 
-    searchClicked : boolean;
+    searchClicked: boolean;
 
     currentAccount: any;
     eventSubscriber: Subscription;
-
-
     searchValueIt: string;
     searchValueHr: string;
     isSaving: boolean;
@@ -66,7 +64,7 @@ export class TicketAvailableComponent implements OnInit {
         );
     }
 
-    loadSearchByNameIt(){
+    loadSearchByNameIt() {
         this.ticketService.SearchNameTicketItquery(this.searchValueIt).subscribe(
             (res: HttpResponse<Ticket[]>) => {
                 this.searchTicketsName = res.body;
@@ -75,7 +73,7 @@ export class TicketAvailableComponent implements OnInit {
         );
     }
 
-    loadSearchByNameHr(){
+    loadSearchByNameHr() {
         this.ticketService.SearchNameTicketHrquery(this.searchValueHr).subscribe(
             (res: HttpResponse<Ticket[]>) => {
                 this.searchTicketsName = res.body;
@@ -96,37 +94,32 @@ export class TicketAvailableComponent implements OnInit {
         this.fillArray();
     }
 
-
-
-    searchBarOnClick(){
-        if(this.searchClicked == false){
-            this.searchClicked= true;
-            console.log("search clicked true");
-            if(this.searchValueIt!=undefined){
+    searchBarOnClick() {
+        if (this.searchClicked === false) {
+            this.searchClicked = true;
+            console.log('search clicked true');
+            if (this.searchValueIt !== undefined) {
                 this.loadSearchByNameIt();
             }
 
-            if(this.searchValueHr!=undefined){
-                this.loadSearchByNameHr()
+            if (this.searchValueHr !== undefined) {
+                this.loadSearchByNameHr();
             }
-        }else{
-            this.searchClicked=false;
-            console.log("search clicked false");
+        }else {
+            this.searchClicked = false;
+            console.log('search clicked false');
 
         }
 
-
-
     }
 
-    fillArray(){
-        this.searchCategories.push("Name");
-        this.searchCategories.push("Date");
-        this.searchCategories.push("Assigned to who");
+    fillArray() {
+        this.searchCategories.push('Name');
+        this.searchCategories.push('Date');
+        this.searchCategories.push('Assigned to who');
     }
 
-    selectChangeHandler(event: any){
-        //update the ui
+    selectChangeHandler(event: any) {
         this.testString = event.target.value;
     }
 
@@ -141,14 +134,13 @@ export class TicketAvailableComponent implements OnInit {
         this.jhiAlertService.error(error.message, null, null);
     }
 
-    searchView(){
-        if(this.searchClicked == false){
-            this.searchClicked= true;
-            console.log("search clicked true");
-        }else{
-            this.searchClicked=false;
-            console.log("search clicked false");
-
+    searchView() {
+        if (this.searchClicked === false) {
+            this.searchClicked = true;
+            console.log('search clicked true');
+        }else {
+            this.searchClicked = false;
+            console.log('search clicked false');
         }
     }
 }
