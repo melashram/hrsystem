@@ -8,15 +8,38 @@
 
     <form name="searchForm" role="form" novalidate (ngSubmit)="searchBarOnClick()" #searchForm="ngForm">
         <div class="form-group" *jhiHasAnyAuthority="['ROLE_IT']">
-            <label class="form-control-label" for="field_searchIt">Search IT</label>
+            <label class="form-control-label" for="field_searchIt">Name IT</label>
             <input type="text" class="form-control" name="search" id="field_searchIt"
                    [(ngModel)]="searchValueIt" maxlength="100" />
         </div>
         <div class="form-group" *jhiHasAnyAuthority="['ROLE_HR']">
-            <label class="form-control-label" for="field_searchHr">Search HR</label>
+            <label class="form-control-label" for="field_searchHr">Name HR</label>
             <input type="text" class="form-control" name="search" id="field_searchHr"
                    [(ngModel)]="searchValueHr" maxlength="100" />
         </div>
+
+        <div class="form-group" *jhiHasAnyAuthority="['ROLE_IT']">
+            <label class="form-control-label" for="field_searchIt">Ticket Status It</label>
+            <input type="text" class="form-control" name="search" id="field_searchTicketStatusIt"
+                   [(ngModel)]="searchValueTicketStatusIt" maxlength="100" />
+        </div>
+        <div class="form-group" *jhiHasAnyAuthority="['ROLE_HR']">
+            <label class="form-control-label" for="field_searchHr">Ticket Status Hr</label>
+            <input type="text" class="form-control" name="search" id="field_searchTicketStatusHr"
+                   [(ngModel)]="searchValueTicketStatusHr" maxlength="100" />
+        </div>
+
+        <div class="form-group" *jhiHasAnyAuthority="['ROLE_IT']">
+            <label class="form-control-label" for="field_searchIt">Request Type It</label>
+            <input type="text" class="form-control" name="search" id="field_searchRequestTypeIt"
+                   [(ngModel)]="searchValueRequestTypeIt" maxlength="100" />
+        </div>
+        <div class="form-group" *jhiHasAnyAuthority="['ROLE_HR']">
+            <label class="form-control-label" for="field_searchHr">Request Type Hr</label>
+            <input type="text" class="form-control" name="search" id="field_searchRequestTypeHr"
+                   [(ngModel)]="searchValueTicketStatusHr" maxlength="100" />
+        </div>
+
         <div class="modal-footer">
             <button type="submit" [disabled]="searchForm.form.invalid || isSaving" class="btn btn-primary" >
                 <span class="fa fa-search"></span>&nbsp;<span>Search</span>
@@ -215,7 +238,7 @@
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    [routerLink]="['/ticket-available', { outlets: { popup: 'tickethrit/'+ ticket.id + '/edit'} }]"
+                                    [routerLink]="['/', { outlets: { popup: 'tickethrit/'+ ticket.id + '/edit'} }]"
                                     replaceUrl="true"
                                     queryParamsHandling="merge"
                                     class="btn btn-primary btn-sm">

@@ -102,16 +102,12 @@ public class TicketResource {
             .body(result);
     }
 
-
-
     @PutMapping("/tickets/hrit")
     @Timed
     public ResponseEntity<Ticket> updateTicketHRIT(@RequestBody Ticket ticket) throws URISyntaxException {
         log.debug("REST request to update Ticket : {}", ticket);
 
         ticket.setAcceptanceDate(Instant.now());
-
-
         final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
         Optional<User> currentLoggedInUser = userRepository.findOneByLogin(userLogin);
 
@@ -121,14 +117,11 @@ public class TicketResource {
 
         ticket.setAssignedUser(userLoggedIn);
 
-
-
         Ticket result = ticketRepository.save(ticket);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, ticket.getId().toString()))
             .body(result);
     }
-
 
     /**
      * GET  /tickets : get all the tickets.
@@ -181,36 +174,24 @@ public class TicketResource {
         return ticketRepository.findByRequestDepartment("IT");
     }
 
-//    @GetMapping("/tickets/searchNameIt")
-//    @Timed
-//    public List<Ticket> getTicketsSearchName() {
-//        log.debug("REST request to get all IT Tickets for specific user");
-//        List<Ticket> SearchedTicketByUserEmp = ticketRepository.findByUserSearch("employee" , "IT");
-//        List<Ticket> SearchedTicketByUserIt = ticketRepository.findByUserSearch("it" , "IT");
-//        List<Ticket> searchedTicketByNull = ticketRepository.findByUserSearch("" , "IT");
-//        return ticketRepository.findByUserSearch("employee" , "IT");
-//    }
-
-
     @GetMapping("/tickets/searchNameIt")
     @ResponseBody
     public  List<Ticket> SearchTicketsByNameIt(
-        @RequestParam("searchToken") String  searchToken) {
-        log.debug(searchToken);
-        List<Ticket> SearchedTicketByUserEmp = ticketRepository.findByUserSearch(searchToken , "IT");
-        List<Ticket> SearchTestStatus = ticketRepository.findByTicketStatusSearch("closed" , "IT");
-
-        List<Ticket> searchTestGeneral = ticketRepository.findByGeneralSearch("" , "closed" , "", "IT" );
-        return SearchedTicketByUserEmp;
+        @RequestParam(value = "searchToken" , required = false) String  searchToken ,
+        @RequestParam(value = "searchTicketStatus" , required = false) String searchTicketStatus,
+        @RequestParam(value = "searchRequestType" , required = false) String searchRequestType) {
+        List<Ticket> searchTestGeneral = ticketRepository.findByGeneralSearch(searchToken , searchTicketStatus , searchRequestType, "IT" );
+        return searchTestGeneral;
     }
 
     @GetMapping("/tickets/searchNameHr")
     @ResponseBody
     public  List<Ticket> SearchTicketsByNameHr(
-        @RequestParam("searchToken") String  searchToken) {
-        log.debug(searchToken);
-        List<Ticket> SearchedTicketByUserEmp = ticketRepository.findByUserSearch(searchToken , "HR");
-        return SearchedTicketByUserEmp;
+        @RequestParam(value = "searchToken" , required = false) String  searchToken ,
+        @RequestParam(value = "searchTicketStatus" , required = false) String searchTicketStatus,
+        @RequestParam(value = "searchRequestType" , required = false) String searchRequestType) {
+        List<Ticket> searchTestGeneral = ticketRepository.findByGeneralSearch(searchToken , searchTicketStatus , searchRequestType, "HR" );
+        return searchTestGeneral;
     }
 
     /**

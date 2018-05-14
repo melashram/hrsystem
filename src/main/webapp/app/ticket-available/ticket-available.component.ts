@@ -29,6 +29,17 @@ export class TicketAvailableComponent implements OnInit {
     eventSubscriber: Subscription;
     searchValueIt: string;
     searchValueHr: string;
+
+    searchValueNameIt: string;
+    searchValueNameHr: string;
+    searchValueTicketStatusIt: string;
+    searchValueTicketStatusHr: string;
+    searchValueRequestTypeIt: string;
+    searchValueRequestTypeHr: string;
+
+
+
+
     isSaving: boolean;
 
     constructor(
@@ -65,7 +76,7 @@ export class TicketAvailableComponent implements OnInit {
     }
 
     loadSearchByNameIt() {
-        this.ticketService.SearchNameTicketItquery(this.searchValueIt).subscribe(
+        this.ticketService.SearchNameTicketItquery(this.searchValueIt , this.searchValueTicketStatusIt , this.searchValueRequestTypeIt).subscribe(
             (res: HttpResponse<Ticket[]>) => {
                 this.searchTicketsName = res.body;
             },
@@ -74,7 +85,7 @@ export class TicketAvailableComponent implements OnInit {
     }
 
     loadSearchByNameHr() {
-        this.ticketService.SearchNameTicketHrquery(this.searchValueHr).subscribe(
+        this.ticketService.SearchNameTicketHrquery(this.searchValueHr , this.searchValueTicketStatusHr , this.searchValueRequestTypeHr).subscribe(
             (res: HttpResponse<Ticket[]>) => {
                 this.searchTicketsName = res.body;
             },
@@ -98,11 +109,11 @@ export class TicketAvailableComponent implements OnInit {
         if (this.searchClicked === false) {
             this.searchClicked = true;
             console.log('search clicked true');
-            if (this.searchValueIt !== undefined) {
+            if (this.searchValueIt !== undefined || this.searchValueTicketStatusIt !== undefined || this.searchValueRequestTypeIt !== undefined) {
                 this.loadSearchByNameIt();
             }
 
-            if (this.searchValueHr !== undefined) {
+            if (this.searchValueHr !== undefined || this.searchValueTicketStatusHr !== undefined || this.searchValueRequestTypeHr !== undefined) {
                 this.loadSearchByNameHr();
             }
         }else {
