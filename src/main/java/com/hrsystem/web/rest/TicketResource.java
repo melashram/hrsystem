@@ -180,7 +180,7 @@ public class TicketResource {
         @RequestParam(value = "searchToken" , required = false) String  searchToken ,
         @RequestParam(value = "searchTicketStatus" , required = false) String searchTicketStatus,
         @RequestParam(value = "searchRequestType" , required = false) String searchRequestType) {
-        List<Ticket> searchTestGeneral = ticketRepository.findByGeneralSearch(searchToken , searchTicketStatus , searchRequestType, "IT" );
+        List<Ticket> searchTestGeneral = ticketRepository.findByGeneralSearch(searchToken , searchTicketStatus ,searchRequestType , "IT" );
         return searchTestGeneral;
     }
 

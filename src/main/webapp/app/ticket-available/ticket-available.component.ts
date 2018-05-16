@@ -5,6 +5,8 @@ import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 import {Principal} from '../shared';
 import {TicketService} from '../entities/ticket/ticket.service';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {TicketStatus, TicketStatusService} from "../entities/ticket-status";
+import {RequestService} from "../entities/request";
 
 @Component({
     selector: 'jhi-ticket-available',
@@ -15,6 +17,9 @@ export class TicketAvailableComponent implements OnInit {
 
     tickets: Ticket[];
     ticket: Ticket;
+    ticketstatuses: TicketStatus[];
+    requests: Request[];
+
     HRtickets: Ticket[];
     ITtickets: Ticket[];
     searchTicketsName: Ticket[];
@@ -35,6 +40,7 @@ export class TicketAvailableComponent implements OnInit {
     searchValueTicketStatusIt: string;
     searchValueTicketStatusHr: string;
     searchValueRequestTypeIt: string;
+    searchRequestObject: Request;
     searchValueRequestTypeHr: string;
 
 
@@ -45,6 +51,8 @@ export class TicketAvailableComponent implements OnInit {
     constructor(
         private ticketService: TicketService,
         private jhiAlertService: JhiAlertService,
+        private ticketStatusService: TicketStatusService,
+        private requestService: RequestService,
         private eventManager: JhiEventManager,
         private principal: Principal
     ) {
@@ -93,10 +101,30 @@ export class TicketAvailableComponent implements OnInit {
         );
     }
 
+    loadTicketStatus() {
+        this.ticketStatusService.query().subscribe(
+            (res: HttpResponse<TicketStatus[]>) => {
+                this.ticketstatuses = res.body;
+            },
+            (res:HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    loadRequestTypes() {
+        this.requestService.query().subscribe(
+            (res: HttpResponse<Request[]>) => {
+                this.requests = res.body;
+            },
+            (res:HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
     ngOnInit() {
         this.loadAll();
         this.loadHRTickets();
         this.loadITTickets();
+        this.loadTicketStatus();
+        this.loadRequestTypes();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
@@ -109,6 +137,7 @@ export class TicketAvailableComponent implements OnInit {
         if (this.searchClicked === false) {
             this.searchClicked = true;
             console.log('search clicked true');
+
             if (this.searchValueIt !== undefined || this.searchValueTicketStatusIt !== undefined || this.searchValueRequestTypeIt !== undefined) {
                 this.loadSearchByNameIt();
             }
