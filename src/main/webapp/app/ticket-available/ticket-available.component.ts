@@ -18,7 +18,9 @@ export class TicketAvailableComponent implements OnInit {
     tickets: Ticket[];
     ticket: Ticket;
     ticketstatuses: TicketStatus[];
-    requests: Request[];
+
+    requestsIt: Request[];
+    requestsHr: Request[];
 
     HRtickets: Ticket[];
     ITtickets: Ticket[];
@@ -110,10 +112,19 @@ export class TicketAvailableComponent implements OnInit {
         );
     }
 
-    loadRequestTypes() {
-        this.requestService.query().subscribe(
+    loadRequestTypesIt() {
+        this.requestService.itRequestsQuery().subscribe(
             (res: HttpResponse<Request[]>) => {
-                this.requests = res.body;
+                this.requestsIt = res.body;
+            },
+            (res:HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    loadRequestTypesHr() {
+        this.requestService.hrRequestsQuery().subscribe(
+            (res: HttpResponse<Request[]>) => {
+                this.requestsHr = res.body;
             },
             (res:HttpErrorResponse) => this.onError(res.message)
         );
@@ -124,7 +135,8 @@ export class TicketAvailableComponent implements OnInit {
         this.loadHRTickets();
         this.loadITTickets();
         this.loadTicketStatus();
-        this.loadRequestTypes();
+        this.loadRequestTypesIt();
+        this.loadRequestTypesHr();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });

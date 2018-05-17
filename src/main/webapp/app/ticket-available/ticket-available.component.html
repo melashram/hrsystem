@@ -1,21 +1,20 @@
 <style>
     table{table-layout: fixed;}
     table th , table td{overflow: visible;}
-
 </style>
 
 <div>
 
-    <form name="searchForm" role="form" novalidate (ngSubmit)="searchBarOnClick()" #searchForm="ngForm">
+    <form id="searchForm" name="searchForm" role="form" novalidate (ngSubmit)="searchBarOnClick()" #searchForm="ngForm">
 
         <div class="form-group" *jhiHasAnyAuthority="['ROLE_IT']">
-            <label class="form-control-label" for="field_searchIt">Name IT</label>
+            <label class="form-control-label" for="field_searchIt">Name</label>
             <input type="text" class="form-control" name="search" id="field_searchIt"
                    [(ngModel)]="searchValueIt" maxlength="100" />
         </div>
 
         <div class="form-group" *jhiHasAnyAuthority="['ROLE_IT']">
-            <label class="form-control-label" for="field_searchIt">Request Type It</label>
+            <label class="form-control-label" for="field_searchIt">Request Type</label>
             <select class="form-control" name="search" id="field_searchTicketStatusIt" [(ngModel)]="searchValueTicketStatusIt" >
                 <option [ngValue]="ticketstatus.ticketStatus" *ngFor="let  ticketstatus of ticketstatuses">
                     {{ticketstatus.ticketStatus}}
@@ -24,25 +23,22 @@
         </div>
 
         <div class="form-group" *jhiHasAnyAuthority="['ROLE_IT']">
-            <label class="form-control-label" for="field_searchIt">Request Type It</label>
+            <label class="form-control-label" for="field_searchIt">Request Type</label>
             <select class="form-control" name="search" id="field_searchRequestTypeIt" [(ngModel)]="searchValueRequestTypeIt" >
-                <option [ngValue]="request.type" *ngFor="let  request of requests">
+                <option [ngValue]="request.type" *ngFor="let  request of requestsIt">
                 {{request.type}}
                 </option>
             </select>
         </div>
 
-        /////////////////////////////////////////////
-
-
         <div class="form-group" *jhiHasAnyAuthority="['ROLE_HR']">
-            <label class="form-control-label" for="field_searchIt">Name HR</label>
+            <label class="form-control-label" for="field_searchIt">Name</label>
             <input type="text" class="form-control" name="search" id="field_searchHr"
                    [(ngModel)]="searchValueHr" maxlength="100" />
         </div>
 
         <div class="form-group" *jhiHasAnyAuthority="['ROLE_HR']">
-            <label class="form-control-label" for="field_searchHr">TicketStatus HR</label>
+            <label class="form-control-label" for="field_searchHr">TicketStatus</label>
             <select class="form-control" name="search" id="field_searchTicketStatusHR" [(ngModel)]="searchValueTicketStatusHr" >
                 <option [ngValue]="ticketstatus.ticketStatus" *ngFor="let  ticketstatus of ticketstatuses">
                     {{ticketstatus.ticketStatus}}
@@ -51,9 +47,9 @@
         </div>
 
         <div class="form-group" *jhiHasAnyAuthority="['ROLE_HR']">
-            <label class="form-control-label" for="field_searchHr">Request Type Hr</label>
+            <label class="form-control-label" for="field_searchHr">Request Type</label>
             <select class="form-control" name="search" id="field_searchRequestTypeHr" [(ngModel)]="searchValueRequestTypeHr" >
-                <option [ngValue]="request.type" *ngFor="let  request of requests">
+                <option [ngValue]="request.type" *ngFor="let  request of requestsHr">
                     {{request.type}}
                 </option>
             </select>
@@ -151,7 +147,7 @@
                     <th><span>ID</span></th>
                     <th style=" width: 5%"><span>Reason</span></th>
                     <th style=" width: 5%"><span>Comment</span></th>
-                    <th style=" width: 5%"><span>Description</span></th>
+                    <th ><span>Description</span></th>
                     <th><span>Creation Date</span></th>
                     <th><span>Acceptance Date</span></th>
                     <th><span>Request</span></th>
