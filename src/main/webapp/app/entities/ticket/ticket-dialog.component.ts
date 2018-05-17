@@ -159,6 +159,7 @@ export class TicketDialogComponent implements OnInit {
     viewHrRequests() {
         if (this.hrRequest === false) {
             this.hrRequest = true;
+
         }else {
             this.hrRequest = false;
         }
