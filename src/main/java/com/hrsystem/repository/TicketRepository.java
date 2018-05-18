@@ -38,7 +38,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
                                         @Param("department") String department);
 
 
-    @Query("select ticket from Ticket ticket where ticket.user.login like :name " +
+    @Query("select ticket from Ticket ticket where (ticket.user.login like :name and ticket.request.department.name like :department)" +
         "or (ticket.ticketStatus.ticketStatus like :ticketStatus and ticket.request.department.name like :department) " +
         "or (ticket.request.type like :requestType and ticket.request.department.name like :department)")
      List<Ticket>findByGeneralSearch(@Param ("name") String name,

@@ -147,12 +147,12 @@
         </table>
     </div>
 
-    <div class="ticketsAvailable" [hidden]="searchClicked">
+    <div  *jhiHasAnyAuthority="['ROLE_IT']" class="ticketsAvailable" [hidden]="searchClicked">
         <h2 >
             Tickets Available
         </h2>
         <div class="table-responsive" >
-            <table  *jhiHasAnyAuthority="['ROLE_IT']" class="table table-striped">
+            <table  class="table table-striped">
                 <thead>
                 <tr>
                     <th><span>ID</span></th>
@@ -218,11 +218,13 @@
                 </tbody>
             </table>
         </div>
-        <div class="ticketsAvailable">
-            <h2 class="ticketsAvailable">
-                <span>Tickets Available</span>
+    </div>
+
+    <div  *jhiHasAnyAuthority="['ROLE_HR']" class="ticketsAvailable" [hidden]="searchClicked">
+            <h2>
+               Tickets Available
             </h2>
-            <table *jhiHasAnyAuthority="['ROLE_HR']" class="table table-striped">
+            <table class="table table-striped">
                 <thead>
                 <tr>
                     <th><span>ID</span></th>
@@ -290,4 +292,3 @@
             </table>
         </div>
     </div>
-</div>
