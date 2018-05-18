@@ -1,6 +1,20 @@
 <style>
-    table{table-layout: fixed;}
+    table{table-layout: fixed;
+        width: 100%;
+        float: right;
+    }
+    .ticketsAvailable{
+        width: 80%;
+        float: right;
+    }
     table th , table td{overflow: visible;}
+    #searchForm{
+        width: 15%;
+        float: left;
+        position: fixed;
+
+    }
+
 </style>
 
 <div>
@@ -62,7 +76,7 @@
         </div>
     </form>
 
-    <div [hidden]="!searchClicked">
+    <div class="ticketsAvailable" [hidden]="!searchClicked">
         <h2>
             Search Results
         </h2>
@@ -133,13 +147,10 @@
         </table>
     </div>
 
-    <div [hidden]="searchClicked">
-        <h2>
-            <span>Tickets Available</span>
+    <div class="ticketsAvailable" [hidden]="searchClicked">
+        <h2 >
+            Tickets Available
         </h2>
-        <div class="row">
-        </div>
-        <br/>
         <div class="table-responsive" >
             <table  *jhiHasAnyAuthority="['ROLE_IT']" class="table table-striped">
                 <thead>
@@ -206,7 +217,11 @@
                 </tr>
                 </tbody>
             </table>
-
+        </div>
+        <div class="ticketsAvailable">
+            <h2 class="ticketsAvailable">
+                <span>Tickets Available</span>
+            </h2>
             <table *jhiHasAnyAuthority="['ROLE_HR']" class="table table-striped">
                 <thead>
                 <tr>
