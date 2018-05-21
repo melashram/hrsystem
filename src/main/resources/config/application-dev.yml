@@ -55,6 +55,12 @@ spring:
         port: 587
         username: intranet.qcentris@gmail.com
         password: Password2018
+        protocol: smtp
+        tls: true
+        properties.mail.smtp:
+                    auth: true
+                    starttls.enable: true
+                    ssl.trust: smtp.gmail.com
 
     messages:
         cache-seconds: 1

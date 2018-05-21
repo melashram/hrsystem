@@ -7,12 +7,17 @@
         width: 80%;
         float: right;
     }
-    table th , table td{overflow: visible;}
+    table th , table td{
+        overflow: visible;
+    }
+    th{
+        font-size: 10px;
+    }
     #searchForm{
         width: 15%;
         float: left;
-        position: fixed;
 
+        position: fixed;
     }
 
 </style>
@@ -84,9 +89,9 @@
             <thead>
             <tr>
                 <th><span>ID</span></th>
-                <th style=" width: 5%"><span>Reason</span></th>
-                <th style=" width: 5%"><span>Comment</span></th>
-                <th style=" width: 5%"><span>Description</span></th>
+                <th><span>Reason</span></th>
+                <th><span>Comment</span></th>
+                <th><span>Description</span></th>
                 <th><span>Creation Date</span></th>
                 <th><span>Acceptance Date</span></th>
                 <th><span>Request</span></th>
