@@ -5,8 +5,8 @@ import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 import {Principal} from '../shared';
 import {TicketService} from '../entities/ticket/ticket.service';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {TicketStatus, TicketStatusService} from "../entities/ticket-status";
-import {RequestService} from "../entities/request";
+import {TicketStatus, TicketStatusService} from '../entities/ticket-status';
+import {RequestService} from '../entities/request';
 
 @Component({
     selector: 'jhi-ticket-available',
@@ -44,9 +44,6 @@ export class TicketAvailableComponent implements OnInit {
     searchValueRequestTypeIt: string;
     searchRequestObject: Request;
     searchValueRequestTypeHr: string;
-
-
-
 
     isSaving: boolean;
 
@@ -108,7 +105,7 @@ export class TicketAvailableComponent implements OnInit {
             (res: HttpResponse<TicketStatus[]>) => {
                 this.ticketstatuses = res.body;
             },
-            (res:HttpErrorResponse) => this.onError(res.message)
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
 
@@ -117,7 +114,7 @@ export class TicketAvailableComponent implements OnInit {
             (res: HttpResponse<Request[]>) => {
                 this.requestsIt = res.body;
             },
-            (res:HttpErrorResponse) => this.onError(res.message)
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
 
@@ -126,7 +123,7 @@ export class TicketAvailableComponent implements OnInit {
             (res: HttpResponse<Request[]>) => {
                 this.requestsHr = res.body;
             },
-            (res:HttpErrorResponse) => this.onError(res.message)
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
 
