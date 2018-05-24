@@ -22,6 +22,8 @@ export class NavbarComponent implements OnInit {
     modalRef: NgbModalRef;
     version: string;
 
+    account: Account;
+
     constructor(
         private loginService: LoginService,
         private principal: Principal,
@@ -34,6 +36,11 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.principal.identity().then((account) => {
+            this.account = account;
+        });
+
         this.profileService.getProfileInfo().then((profileInfo) => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
