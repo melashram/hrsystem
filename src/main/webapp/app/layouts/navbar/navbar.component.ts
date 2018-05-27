@@ -37,15 +37,21 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit() {
 
-        this.principal.identity().then((account) => {
-            this.account = account;
-        });
+        if(this.isAuthenticated()){
+            this.principal.identity().then((account) => {
+                this.account = account;
+            });
+            console.log(this.account.name);
+        }else{
+            console.log("Not Authenticated");
+        }
 
         this.profileService.getProfileInfo().then((profileInfo) => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
     }
+
 
     collapseNavbar() {
         this.isNavbarCollapsed = true;

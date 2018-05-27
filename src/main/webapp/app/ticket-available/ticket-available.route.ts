@@ -20,7 +20,7 @@ export const ticketAvailablePopupRoute: Routes = [
         path: 'ticket-available/:id/edit',
         component: TicketAvailablePopupComponent,
         data: {
-            authorities: [],
+            authorities: ['ROLE_HR' , 'ROLE_IT' , 'ROLE_ADMIN'],
             pageTitle: 'Tickets-available'
         },
         canActivate: [UserRouteAccessService],

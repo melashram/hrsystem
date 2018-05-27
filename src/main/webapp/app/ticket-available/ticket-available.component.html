@@ -20,6 +20,7 @@
         position: fixed;
     }
 
+
 </style>
 
 <div>
@@ -27,13 +28,13 @@
     <form id="searchForm" name="searchForm" role="form" novalidate (ngSubmit)="searchBarOnClick()" #searchForm="ngForm">
 
         <div class="form-group" *jhiHasAnyAuthority="['ROLE_IT']">
-            <label class="form-control-label" for="field_searchIt">Name</label>
+            <label class="form-control-label" for="field_searchIt">User</label>
             <input type="text" class="form-control" name="search" id="field_searchIt"
                    [(ngModel)]="searchValueIt" maxlength="100" />
         </div>
 
         <div class="form-group" *jhiHasAnyAuthority="['ROLE_IT']">
-            <label class="form-control-label" for="field_searchIt">Request Type</label>
+            <label class="form-control-label" for="field_searchIt">Ticket Status</label>
             <select class="form-control" name="search" id="field_searchTicketStatusIt" [(ngModel)]="searchValueTicketStatusIt" >
                 <option [ngValue]=""></option>
                 <option [ngValue]="ticketstatus.ticketStatus" *ngFor="let  ticketstatus of ticketstatuses">
@@ -53,7 +54,7 @@
         </div>
 
         <div class="form-group" *jhiHasAnyAuthority="['ROLE_HR']">
-            <label class="form-control-label" for="field_searchIt">Name</label>
+            <label class="form-control-label" for="field_searchIt">User</label>
             <input type="text" class="form-control" name="search" id="field_searchHr"
                    [(ngModel)]="searchValueHr" maxlength="100" />
         </div>
@@ -132,7 +133,7 @@
                     {{ticket.user?.login}}
                 </td>
                 <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
+                    <div  class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'tickethrit/'+ ticket.id + '/edit'} }]"
                                 replaceUrl="true"
