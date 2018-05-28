@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     errorUserExists: string;
     registerAccount: any;
     success: boolean;
+    emailSeparator: number;
     modalRef: NgbModalRef;
 
     constructor(
@@ -45,10 +46,18 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.errorUserExists = null;
             this.errorEmailExists = null;
             this.registerAccount.langKey = 'en';
+            this.trimEmailToUsername();
             this.registerService.save(this.registerAccount).subscribe(() => {
                 this.success = true;
             }, (response) => this.processError(response));
         }
+    }
+
+    trimEmailToUsername(){
+        this.emailSeparator=this.registerAccount.email.indexOf("@");
+        this.registerAccount.login= this.registerAccount.email.substring(0,this.emailSeparator);
+
+
     }
 
     openLogin() {
