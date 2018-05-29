@@ -142,6 +142,16 @@ export class TicketAvailableComponent implements OnInit {
         this.fillArray();
     }
 
+    isTicketClosed(ticket: Ticket):boolean{
+        if(ticket.ticketStatus.id == 2){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
     searchBarOnClick() {
         if (this.searchClicked === false) {
             this.searchClicked = true;
