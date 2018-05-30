@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface TicketStatusRepository extends JpaRepository<TicketStatus, Long> {
 
-
+    @Query("select ticketStatus from TicketStatus ticketStatus where ticketStatus.ticketStatus like 'Pending'")
+    public TicketStatus getPendingStatus();
 
 }

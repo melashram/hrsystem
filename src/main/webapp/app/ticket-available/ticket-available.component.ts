@@ -172,6 +172,10 @@ export class TicketAvailableComponent implements OnInit {
 
     }
 
+    test(ticket: Ticket){
+        this.ticketService.reassignToOwner(ticket);
+    }
+
     fillArray() {
         this.searchCategories.push('Name');
         this.searchCategories.push('Date');

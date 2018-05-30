@@ -3,8 +3,10 @@ package com.hrsystem.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.hrsystem.domain.Ticket;
 
+import com.hrsystem.domain.TicketStatus;
 import com.hrsystem.domain.User;
 import com.hrsystem.repository.TicketRepository;
+import com.hrsystem.repository.TicketStatusRepository;
 import com.hrsystem.repository.UserRepository;
 import com.hrsystem.security.SecurityUtils;
 import com.hrsystem.web.rest.errors.BadRequestAlertException;
@@ -44,6 +46,9 @@ public class TicketResource {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TicketStatusRepository ticketStatusRepository;
+
     public TicketResource(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
     }
@@ -63,6 +68,8 @@ public class TicketResource {
             throw new BadRequestAlertException("A new ticket cannot already have an ID", ENTITY_NAME, "idexists");
         }
         ticket.setCreationDate(Instant.now());
+        TicketStatus ticketStatus = ticketStatusRepository.getPendingStatus();
+        ticket.setTicketStatus(ticketStatus);
 
         final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
         Optional<User> currentLoggedInUser = userRepository.findOneByLogin(userLogin);
@@ -93,9 +100,10 @@ public class TicketResource {
     public ResponseEntity<Ticket> updateTicket(@RequestBody Ticket ticket) throws URISyntaxException {
         log.debug("REST request to update Ticket : {}", ticket);
         if (ticket.getId() == null) {
-            return createTicket(ticket);
-        }
 
+            return createTicket(ticket);
+
+        }
         Ticket result = ticketRepository.save(ticket);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, ticket.getId().toString()))
@@ -104,8 +112,8 @@ public class TicketResource {
 
     @PutMapping("/tickets/hrit")
     @Timed
-    public ResponseEntity<Ticket> updateTicketHRIT(@RequestBody Ticket ticket) throws URISyntaxException {
-        log.debug("REST request to update Ticket : {}", ticket);
+    public ResponseEntity<Ticket> assignTicketHRIT(@RequestBody Ticket ticket) throws URISyntaxException {
+        log.debug("REST request to assign Ticket : {}", ticket);
 
         ticket.setAcceptanceDate(Instant.now());
         final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
@@ -123,6 +131,18 @@ public class TicketResource {
             .body(result);
     }
 
+    @PutMapping("/tickets/assigntoowner")
+    @Timed
+    public ResponseEntity<Ticket> reassignTicketHRIT(@RequestBody Ticket ticket) throws URISyntaxException {
+        log.debug("REST request to reassign Ticket : {}", ticket);
+
+        ticket.setAcceptanceDate(Instant.now());
+
+        Ticket result = ticketRepository.save(ticket);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, ticket.getId().toString()))
+            .body(result);
+    }
     /**
      * GET  /tickets : get all the tickets.
      *

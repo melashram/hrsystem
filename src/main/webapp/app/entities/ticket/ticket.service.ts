@@ -87,10 +87,17 @@ export class TicketService {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, {observe: 'response'});
     }
 
-    assignTo1(ticket: Ticket): Observable<EntityResponseType> {
+    assignTo(ticket: Ticket): Observable<EntityResponseType> {
         const copy = this.convert(ticket);
         console.log('ASSS');
         return this.http.put<Ticket>(this.resourceUrl + '/' + ticket.id + '/assigntome', copy, {observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    reassignToOwner(ticket: Ticket): Observable<EntityResponseType> {
+        const copy = this.convert(ticket);
+        console.log('reAssign');
+        return this.http.put<Ticket>(this.resourceUrl +'/assigntoowner', copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
