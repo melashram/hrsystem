@@ -173,7 +173,12 @@ export class TicketAvailableComponent implements OnInit {
     }
 
     test(ticket: Ticket){
-        this.ticketService.reassignToOwner(ticket);
+        this.ticketService.reassign1(ticket);
+    }
+
+    test2(id: number){
+        console.log(id);
+        console.log()
     }
 
     fillArray() {

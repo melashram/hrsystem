@@ -131,12 +131,12 @@ public class TicketResource {
             .body(result);
     }
 
-    @PutMapping("/tickets/assigntoowner")
+    @PutMapping("/tickets/test")
     @Timed
     public ResponseEntity<Ticket> reassignTicketHRIT(@RequestBody Ticket ticket) throws URISyntaxException {
         log.debug("REST request to reassign Ticket : {}", ticket);
 
-        ticket.setAcceptanceDate(Instant.now());
+        ticket.setAssignedUser(ticket.getUser());
 
         Ticket result = ticketRepository.save(ticket);
         return ResponseEntity.ok()
