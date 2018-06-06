@@ -38,6 +38,13 @@ export class TicketService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
+    reassignToOwner(ticket: Ticket): Observable<EntityResponseType> {
+        console.log('Reassign to owner');
+        const copy = this.convert(ticket);
+        return this.http.put<Ticket>(this.resourceUrl + '/assigntoowner', copy, {observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<Ticket>(`${this.resourceUrl}/${id}`, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
@@ -94,12 +101,7 @@ export class TicketService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
-    reassignToOwner(ticket: Ticket): Observable<EntityResponseType> {
-        const copy = this.convert(ticket);
-        console.log('reAssign');
-        return this.http.put<Ticket>(this.resourceUrl +'/assigntoowner', copy, {observe: 'response'})
-            .map((res: EntityResponseType) => this.convertResponse(res));
-    }
+
 
     private convertResponse(res: EntityResponseType): EntityResponseType {
         const body: Ticket = this.convertItemFromServer(res.body);
