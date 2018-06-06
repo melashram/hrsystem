@@ -33,17 +33,30 @@ export class TicketService {
 
     updateHRIT(ticket: Ticket): Observable<EntityResponseType> {
         console.log('update from HR IT');
+        console.log(ticket.acceptanceDate);
+        console.log(ticket.creationDate);
+        console.log(typeof ticket.creationDate);
         const copy = this.convert(ticket);
+        console.log(ticket);
         return this.http.put<Ticket>(this.resourceUrl + '/hrit', copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
-    reassignToOwner(ticket: Ticket): Observable<EntityResponseType> {
+    reassign1(ticket: Ticket): Observable<EntityResponseType> {
         console.log('Reassign to owner');
-        const copy = this.convert(ticket);
-        return this.http.put<Ticket>(this.resourceUrl + '/assigntoowner', copy, {observe: 'response'})
+        console.log(ticket.acceptanceDate);
+        console.log(ticket.creationDate.toString());
+        console.log(typeof ticket.creationDate);
+        console.log(ticket);
+        // ticket.creationDate = ticket.creationDate.toLocaleString();
+        // console.log(ticket.creationDate);
+        // console.log("creattion date" + typeof ticket.creationDate);
+
+        const copy1 = this.convert(ticket);
+        return this.http.put<Ticket>(this.resourceUrl + '/test', copy1, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
+
 
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<Ticket>(`${this.resourceUrl}/${id}`, {observe: 'response'})
@@ -101,7 +114,12 @@ export class TicketService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
-
+    // reassignToOwner(ticket: Ticket): Observable<EntityResponseType> {
+    //     const copy = this.convert(ticket);
+    //     console.log('reAssign');
+    //     return this.http.put<Ticket>(this.resourceUrl +'/assigntoowner', copy, {observe: 'response'})
+    //         .map((res: EntityResponseType) => this.convertResponse(res));
+    // }
 
     private convertResponse(res: EntityResponseType): EntityResponseType {
         const body: Ticket = this.convertItemFromServer(res.body);
