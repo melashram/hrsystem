@@ -9,6 +9,7 @@ import com.hrsystem.repository.TicketRepository;
 import com.hrsystem.repository.TicketStatusRepository;
 import com.hrsystem.repository.UserRepository;
 import com.hrsystem.security.SecurityUtils;
+import com.hrsystem.service.MailService;
 import com.hrsystem.web.rest.errors.BadRequestAlertException;
 import com.hrsystem.web.rest.errors.InternalServerErrorException;
 import com.hrsystem.web.rest.util.HeaderUtil;
@@ -42,6 +43,9 @@ public class TicketResource {
     private static final String ENTITY_NAME = "ticket";
 
     private final TicketRepository ticketRepository;
+
+    @Autowired
+    private MailService  mailService;
 
     @Autowired
     private UserRepository userRepository;
@@ -81,9 +85,13 @@ public class TicketResource {
         ticket.setUser(userLoggedIn);
 
         Ticket result = ticketRepository.save(ticket);
+        mailService.sendRequestMail(userLoggedIn);
         return ResponseEntity.created(new URI("/api/tickets/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+
+
+
     }
 
     /**
