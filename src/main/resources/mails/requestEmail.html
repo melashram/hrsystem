@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{email.request.title}">QTool Request</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+    </head>
+    <body>
+        <p th:text="#{email.request.from(${user.login})}">
+            Request From
+        </p>
+        <p th:text="#{email.request.text1}">
+           Request
+        </p>
+
+        <p>
+            <span th:text="#{email.request.text2}">Regards, </span>
+            <br/>
+            <em th:text="#{email.signature}">QTool Team.</em>
+        </p>
+    </body>
+</html>
