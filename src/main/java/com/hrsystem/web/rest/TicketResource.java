@@ -85,7 +85,7 @@ public class TicketResource {
         ticket.setUser(userLoggedIn);
 
         Ticket result = ticketRepository.save(ticket);
-        mailService.sendRequestMail(userLoggedIn);
+        mailService.sendRequestMail(userLoggedIn , ticket.getRequest());
         return ResponseEntity.created(new URI("/api/tickets/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

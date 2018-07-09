@@ -1,5 +1,6 @@
 package com.hrsystem.service;
 
+import com.hrsystem.domain.Request;
 import com.hrsystem.domain.User;
 
 import io.github.jhipster.config.JHipsterProperties;
@@ -29,6 +30,8 @@ public class MailService {
     private final Logger log = LoggerFactory.getLogger(MailService.class);
 
     private static final String USER = "user";
+
+    private static final String REQUEST = "request";
 
     private static final String BASE_URL = "baseUrl";
 
@@ -86,6 +89,19 @@ public class MailService {
     }
 
     @Async
+    public void sendEmailFromTemplate(User user,Request request , String templateName, String titleKey) {
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable(USER, user);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        context.setVariable(REQUEST,request);
+        String content = templateEngine.process(templateName, context);
+        String subject = messageSource.getMessage(titleKey, null, locale);
+        sendEmail(user.getEmail(), subject, content, false, true);
+
+    }
+
+    @Async
     public void sendActivationEmail(User user) {
         log.debug("Sending activation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "activationEmail", "email.activation.title");
@@ -104,8 +120,9 @@ public class MailService {
     }
 
     @Async
-    public void sendRequestMail(User user) {
+    public void sendRequestMail(User user , Request request) {
         log.debug("Sending Request reset email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "requestEmail", "email.request.title");
+        log.debug("Sending Request reset request to '{}'", request.getType());
+        sendEmailFromTemplate(user, request, "requestEmail", "email.request.title");
     }
 }
