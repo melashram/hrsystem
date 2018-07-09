@@ -53,3 +53,5 @@ relationship OneToOne{
 relationship ManyToOne{
 	Ticket {EmployeeRequest} to Employee
 }
+
+paginate Ticket with pagination

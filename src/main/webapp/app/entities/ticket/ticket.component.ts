@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import {JhiEventManager, JhiAlertService, JhiParseLinks} from 'ng-jhipster';
 
 import { Ticket } from './ticket.model';
 import { TicketService } from './ticket.service';
-import { Principal } from '../../shared';
+import {Principal, User} from '../../shared';
 import {TicketStatus, TicketStatusService} from '../ticket-status';
 
 @Component({
@@ -19,12 +19,23 @@ tickets: Ticket[];
 
     ticketstatuses: TicketStatus[];
 
+    queryCount: any;
+    totalItems: any;
+    links: any;
+    predicate: any;
+    reverse: any;
+    page: any;
+    itemsPerPage: any;
+
+
+
     constructor(
         private ticketService: TicketService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private ticketStatusService: TicketStatusService,
-        private principal: Principal
+        private principal: Principal,
+        private parseLinks: JhiParseLinks,
     ) {
     }
 
@@ -36,6 +47,19 @@ tickets: Ticket[];
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
+    loadAlls() {
+        this.ticketService.query({
+            page: this.page - 1,
+            size: this.itemsPerPage,
+            sort: this.sort()}).subscribe(
+            (res: HttpResponse<Ticket[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpResponse<any>) => this.onError(res.body)
+        );
+
+        console.log(this.page);
+    }
+
     ngOnInit() {
         this.loadAll();
         this.loadTicketStatus();
@@ -68,4 +92,20 @@ tickets: Ticket[];
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
+
+    private onSuccess(data, headers) {
+        this.links = this.parseLinks.parse(headers.get('link'));
+        this.totalItems = headers.get('X-Total-Count');
+        this.queryCount = this.totalItems;
+        this.tickets = data;
+    }
+
+    sort() {
+        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+        if (this.predicate !== 'id') {
+            result.push('id');
+        }
+        return result;
+    }
+
 }

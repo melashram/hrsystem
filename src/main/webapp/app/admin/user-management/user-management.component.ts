@@ -21,9 +21,9 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     queryCount: any;
     itemsPerPage: any;
     page: any;
-    predicate: any;
     previousPage: any;
     reverse: any;
+    predicate: any;
 
     constructor(
         private userService: UserService,
