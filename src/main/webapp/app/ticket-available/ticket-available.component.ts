@@ -44,8 +44,9 @@ export class TicketAvailableComponent implements OnInit {
     searchValueRequestTypeIt: string;
     searchRequestObject: Request;
     searchValueRequestTypeHr: string;
-
     isSaving: boolean;
+
+    searchedTicketForReassign: Ticket;
 
     constructor(
         private ticketService: TicketService,
@@ -151,7 +152,6 @@ export class TicketAvailableComponent implements OnInit {
         }
     }
 
-
     searchBarOnClick() {
         if (this.searchClicked === false) {
             this.searchClicked = true;
@@ -173,11 +173,22 @@ export class TicketAvailableComponent implements OnInit {
     }
 
     test(ticket: Ticket){
+        console.log(ticket.id);
         this.ticketService.reassign1(ticket);
     }
 
     test2(id: number){
-        console.log(id);
+        // console.log(id);
+        // // this.searchedTicketForReassign = this.ticketService.findTicketForReassignment(id);
+        // this.ticketService.find(id).subscribe(
+        //     (res: HttpResponse<Ticket>) => {
+        //         this.searchedTicketForReassign = res.body;
+        //     },
+        //     (res: HttpErrorResponse) => this.onError(res.message)
+        // );
+        console.log( this.searchedTicketForReassign);
+        console.log("da5el 3al assign to");
+        this.ticketService.updateHRIT(this.searchedTicketForReassign);
         console.log()
     }
 
