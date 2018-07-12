@@ -95,7 +95,6 @@ export class TicketAvailableDialogComponent implements OnInit {
         if (this.ticket.id !== undefined) {
             this.subscribeToSaveResponse(
                 this.ticketService.updateHRIT(this.ticket));
-            console.log(this.ticket);
         } else {
             this.subscribeToSaveResponse(
                 this.ticketService.create(this.ticket));

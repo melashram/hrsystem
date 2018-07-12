@@ -120,9 +120,8 @@ public class TicketResource {
 
     @PutMapping("/tickets/hrit")
     @Timed
-    public ResponseEntity<Ticket> assignTicketHRIT(@RequestBody Ticket ticket,
-                                                   @RequestParam(value = "reassign" , required = false) String  reassign) throws URISyntaxException {
-        log.debug("REST request to assign Ticket : {}", ticket , reassign);
+    public ResponseEntity<Ticket> assignTicketHRIT(@RequestBody Ticket ticket) throws URISyntaxException {
+        log.debug("REST request to assign Ticket : {}", ticket);
 
         ticket.setAcceptanceDate(Instant.now());
         final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
