@@ -7,6 +7,7 @@ import {TicketService} from '../entities/ticket/ticket.service';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {TicketStatus, TicketStatusService} from '../entities/ticket-status';
 import {RequestService} from '../entities/request';
+import {DatePipe} from "@angular/common";
 
 @Component({
     selector: 'jhi-ticket-available',
@@ -54,7 +55,8 @@ export class TicketAvailableComponent implements OnInit {
         private ticketStatusService: TicketStatusService,
         private requestService: RequestService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private datePipe: DatePipe,
     ) {
     }
 
@@ -174,23 +176,77 @@ export class TicketAvailableComponent implements OnInit {
 
     test(ticket: Ticket){
         console.log(ticket.id);
-        this.ticketService.reassign1(ticket);
+        console.log(ticket);
+        console.log("FORM TEST");
+        console.log(ticket.creationDate);
+        console.log(ticket.acceptanceDate);
+        console.log("End in test");
+        this.ticketService.find(ticket.id)
+            .subscribe((ticketResponse: HttpResponse<Ticket>) => {
+                ticket = ticketResponse.body;
+                ticket.creationDate = this.datePipe
+                    .transform(ticket.creationDate, 'yyyy-MM-ddTHH:mm:ss');
+                ticket.acceptanceDate = this.datePipe
+                    .transform(ticket.acceptanceDate, 'yyyy-MM-ddTHH:mm:ss');
+            });
+
+        console.log("FORM TEST");
+        console.log(typeof ticket.acceptanceDate);
+        console.log(typeof ticket.creationDate);
+        console.log(ticket.creationDate);
+        console.log("end TEST");
+
+
+        this.ticketService.updateHRIT(ticket);
     }
 
+
     test2(id: number){
-        // console.log(id);
-        // // this.searchedTicketForReassign = this.ticketService.findTicketForReassignment(id);
-        // this.ticketService.find(id).subscribe(
-        //     (res: HttpResponse<Ticket>) => {
-        //         this.searchedTicketForReassign = res.body;
-        //     },
-        //     (res: HttpErrorResponse) => this.onError(res.message)
-        // );
+        this.ticketService.find(id)
+            .subscribe((ticketResponse: HttpResponse<Ticket>) => {
+                this.searchedTicketForReassign = ticketResponse.body;
+                this.searchedTicketForReassign.creationDate = this.datePipe
+                    .transform( this.searchedTicketForReassign.creationDate, 'yyyy-MM-ddTHH:mm:ss');
+                this.searchedTicketForReassign.acceptanceDate = this.datePipe
+                    .transform( this.searchedTicketForReassign.acceptanceDate, 'yyyy-MM-ddTHH:mm:ss');
+            });
         console.log( this.searchedTicketForReassign);
         console.log("da5el 3al assign to");
+
+        console.log("FORM TEST");
+        console.log(typeof this.searchedTicketForReassign.acceptanceDate);
+        console.log(typeof this.searchedTicketForReassign.creationDate);
+        console.log(this.searchedTicketForReassign.creationDate);
+        console.log("end TEST");
+
         this.ticketService.updateHRIT(this.searchedTicketForReassign);
         console.log()
     }
+
+
+    test3(ticket: Ticket){
+        console.log(ticket.id);
+        console.log(ticket);
+        console.log("FORM TEST 3 ");
+        console.log( typeof ticket.creationDate);
+        console.log(typeof ticket.acceptanceDate);
+
+        ticket.acceptanceDate = this.datePipe
+            .transform( ticket.acceptanceDate, 'yyyy-MM-ddTHH:mm:ss');
+        ticket.creationDate = this.datePipe
+            .transform( ticket.creationDate, 'yyyy-MM-ddTHH:mm:ss');
+
+        console.log("After transform")
+        console.log(ticket.acceptanceDate);
+        console.log(typeof ticket.acceptanceDate);
+
+        console.log(ticket.creationDate);
+        console.log(typeof ticket.creationDate);
+        console.log("End in test 3");
+
+        this.ticketService.reassignToOwner(ticket);
+    }
+
 
     fillArray() {
         this.searchCategories.push('Name');

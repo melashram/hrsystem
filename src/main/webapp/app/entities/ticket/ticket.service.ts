@@ -7,6 +7,7 @@ import {JhiDateUtils} from 'ng-jhipster';
 
 import {Ticket} from './ticket.model';
 import {createRequestOption} from '../../shared';
+import {tick} from "@angular/core/testing";
 
 export type EntityResponseType = HttpResponse<Ticket>;
 
@@ -38,9 +39,20 @@ export class TicketService {
         console.log(typeof ticket.creationDate);
         const copy = this.convert(ticket);
         console.log(ticket);
-        // return this.http.put<Ticket>(this.resourceUrl + '/hrit', copy, {observe: 'response'})
-        //     .map((res: EntityResponseType) => this.convertResponse(res));
-        return this.http.put<Ticket>(`${this.resourceUrl}/hrit?reassign=${true}`, copy, {observe: 'response'})
+        return this.http.put<Ticket>(this.resourceUrl + '/hrit', copy, {observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+
+    }
+
+    reassignToOwner(ticket: Ticket): Observable<EntityResponseType> {
+        console.log('update from Reassign to owner');
+        console.log(ticket.acceptanceDate);
+        console.log(ticket.creationDate);
+        console.log(typeof ticket.creationDate);
+        const copy = this.convert(ticket);
+        console.log(ticket);
+        ticket.assignedUser=ticket.user;
+        return this.http.put<Ticket>(`${this.resourceUrl}/hrit`, copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
