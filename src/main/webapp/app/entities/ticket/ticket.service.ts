@@ -38,7 +38,9 @@ export class TicketService {
         console.log(typeof ticket.creationDate);
         const copy = this.convert(ticket);
         console.log(ticket);
-        return this.http.put<Ticket>(this.resourceUrl + '/hrit', copy, {observe: 'response'})
+        // return this.http.put<Ticket>(this.resourceUrl + '/hrit', copy, {observe: 'response'})
+        //     .map((res: EntityResponseType) => this.convertResponse(res));
+        return this.http.put<Ticket>(`${this.resourceUrl}/hrit?reassign=${true}`, copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
@@ -52,8 +54,10 @@ export class TicketService {
         // console.log(ticket.creationDate);
         // console.log("creattion date" + typeof ticket.creationDate);
 
-        const copy1 = this.convert(ticket);
-        return this.http.put<Ticket>(this.resourceUrl + '/test', copy1, {observe: 'response'})
+        const copy = this.convert(ticket);
+        // return this.http.put<Ticket>(this.resourceUrl + '/test', copy, {observe: 'response'})
+        //     .map((res: EntityResponseType) => this.convertResponse(res));
+        return this.http.put<Ticket>(`${this.resourceUrl}/test?reassign=${true}`, copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
@@ -61,6 +65,11 @@ export class TicketService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<Ticket>(`${this.resourceUrl}/${id}`, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    findTicketForReassignment(id: number): Observable<HttpResponse<Ticket>> {
+        return this.http.get<Ticket>(`${this.resourceUrl}/${id}`, {observe: 'response'})
+            .map((res:HttpResponse<Ticket>) => this.convertResponse(res));
     }
 
     query(req?: any): Observable<HttpResponse<Ticket[]>> {
