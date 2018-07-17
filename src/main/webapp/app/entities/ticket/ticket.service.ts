@@ -44,6 +44,18 @@ export class TicketService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
+    reassignToOwner(ticket: Ticket): Observable<EntityResponseType> {
+        console.log('update from Reassign to owner');
+        console.log(ticket.acceptanceDate);
+        console.log(ticket.creationDate);
+        console.log(typeof ticket.creationDate);
+        const copy = this.convert(ticket);
+        console.log(ticket);
+        ticket.assignedUser=ticket.user;
+        return this.http.put<Ticket>(`${this.resourceUrl}/hrit`, copy, {observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
     reassign1(ticket: Ticket): Observable<EntityResponseType> {
         console.log('Reassign to owner');
         console.log(ticket.acceptanceDate);
