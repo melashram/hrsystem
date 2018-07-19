@@ -38,9 +38,7 @@ export class TicketService {
         console.log(typeof ticket.creationDate);
         const copy = this.convert(ticket);
         console.log(ticket);
-        // return this.http.put<Ticket>(this.resourceUrl + '/hrit', copy, {observe: 'response'})
-        //     .map((res: EntityResponseType) => this.convertResponse(res));
-        return this.http.put<Ticket>(`${this.resourceUrl}/hrit?reassign=${true}`, copy, {observe: 'response'})
+        return this.http.put<Ticket>(`${this.resourceUrl}/hrit`, copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
@@ -52,7 +50,7 @@ export class TicketService {
         const copy = this.convert(ticket);
         console.log(ticket);
         ticket.assignedUser=ticket.user;
-        return this.http.put<Ticket>(`${this.resourceUrl}/hrit`, copy, {observe: 'response'})
+        return this.http.put<Ticket>(`${this.resourceUrl}/test`, copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 

@@ -220,7 +220,6 @@ export class TicketAvailableComponent implements OnInit {
         console.log("end TEST");
 
         this.ticketService.updateHRIT(this.searchedTicketForReassign);
-        console.log()
     }
 
 

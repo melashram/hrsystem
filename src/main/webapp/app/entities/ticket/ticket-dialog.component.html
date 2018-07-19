@@ -99,23 +99,9 @@
                    [(ngModel)]="ticket.description" maxlength="150" />
         </div>
 
-
-        <div [hidden]="ticket.id" >
-            <div id="element1">
-                IT Requests
-            </div>
-            <label id = "element3" class="switch">
-                <input type="checkbox" (click) = "viewHrRequests()">
-                <span class="slider"></span>
-            </label>
-            <br>
-            <div id="element2">
-                HR Requests
-            </div>
-            <label id = "element4" class="switch">
-                <input type="checkbox" (click) = "viewHrRequests()">
-                <span class="slider"></span>
-            </label>
+        <div [hidden]="ticket.id">
+                <input type="radio" name="request" value="itrequest" (click) = "viewHrRequests()"> IT Requests<br>
+                <input type="radio" name="request" value="hrrequest" (click) = "viewHrRequests()"> HR Request<br>
         </div>
 
         <div class="form-group" [hidden]="ticket.id || !hrRequest" >
