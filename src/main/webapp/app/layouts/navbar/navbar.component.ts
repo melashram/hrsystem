@@ -68,6 +68,7 @@ export class NavbarComponent implements OnInit {
     logout() {
         this.collapseNavbar();
         this.loginService.logout();
+        this.account=null;
         this.router.navigate(['']);
     }
 
@@ -77,5 +78,9 @@ export class NavbarComponent implements OnInit {
 
     getImageUrl() {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
+    }
+
+    reload(){
+        window.location.reload();
     }
 }

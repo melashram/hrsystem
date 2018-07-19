@@ -57,6 +57,7 @@ export class TicketAvailableComponent implements OnInit {
         private eventManager: JhiEventManager,
         private principal: Principal,
         private datePipe: DatePipe,
+
     ) {
     }
 
