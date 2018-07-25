@@ -227,14 +227,6 @@
                                 <span class="fa fa-pencil"></span>
                                 <span class="d-none d-md-inline">Reassign to owner</span>
                             </button>
-                            <!--<button type="submit"-->
-                                    <!--[routerLink]="['/', { outlets: { popup: 'ticket/'+ ticket.id + '/delete'} }]"-->
-                                    <!--replaceUrl="true"-->
-                                    <!--queryParamsHandling="merge"-->
-                                    <!--class="btn btn-danger btn-sm">-->
-                                <!--<span class="fa fa-remove"></span>-->
-                                <!--<span class="d-none d-md-inline">Delete</span>-->
-                            <!--</button>-->
                         </div>
                     </td>
                 </tr>
@@ -290,24 +282,22 @@
                     <td>
                         {{ticket.user?.login}}
                     </td>
-                    <td class="text-right" *ngIf="">
+                    <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     [routerLink]="['/', { outlets: { popup: 'tickethrit/'+ ticket.id + '/edit'} }]"
                                     replaceUrl="true"
                                     queryParamsHandling="merge"
-                                    class="btn btn-dark btn-sm">
+                                    class="btn btn-primary btn-sm">
                                 <span class="fa fa-pencil"></span>
                                 <span class="d-none d-md-inline">Assign to me</span>
                             </button>
-                            <!--<button type="submit"-->
-                                    <!--[routerLink]="['/', { outlets: { popup: 'ticket/'+ ticket.id + '/delete'} }]"-->
-                                    <!--replaceUrl="true"-->
-                                    <!--queryParamsHandling="merge"-->
-                                    <!--class="btn btn-danger btn-sm">-->
-                                <!--<span class="fa fa-remove"></span>-->
-                                <!--<span class="d-none d-md-inline">Delete</span>-->
-                            <!--</button>-->
+
+                            <button (click)="test3(ticket)"
+                                    class="btn btn-danger btn-sm">
+                                <span class="fa fa-pencil"></span>
+                                <span class="d-none d-md-inline">Reassign to owner</span>
+                            </button>
                         </div>
                     </td>
                 </tr>

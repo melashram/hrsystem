@@ -14,7 +14,7 @@
 
 
             <li class="nav-item" *jhiHasAnyAuthority="['ROLE_EMPLOYEE','ROLE_HR','ROLE_IT']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="../ticket-hrit" >
+                <a class="nav-link" routerLink="../ticket-hrit" (click) = "reload()">
                     <span>
                         <i class="fa fa-home" aria-hidden="true"></i>
                         <span>Create New Ticket</span>
