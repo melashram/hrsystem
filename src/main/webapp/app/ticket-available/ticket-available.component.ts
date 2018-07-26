@@ -7,7 +7,7 @@ import {TicketService} from '../entities/ticket/ticket.service';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {TicketStatus, TicketStatusService} from '../entities/ticket-status';
 import {RequestService} from '../entities/request';
-import {DatePipe} from "@angular/common";
+import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'jhi-ticket-available',
@@ -29,7 +29,7 @@ export class TicketAvailableComponent implements OnInit {
 
     testString: '';
 
-    searchCategories = ['A' , 'B' , 'C' , 'D'];
+    searchCategories = ['A', 'B', 'C', 'D'];
 
     searchClicked: boolean;
 
@@ -49,16 +49,13 @@ export class TicketAvailableComponent implements OnInit {
 
     searchedTicketForReassign: Ticket;
 
-    constructor(
-        private ticketService: TicketService,
-        private jhiAlertService: JhiAlertService,
-        private ticketStatusService: TicketStatusService,
-        private requestService: RequestService,
-        private eventManager: JhiEventManager,
-        private principal: Principal,
-        private datePipe: DatePipe,
-
-    ) {
+    constructor(private ticketService: TicketService,
+                private jhiAlertService: JhiAlertService,
+                private ticketStatusService: TicketStatusService,
+                private requestService: RequestService,
+                private eventManager: JhiEventManager,
+                private principal: Principal,
+                private datePipe: DatePipe,) {
     }
 
     loadHRTickets() {
@@ -69,6 +66,7 @@ export class TicketAvailableComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     loadITTickets() {
         this.ticketService.ITTicketquery().subscribe(
             (res: HttpResponse<Ticket[]>) => {
@@ -77,6 +75,7 @@ export class TicketAvailableComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     loadAll() {
         this.ticketService.query().subscribe(
             (res: HttpResponse<Ticket[]>) => {
@@ -87,7 +86,7 @@ export class TicketAvailableComponent implements OnInit {
     }
 
     loadSearchByNameIt() {
-        this.ticketService.SearchNameTicketItquery(this.searchValueIt , this.searchValueTicketStatusIt , this.searchValueRequestTypeIt).subscribe(
+        this.ticketService.SearchNameTicketItquery(this.searchValueIt, this.searchValueTicketStatusIt, this.searchValueRequestTypeIt).subscribe(
             (res: HttpResponse<Ticket[]>) => {
                 this.searchTicketsName = res.body;
             },
@@ -96,7 +95,7 @@ export class TicketAvailableComponent implements OnInit {
     }
 
     loadSearchByNameHr() {
-        this.ticketService.SearchNameTicketHrquery(this.searchValueHr , this.searchValueTicketStatusHr , this.searchValueRequestTypeHr).subscribe(
+        this.ticketService.SearchNameTicketHrquery(this.searchValueHr, this.searchValueTicketStatusHr, this.searchValueRequestTypeHr).subscribe(
             (res: HttpResponse<Ticket[]>) => {
                 this.searchTicketsName = res.body;
             },
@@ -146,11 +145,10 @@ export class TicketAvailableComponent implements OnInit {
         this.fillArray();
     }
 
-    isTicketClosed(ticket: Ticket):boolean{
-        if(ticket.ticketStatus.id == 2){
+    isTicketClosed(ticket: Ticket): boolean {
+        if (ticket.ticketStatus.id === 2) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -167,7 +165,7 @@ export class TicketAvailableComponent implements OnInit {
             if (this.searchValueHr !== undefined || this.searchValueTicketStatusHr !== undefined || this.searchValueRequestTypeHr !== undefined) {
                 this.loadSearchByNameHr();
             }
-        }else {
+        } else {
             this.searchClicked = false;
             console.log('search clicked false');
 
@@ -175,13 +173,13 @@ export class TicketAvailableComponent implements OnInit {
 
     }
 
-    test(ticket: Ticket){
+    test(ticket: Ticket) {
         console.log(ticket.id);
         console.log(ticket);
-        console.log("FORM TEST");
+        console.log('FORM TEST');
         console.log(ticket.creationDate);
         console.log(ticket.acceptanceDate);
-        console.log("End in test");
+        console.log('End in test');
         this.ticketService.find(ticket.id)
             .subscribe((ticketResponse: HttpResponse<Ticket>) => {
                 ticket = ticketResponse.body;
@@ -191,58 +189,58 @@ export class TicketAvailableComponent implements OnInit {
                     .transform(ticket.acceptanceDate, 'yyyy-MM-ddTHH:mm:ss');
             });
 
-        console.log("FORM TEST");
+        console.log('FORM TEST');
         console.log(typeof ticket.acceptanceDate);
         console.log(typeof ticket.creationDate);
         console.log(ticket.creationDate);
-        console.log("end TEST");
+        console.log('end TEST');
 
 
         this.ticketService.updateHRIT(ticket);
     }
 
 
-    test2(id: number){
+    test2(id: number) {
         this.ticketService.find(id)
             .subscribe((ticketResponse: HttpResponse<Ticket>) => {
                 this.searchedTicketForReassign = ticketResponse.body;
                 this.searchedTicketForReassign.creationDate = this.datePipe
-                    .transform( this.searchedTicketForReassign.creationDate, 'yyyy-MM-ddTHH:mm:ss');
+                    .transform(this.searchedTicketForReassign.creationDate, 'yyyy-MM-ddTHH:mm:ss');
                 this.searchedTicketForReassign.acceptanceDate = this.datePipe
-                    .transform( this.searchedTicketForReassign.acceptanceDate, 'yyyy-MM-ddTHH:mm:ss');
+                    .transform(this.searchedTicketForReassign.acceptanceDate, 'yyyy-MM-ddTHH:mm:ss');
             });
-        console.log( this.searchedTicketForReassign);
-        console.log("da5el 3al assign to");
+        console.log(this.searchedTicketForReassign);
+        console.log('da5el 3al assign to');
 
-        console.log("FORM TEST");
+        console.log('FORM TEST');
         console.log(typeof this.searchedTicketForReassign.acceptanceDate);
         console.log(typeof this.searchedTicketForReassign.creationDate);
         console.log(this.searchedTicketForReassign.creationDate);
-        console.log("end TEST");
+        console.log('end TEST');
 
         this.ticketService.updateHRIT(this.searchedTicketForReassign);
     }
 
 
-    test3(ticket: Ticket){
+    test3(ticket: Ticket) {
         console.log(ticket.id);
         console.log(ticket);
-        console.log("FORM TEST 3 ");
-        console.log( typeof ticket.creationDate);
+        console.log('FORM TEST 3 ');
+        console.log(typeof ticket.creationDate);
         console.log(typeof ticket.acceptanceDate);
 
         ticket.acceptanceDate = this.datePipe
-            .transform( ticket.acceptanceDate, 'yyyy-MM-ddTHH:mm:ss');
+            .transform(ticket.acceptanceDate, 'yyyy-MM-ddTHH:mm:ss');
         ticket.creationDate = this.datePipe
-            .transform( ticket.creationDate, 'yyyy-MM-ddTHH:mm:ss');
+            .transform(ticket.creationDate, 'yyyy-MM-ddTHH:mm:ss');
 
-        console.log("After transform")
+        console.log('After transform')
         console.log(ticket.acceptanceDate);
         console.log(typeof ticket.acceptanceDate);
 
         console.log(ticket.creationDate);
         console.log(typeof ticket.creationDate);
-        console.log("End in test 3");
+        console.log('End in test 3');
 
         this.ticketService.reassignToOwner(ticket);
     }
@@ -260,10 +258,12 @@ export class TicketAvailableComponent implements OnInit {
     trackId(index: number, item: Ticket) {
         return item.id;
     }
+
     registerChangeInTickets() {
         this.eventSubscriber = this.eventManager.subscribe('ticketListModification', (response) => this.loadHRTickets());
         this.eventSubscriber = this.eventManager.subscribe('ticketListModification', (response) => this.loadITTickets());
     }
+
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
@@ -272,7 +272,7 @@ export class TicketAvailableComponent implements OnInit {
         if (this.searchClicked === false) {
             this.searchClicked = true;
             console.log('search clicked true');
-        }else {
+        } else {
             this.searchClicked = false;
             console.log('search clicked false');
         }

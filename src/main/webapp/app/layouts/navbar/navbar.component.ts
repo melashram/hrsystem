@@ -63,6 +63,7 @@ export class NavbarComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
+        console.log("Logged in");
     }
 
     logout() {
