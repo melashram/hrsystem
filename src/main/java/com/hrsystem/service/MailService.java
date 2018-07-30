@@ -1,5 +1,6 @@
 package com.hrsystem.service;
 
+import com.hrsystem.domain.Department;
 import com.hrsystem.domain.User;
 
 import io.github.jhipster.config.JHipsterProperties;
@@ -40,6 +41,12 @@ public class MailService {
 
     private final SpringTemplateEngine templateEngine;
 
+    private final String HR_EMAIL = "i.saad@qcentris.com";
+
+    private final String IT_EMAIL = "a.essam@qcentris.com";
+
+    private String [] RequestTypes ={"HR" , "IT"};
+
     public MailService(JHipsterProperties jHipsterProperties, JavaMailSender javaMailSender,
             MessageSource messageSource, SpringTemplateEngine templateEngine) {
 
@@ -74,7 +81,7 @@ public class MailService {
     }
 
     @Async
-    public void sendEmailFromTemplate(User user, String templateName, String titleKey) {
+    public void sendEmailFromTemplate(User user, String templateName, String titleKey ) {
         Locale locale = Locale.forLanguageTag(user.getLangKey());
         Context context = new Context(locale);
         context.setVariable(USER, user);
@@ -82,6 +89,18 @@ public class MailService {
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
+
+    }
+
+    @Async
+    public void sendEmailFromTemplateToDepartmentRequest(User user, String departmentEmail, String templateName, String titleKey ) {
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable(USER, user);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process(templateName, context);
+        String subject = messageSource.getMessage(titleKey, null, locale);
+        sendEmail(departmentEmail, subject, content, false, true);
 
     }
 
@@ -104,8 +123,16 @@ public class MailService {
     }
 
     @Async
-    public void sendRequestMail(User user) {
-        log.debug("Sending Request reset email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "requestEmail", "email.request.title");
+    public void sendRequestMailFromDepartment(User user , String requestType) {
+        //HR
+        if(requestType == RequestTypes[0]){
+            log.debug("Sending Request reset email to '{}'", HR_EMAIL);
+            sendEmailFromTemplateToDepartmentRequest(user,HR_EMAIL, "requestEmail", "email.request.title");
+        }
+        //IT
+        else if(requestType == RequestTypes[1]){
+            log.debug("Sending Request reset email to '{}'", IT_EMAIL);
+            sendEmailFromTemplateToDepartmentRequest(user,IT_EMAIL, "requestEmail", "email.request.title");
+        }
     }
 }

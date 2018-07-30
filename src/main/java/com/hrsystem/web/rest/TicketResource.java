@@ -53,6 +53,8 @@ public class TicketResource {
     @Autowired
     private TicketStatusRepository ticketStatusRepository;
 
+    private String [] RequestTypes ={"HR" , "IT"};
+
     public TicketResource(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
     }
@@ -85,7 +87,17 @@ public class TicketResource {
         ticket.setUser(userLoggedIn);
 
         Ticket result = ticketRepository.save(ticket);
-        mailService.sendRequestMail(userLoggedIn);
+
+        String resultTicketType = result.getRequest().getDepartment().getName();
+
+        //HR
+        if(resultTicketType == RequestTypes[0]){
+            mailService.sendRequestMailFromDepartment(userLoggedIn , resultTicketType );
+        }
+        //IT
+        else if(resultTicketType == RequestTypes[1]){
+            mailService.sendRequestMailFromDepartment(userLoggedIn , resultTicketType);
+        }
         return ResponseEntity.created(new URI("/api/tickets/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
