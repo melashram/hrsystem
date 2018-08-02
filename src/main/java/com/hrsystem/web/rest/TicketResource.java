@@ -91,19 +91,16 @@ public class TicketResource {
         String resultTicketType = result.getRequest().getDepartment().getName();
 
         //HR
-        if(resultTicketType == RequestTypes[0]){
-            mailService.sendRequestMailFromDepartment(userLoggedIn , resultTicketType );
+        if(resultTicketType.equals(RequestTypes[0])){
+            mailService.sendRequestMailFromDepartment(userLoggedIn , result , resultTicketType );
         }
         //IT
-        else if(resultTicketType == RequestTypes[1]){
-            mailService.sendRequestMailFromDepartment(userLoggedIn , resultTicketType);
+        else if(resultTicketType.equals(RequestTypes[1]) ){
+            mailService.sendRequestMailFromDepartment(userLoggedIn , result ,resultTicketType);
         }
         return ResponseEntity.created(new URI("/api/tickets/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
-
-
-
     }
 
     /**

@@ -9,14 +9,29 @@
         <p th:text="#{email.request.from(${user.login})}">
             Request From
         </p>
-        <p th:text="#{email.request.text1}">
-           Request
+
+        <p th:text="#{email.request.ticket1}">
+        </p>
+
+        <p th:text="#{email.request.ticket2(${ticket.getRequest().getType()})}">
+        </p>
+
+        <p th:text="#{email.request.ticket3(${ticket.getCreationDate()})}">
+        </p>
+
+        <p th:text="#{email.request.ticket4(${ticket.getReason()})}">
+        </p>
+
+        <p th:text="#{email.request.ticket5(${ticket.getComment()})}">
+        </p>
+
+        <p th:text="#{email.request.ticket6(${ticket.getDescription()})}">
         </p>
 
         <p>
-            <span th:text="#{email.request.text2}">Regards, </span>
+            <span th:text="#{email.request.text2}"></span>
             <br/>
-            <em th:text="#{email.signature}">QTool Team.</em>
+            <em th:text="#{email.signature}"></em>
         </p>
     </body>
 </html>
