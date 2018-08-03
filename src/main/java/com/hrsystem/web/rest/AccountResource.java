@@ -23,6 +23,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
 
+import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.springframework.ui.Model;
+
 /**
  * REST controller for managing the current user's account.
  */
@@ -67,9 +72,6 @@ public class AccountResource {
             managedUserVM.getSocialInsuranceNumber() , managedUserVM.getNationality() , managedUserVM.getNationalIdNumber() ,
             managedUserVM.getPassportNumber() , managedUserVM.getCibAccountNumber() , managedUserVM.getCityCountry(),
             managedUserVM.getHomeAddress());
-//        Employee employee = new Employee();
-//        employee.getTitle();
-//        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword() , employee);
 
         mailService.sendActivationEmail(user);
     }
