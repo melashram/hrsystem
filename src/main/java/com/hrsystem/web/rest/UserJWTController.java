@@ -14,9 +14,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.UUID;
 
 /**
  * Controller to authenticate users.
@@ -34,9 +38,23 @@ public class UserJWTController {
         this.authenticationManager = authenticationManager;
     }
 
+
     @PostMapping("/authenticate")
     @Timed
-    public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginVM loginVM) {
+    public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginVM loginVM , HttpServletRequest request) {
+
+        //For the SSO
+//        UUID state = UUID.randomUUID();
+//        UUID nonce = UUID.randomUUID();
+//
+//        // Save the state and nonce in the session so we can
+//        // verify after the auth process redirects back
+//        HttpSession session = request.getSession();
+//        session.setAttribute("expected_state", state);
+//        session.setAttribute("expected_nonce", nonce);
+//
+//        String loginUrl = AuthHelper.getLoginUrl(state, nonce);
+
 
         UsernamePasswordAuthenticationToken authenticationToken =
             new UsernamePasswordAuthenticationToken(loginVM.getUsername(), loginVM.getPassword());
