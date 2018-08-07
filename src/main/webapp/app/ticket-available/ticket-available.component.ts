@@ -222,7 +222,7 @@ export class TicketAvailableComponent implements OnInit {
     }
 
 
-    test3(ticket: Ticket) {
+    ReassignTicketButton(ticket: Ticket) {
         console.log(ticket.id);
         console.log(ticket);
         console.log('FORM TEST 3 ');
