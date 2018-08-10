@@ -20,7 +20,7 @@ export const ticketRoute: Routes = [
         path: 'ticket/:id',
         component: TicketDetailComponent,
         data: {
-            authorities: ['ROLE_EMPLOYEE', 'ROLE_IT', 'ROLE_HR'],
+            authorities: ['ROLE_EMPLOYEE', 'ROLE_IT', 'ROLE_HR' ,'ROLE_ADMIN'],
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService]
@@ -78,7 +78,7 @@ export const ticketPopupRoute: Routes = [
         path: 'ticket/:id/delete',
         component: TicketDeletePopupComponent,
         data: {
-            authorities: ['ROLE_IT' , 'ROLE_HR'],
+            authorities: ['ROLE_IT' , 'ROLE_HR' , 'ROLE_ADMIN'],
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService],
