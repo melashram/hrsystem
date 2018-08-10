@@ -50,24 +50,7 @@ export class TicketService {
         const copy = this.convert(ticket);
         console.log(ticket);
         ticket.assignedUser = ticket.user;
-        return this.http.put<Ticket>(`${this.resourceUrl}/test`, copy, {observe: 'response'})
-            .map((res: EntityResponseType) => this.convertResponse(res));
-    }
-
-    reassign1(ticket: Ticket): Observable<EntityResponseType> {
-        console.log('Reassign to owner');
-        console.log(ticket.acceptanceDate);
-        console.log(ticket.creationDate.toString());
-        console.log(typeof ticket.creationDate);
-        console.log(ticket);
-        // ticket.creationDate = ticket.creationDate.toLocaleString();
-        // console.log(ticket.creationDate);
-        // console.log("creattion date" + typeof ticket.creationDate);
-
-        const copy = this.convert(ticket);
-        // return this.http.put<Ticket>(this.resourceUrl + '/test', copy, {observe: 'response'})
-        //     .map((res: EntityResponseType) => this.convertResponse(res));
-        return this.http.put<Ticket>(`${this.resourceUrl}/test?reassign=${true}`, copy, {observe: 'response'})
+        return this.http.put<Ticket>(`${this.resourceUrl}/reassignTicketToOwner`, copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
@@ -137,13 +120,6 @@ export class TicketService {
         return this.http.put<Ticket>(this.resourceUrl + '/' + ticket.id + '/assigntome', copy, {observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
-
-    // reassignToOwner(ticket: Ticket): Observable<EntityResponseType> {
-    //     const copy = this.convert(ticket);
-    //     console.log('reAssign');
-    //     return this.http.put<Ticket>(this.resourceUrl +'/assigntoowner', copy, {observe: 'response'})
-    //         .map((res: EntityResponseType) => this.convertResponse(res));
-    // }
 
     private convertResponse(res: EntityResponseType): EntityResponseType {
         const body: Ticket = this.convertItemFromServer(res.body);

@@ -129,9 +129,9 @@ public class TicketResource {
 
     @PutMapping("/tickets/hrit")
     @Timed
-    public ResponseEntity<Ticket> assignTicketHRIT(@RequestBody Ticket ticket,
-                                                   @RequestParam(value = "reassign" , required = false) String  reassign) throws URISyntaxException {
-        log.debug("REST request to assign Ticket : {}", ticket , reassign);
+    public ResponseEntity<Ticket> assignTicketHRIT(@RequestBody Ticket ticket
+                                                   ) throws URISyntaxException {
+        log.debug("REST request to assign Ticket : {}", ticket);
 
         ticket.setAcceptanceDate(Instant.now());
         final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
@@ -149,7 +149,19 @@ public class TicketResource {
             .body(result);
     }
 
-    @PutMapping("/tickets/test")
+    @PutMapping("/tickets/reassignTicket")
+    @Timed
+    public ResponseEntity<Ticket> reassignTest(@RequestBody Ticket ticket
+    ) throws URISyntaxException {
+        log.debug("REST request to Reassign Ticket : {}", ticket);
+
+        Ticket result = ticketRepository.save(ticket);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, ticket.getId().toString()))
+            .body(result);
+    }
+
+    @PutMapping("/tickets/reassignTicketToOwner")
     @Timed
     public ResponseEntity<Ticket> reassignTicketHRIT(@RequestBody Ticket ticket) throws URISyntaxException {
         log.debug("REST request to reassign Ticket : {}", ticket);
