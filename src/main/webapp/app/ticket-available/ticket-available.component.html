@@ -1,46 +1,73 @@
-<style>
-    /*table {*/
-        /*width: 50%;*/
-        /*border-collapse: collapse;*/
-    /*}*/
-    .ticketsAvailable{
-        width: 80%;
-        float: right;
-    }
-    /*table th , table td{*/
-        /*overflow: visible;*/
-    /*}*/
-    /*th{*/
-        /*font-size: 10px;*/
-        /*height: 50px;*/
-    /*}*/
-    #searchForm{
-        width: 15%;
-        float: left;
+<!--<style>-->
+    <!--/*table {*/-->
+        <!--/*width: 50%;*/-->
+        <!--/*border-collapse: collapse;*/-->
+    <!--/*}*/-->
+    <!--.ticketsAvailable{-->
+        <!--width: 80%;-->
+        <!--float: right;-->
+    <!--}-->
+    <!--/*table th , table td{*/-->
+        <!--/*overflow: visible;*/-->
+    <!--/*}*/-->
+    <!--/*th{*/-->
+        <!--/*font-size: 10px;*/-->
+        <!--/*height: 50px;*/-->
+    <!--/*}*/-->
+    <!--#searchForm{-->
+        <!--width: 15%;-->
+        <!--float: left;-->
 
-        position: fixed;
-    }
+        <!--position: fixed;-->
+    <!--}-->
 
-    /*
-Generic Styling, for Desktops/Laptops
-*/
-    table {
-        width: 50%;
-        border-collapse: collapse;
-    }
-    /*!* Zebra striping *!*/
-    /*th {*/
-        /*font-weight: bold;*/
-        /*height: 50px;*/
+    <!--/*-->
+<!--Generic Styling, for Desktops/Laptops-->
+<!--*/-->
+    <!--/*table {*/-->
+        <!--/*width: 50%;*/-->
+        <!--/*border-collapse: collapse;*/-->
+    <!--/*}*/-->
+    <!--/*!* Zebra striping *!*/-->
+    <!--/*th {*/-->
+        <!--/*font-weight: bold;*/-->
+        <!--/*height: 50px;*/-->
 
-    /*}*/
-    /*td, th {*/
-        /*!*border: 1px solid #ccc;*!*/
-        /*text-align: left;*/
-    /*}*/
+    <!--/*}*/-->
+    <!--/*td, th {*/-->
+        <!--/*!*border: 1px solid #ccc;*!*/-->
+        <!--/*text-align: left;*/-->
+    <!--/*}*/-->
 
+    <!--.ticketsAvailable {-->
+        <!--font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;-->
+        <!--border-collapse: collapse;-->
+        <!--width: 80%;-->
+        <!--float: right;-->
+    <!--}-->
 
-</style>
+    <!--.ticketsAvailable td, .ticketsAvailable th {-->
+        <!--border: 1px solid #ddd;-->
+        <!--padding: 8px;-->
+    <!--}-->
+
+    <!--.ticketsAvailable tr:nth-child(even){background-color: #f2f2f2;}-->
+
+    <!--.ticketsAvailable tr:hover {background-color: #ddd;}-->
+
+    <!--.ticketsAvailable th {-->
+        <!--padding-top: 12px;-->
+        <!--padding-bottom: 12px;-->
+        <!--text-align: left;-->
+        <!--background-color: #005A9B;-->
+        <!--color: white;-->
+    <!--}-->
+
+<!--</style>-->
+
+<!--<head>-->
+    <!--<link rel="stylesheet" href="../../content/css/entitiesStyles.css">-->
+<!--</head>-->
 
 <div>
 
@@ -162,7 +189,7 @@ Generic Styling, for Desktops/Laptops
                             <span class="d-none d-md-inline">Assign to me</span>
                         </button>
 
-                        <button (click)="test()"
+                        <button (click)="ReassignTicketButton(ticket)"
                                 class="btn btn-danger btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline">Reassign to owner</span>
