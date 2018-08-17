@@ -42,9 +42,9 @@
                 <constraints nullable="true" />
             </column>
             <column name="request_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+                <constraints unique="false" nullable="true" />
             </column>            <column name="ticket_status_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+                <constraints unique="false" nullable="true" />
             </column>
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
@@ -58,7 +58,7 @@
         </createTable>
         <dropDefaultValue tableName="ticket" columnName="creation_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="ticket" columnName="acceptance_date" columnDataType="datetime"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>
