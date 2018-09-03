@@ -45,7 +45,7 @@ public class MailService {
 
     private final SpringTemplateEngine templateEngine;
 
-    private final String HR_EMAIL = "intranet.qcentris@qcentris.com";
+    private final String HR_EMAIL = "hr-cairo@qcentris.com";
 
     private final String IT_EMAIL = "intranet.qcentris@qcentris.com";
 
@@ -136,11 +136,14 @@ public class MailService {
         if(requestType.equals(RequestTypes[0])){
             log.debug("Sending Request reset email to '{}'", HR_EMAIL);
             sendEmailFromTemplateToDepartmentRequest(user,HR_EMAIL, ticket ,  "requestEmail", "email.request.title");
+            sendEmailFromTemplateToDepartmentRequest(user,user.getEmail(), ticket ,  "requestEmail", "email.request.title");
+
         }
         //IT
         else if(requestType.equals(RequestTypes[1]) ){
             log.debug("Sending Request reset email to '{}'", IT_EMAIL);
             sendEmailFromTemplateToDepartmentRequest(user,IT_EMAIL,ticket ,"requestEmail", "email.request.title");
+            sendEmailFromTemplateToDepartmentRequest(user,user.getEmail(),ticket ,"requestEmail", "email.request.title");
         }
     }
 }
