@@ -27,8 +27,6 @@ tickets: Ticket[];
     page: any;
     itemsPerPage: any;
 
-
-
     constructor(
         private ticketService: TicketService,
         private jhiAlertService: JhiAlertService,

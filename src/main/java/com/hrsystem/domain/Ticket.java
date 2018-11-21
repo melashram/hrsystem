@@ -26,9 +26,6 @@ public class Ticket implements Serializable {
     @Column(name = "jhi_comment")
     private String comment;
 
-    @Column(name = "description")
-    private String description;
-
     @Column(name = "creation_date")
     private Instant creationDate;
 
@@ -82,19 +79,6 @@ public class Ticket implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Ticket description(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Instant getCreationDate() {
@@ -202,7 +186,6 @@ public class Ticket implements Serializable {
             "id=" + getId() +
             ", reason='" + getReason() + "'" +
             ", comment='" + getComment() + "'" +
-            ", description='" + getDescription() + "'" +
             ", creationDate='" + getCreationDate() + "'" +
             ", acceptanceDate='" + getAcceptanceDate() + "'" +
             "}";

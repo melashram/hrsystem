@@ -44,10 +44,6 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "description",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "creationDate",
             "fieldType": "Instant"
         },

@@ -19,6 +19,10 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 
 import javax.mail.internet.MimeMessage;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.Locale;
 
 /**
@@ -36,6 +40,10 @@ public class MailService {
     private static final String TICKET = "ticket";
 
     private static final String BASE_URL = "baseUrl";
+
+    private String current_IP ;
+
+    private static final String PORT ="8080";
 
     private final JHipsterProperties jHipsterProperties;
 
@@ -58,6 +66,7 @@ public class MailService {
         this.javaMailSender = javaMailSender;
         this.messageSource = messageSource;
         this.templateEngine = templateEngine;
+        this.current_IP ="http://"+ getCurrentIP()+ ":" + PORT;
     }
 
     @Async
@@ -89,9 +98,11 @@ public class MailService {
         Locale locale = Locale.forLanguageTag(user.getLangKey());
         Context context = new Context(locale);
         context.setVariable(USER, user);
-        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        //context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        context.setVariable(BASE_URL, current_IP);
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
+        log.debug("jhipstergetmail : " + getCurrentIP());
         sendEmail(user.getEmail(), subject, content, false, true);
 
     }
@@ -102,7 +113,7 @@ public class MailService {
         Context context = new Context(locale);
         context.setVariable(USER, user);
         context.setVariable(TICKET , ticket);
-        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        context.setVariable(BASE_URL, current_IP);
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
 
@@ -145,5 +156,19 @@ public class MailService {
             sendEmailFromTemplateToDepartmentRequest(user,IT_EMAIL,ticket ,"requestEmail", "email.request.title");
             sendEmailFromTemplateToDepartmentRequest(user,user.getEmail(),ticket ,"requestEmail", "email.request.title");
         }
+    }
+
+    public String getCurrentIP(){
+        String ip ="";
+        try(final DatagramSocket socket = new DatagramSocket()){
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            ip = socket.getLocalAddress().getHostAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+
+        return ip;
     }
 }

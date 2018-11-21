@@ -53,10 +53,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         }
     }
 
-    trimEmailToUsername(){
-        this.emailSeparator=this.registerAccount.email.indexOf("@");
-        this.registerAccount.login= this.registerAccount.email.substring(0,this.emailSeparator);
-
+    trimEmailToUsername() {
+        this.emailSeparator = this.registerAccount.email.indexOf('@');
+        this.registerAccount.login = this.registerAccount.email.substring(0 , this.emailSeparator);
 
     }
 

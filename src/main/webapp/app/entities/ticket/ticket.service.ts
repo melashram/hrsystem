@@ -93,7 +93,9 @@ export class TicketService {
     SearchNameTicketItquery(searchToken: string, searchTicketStatus: string, searchRequestType: string): Observable<HttpResponse<Ticket[]>> {
         const options = createRequestOption(searchToken);
 
-        return this.http.get<Ticket[]>(`${this.resourceUrl}/searchNameIt?searchToken=${searchToken}&searchTicketStatus=${searchTicketStatus}&searchRequestType=${searchRequestType}`, {
+        return this.http.get<Ticket[]>(
+            `${this.resourceUrl}/searchNameIt?searchToken=${searchToken}&searchTicketStatus=${searchTicketStatus}&searchRequestType=${searchRequestType}`,
+            {
             params: options,
             observe: 'response'
         })
@@ -103,7 +105,9 @@ export class TicketService {
     SearchNameTicketHrquery(searchToken: string, searchTicketStatus: string, searchRequestType: string): Observable<HttpResponse<Ticket[]>> {
         const options = createRequestOption(searchToken);
 
-        return this.http.get<Ticket[]>(`${this.resourceUrl}/searchNameHr?searchToken=${searchToken}&searchTicketStatus=${searchTicketStatus}&searchRequestType=${searchRequestType}`, {
+        return this.http.get<Ticket[]>(
+            `${this.resourceUrl}/searchNameHr?searchToken=${searchToken}&searchTicketStatus=${searchTicketStatus}&searchRequestType=${searchRequestType}`,
+            {
             params: options,
             observe: 'response'
         })

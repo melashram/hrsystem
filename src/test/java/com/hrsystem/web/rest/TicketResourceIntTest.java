@@ -46,9 +46,6 @@ public class TicketResourceIntTest {
     private static final String DEFAULT_COMMENT = "AAAAAAAAAA";
     private static final String UPDATED_COMMENT = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
-
     private static final Instant DEFAULT_CREATION_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATION_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -95,7 +92,6 @@ public class TicketResourceIntTest {
         Ticket ticket = new Ticket()
             .reason(DEFAULT_REASON)
             .comment(DEFAULT_COMMENT)
-            .description(DEFAULT_DESCRIPTION)
             .creationDate(DEFAULT_CREATION_DATE)
             .acceptanceDate(DEFAULT_ACCEPTANCE_DATE);
         return ticket;
@@ -123,7 +119,6 @@ public class TicketResourceIntTest {
         Ticket testTicket = ticketList.get(ticketList.size() - 1);
         assertThat(testTicket.getReason()).isEqualTo(DEFAULT_REASON);
         assertThat(testTicket.getComment()).isEqualTo(DEFAULT_COMMENT);
-        assertThat(testTicket.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testTicket.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
         assertThat(testTicket.getAcceptanceDate()).isEqualTo(DEFAULT_ACCEPTANCE_DATE);
     }
@@ -160,7 +155,6 @@ public class TicketResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(ticket.getId().intValue())))
             .andExpect(jsonPath("$.[*].reason").value(hasItem(DEFAULT_REASON.toString())))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].creationDate").value(hasItem(DEFAULT_CREATION_DATE.toString())))
             .andExpect(jsonPath("$.[*].acceptanceDate").value(hasItem(DEFAULT_ACCEPTANCE_DATE.toString())));
     }
@@ -178,7 +172,6 @@ public class TicketResourceIntTest {
             .andExpect(jsonPath("$.id").value(ticket.getId().intValue()))
             .andExpect(jsonPath("$.reason").value(DEFAULT_REASON.toString()))
             .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.creationDate").value(DEFAULT_CREATION_DATE.toString()))
             .andExpect(jsonPath("$.acceptanceDate").value(DEFAULT_ACCEPTANCE_DATE.toString()));
     }
@@ -205,7 +198,6 @@ public class TicketResourceIntTest {
         updatedTicket
             .reason(UPDATED_REASON)
             .comment(UPDATED_COMMENT)
-            .description(UPDATED_DESCRIPTION)
             .creationDate(UPDATED_CREATION_DATE)
             .acceptanceDate(UPDATED_ACCEPTANCE_DATE);
 
@@ -220,7 +212,6 @@ public class TicketResourceIntTest {
         Ticket testTicket = ticketList.get(ticketList.size() - 1);
         assertThat(testTicket.getReason()).isEqualTo(UPDATED_REASON);
         assertThat(testTicket.getComment()).isEqualTo(UPDATED_COMMENT);
-        assertThat(testTicket.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testTicket.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
         assertThat(testTicket.getAcceptanceDate()).isEqualTo(UPDATED_ACCEPTANCE_DATE);
     }
