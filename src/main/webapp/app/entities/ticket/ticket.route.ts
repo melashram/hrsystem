@@ -20,7 +20,7 @@ export const ticketRoute: Routes = [
         path: 'ticket/:id',
         component: TicketDetailComponent,
         data: {
-            authorities: ['ROLE_EMPLOYEE', 'ROLE_IT', 'ROLE_HR' ,'ROLE_ADMIN'],
+            authorities: ['ROLE_EMPLOYEE', 'ROLE_IT', 'ROLE_HR' , 'ROLE_ADMIN'],
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService]
@@ -42,7 +42,7 @@ export const ticketRoute: Routes = [
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService]
-    },{
+    }, {
         path: 'ticket/userticket',
         component: TicketComponent,
         data: {

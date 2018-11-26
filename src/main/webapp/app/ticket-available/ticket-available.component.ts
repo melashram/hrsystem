@@ -54,7 +54,7 @@ export class TicketAvailableComponent implements OnInit {
                 private requestService: RequestService,
                 private eventManager: JhiEventManager,
                 private principal: Principal,
-                private datePipe: DatePipe,) {
+                private datePipe: DatePipe) {
     }
 
     loadHRTickets() {
@@ -173,7 +173,7 @@ export class TicketAvailableComponent implements OnInit {
     }
 
     ReassignTicketButton(ticket: Ticket) {
-        //Transform Date format to be able to convert the Ticket
+        // Transform Date format to be able to convert the Ticket
         ticket.acceptanceDate = this.datePipe
             .transform(ticket.acceptanceDate, 'yyyy-MM-ddTHH:mm:ss');
         ticket.creationDate = this.datePipe

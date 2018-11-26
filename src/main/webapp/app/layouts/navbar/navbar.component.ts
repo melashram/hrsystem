@@ -37,13 +37,13 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit() {
 
-        if(this.isAuthenticated()){
+        if (this.isAuthenticated()) {
             this.principal.identity().then((account) => {
                 this.account = account;
             });
             console.log(this.account.name);
-        }else{
-            console.log("Not Authenticated");
+        }else {
+            console.log('Not Authenticated');
         }
 
         this.profileService.getProfileInfo().then((profileInfo) => {
@@ -51,7 +51,6 @@ export class NavbarComponent implements OnInit {
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
     }
-
 
     collapseNavbar() {
         this.isNavbarCollapsed = true;
@@ -63,14 +62,14 @@ export class NavbarComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
-        console.log("Logged in");
+        console.log('Logged in');
     }
 
     logout() {
         this.collapseNavbar();
 
         this.loginService.logout();
-        this.account=null;
+        this.account = null;
         this.router.navigate(['']);
     }
 
@@ -82,7 +81,7 @@ export class NavbarComponent implements OnInit {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
     }
 
-    reload(){
+    reload() {
         window.location.reload();
     }
 }
