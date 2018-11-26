@@ -39,7 +39,7 @@
             </column>
 
             <column name="acceptance_date" type="timestamp">
-                <constraints nullable="true" />
+                <constraints nullable="true"/>
             </column>
             <column name="request_id" type="bigint">
                 <constraints unique="false" nullable="true" />
