@@ -17,14 +17,13 @@
     <div class="row">
     </div>
     <br/>
-    <div class="table-responsive" >
+    <div class="ticketsTable" >
         <table *jhiHasAnyAuthority="['ROLE_EMPLOYEE','ROLE_IT','ROLE_HR']" class="table table-striped">
             <thead>
             <tr>
                 <th><span>ID</span></th>
                 <th style=" width: 20%"><span>Reason</span></th>
                 <th style=" width: 20%"><span>Comment</span></th>
-                <th style=" width: 20%"><span>Description</span></th>
                 <th><span>Creation Date</span></th>
                 <th><span>Acceptance Date</span></th>
                 <th><span>Request</span></th>
@@ -37,7 +36,6 @@
                 <td><a [routerLink]="['../ticket', ticket.id ]">{{ticket.id}}</a></td>
                 <td>{{ticket.reason}}</td>
                 <td>{{ticket.comment}}</td>
-                <td>{{ticket.description}}</td>
                 <td>{{ticket.creationDate | date:'medium'}}</td>
                 <td>{{ticket.acceptanceDate | date:'medium'}}</td>
                 <td>

@@ -12,10 +12,6 @@
         <dd>
             <span>{{ticket.comment}}</span>
         </dd>
-        <dt><span>Description</span></dt>
-        <dd>
-            <span>{{ticket.description}}</span>
-        </dd>
         <dt><span>Creation Date</span></dt>
         <dd>
             <span>{{ticket.creationDate | date:'medium'}}</span>
@@ -52,7 +48,7 @@
         <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
     </button>
 
-    <button type="button" *jhiHasAnyAuthority="['ROLE_ADMIN' , 'ROLE_IT' , 'ROLE_HR']"
+    <button type="button"
             [routerLink]="['/', { outlets: { popup: 'ticket/'+ ticket.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"

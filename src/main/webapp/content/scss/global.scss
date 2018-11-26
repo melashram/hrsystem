@@ -229,24 +229,39 @@ ui bootstrap tweaks
     position: fixed;
 }
 
-.ticketsAvailable {
+.ticketsAvailable , .ticketsTable {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     font-size: 14px;
     border-collapse: collapse;
     width: 80%;
     float: right;
 }
+.ticketsTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    border-collapse: collapse;
+    width: 100%;
+    float: right;
+}
 
-.ticketsAvailable td, .ticketsAvailable th {
+.ticketsAvailable td, .ticketsAvailable th , .ticketsTable td , .ticketsTable th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-.ticketsAvailable tr:nth-child(even){background-color: #f2f2f2;}
+.ticketsAvailable tr:nth-child(even){
+    background-color: #f2f2f2;}
 
-.ticketsAvailable tr:hover {background-color: #ddd;}
+.ticketsTable tr:nth-child(even){
+    background-color: #f2f2f2;}
 
-.ticketsAvailable th {
+.ticketsAvailable tr:hover {
+    background-color: #ddd;}
+
+.ticketsTable tr:hover {
+    background-color: #ddd;}
+
+.ticketsAvailable th , .ticketsTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
