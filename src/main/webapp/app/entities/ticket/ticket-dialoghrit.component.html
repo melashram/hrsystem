@@ -25,12 +25,6 @@
             <input type="text" class="form-control" name="comment" id="field_comment"
                    [(ngModel)]="ticket.comment" />
         </div>
-        <div class="form-group" *jhiHasAnyAuthority="['ROLE_EMPLOYEE']">
-            <label class="form-control-label" for="field_description">Description</label>
-            <input type="text" class="form-control" name="description" id="field_description"
-                   [(ngModel)]="ticket.description" />
-        </div>
-
         <div class="form-group" *jhiHasAnyAuthority="['ROLE_HR' , 'ROLE_IT']">
             <label class="form-control-label" for="field_ticketStatus">Ticket Status</label>
             <select class="form-control" id="field_ticketStatus" name="ticketStatus" [(ngModel)]="ticket.ticketStatus">

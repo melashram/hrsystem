@@ -5,6 +5,7 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { LoginService } from './login.service';
 import { StateStorageService } from '../auth/state-storage.service';
+import {NavbarComponent} from "../../layouts";
 
 @Component({
     selector: 'jhi-login-modal',
@@ -17,6 +18,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
     username: string;
     credentials: any;
 
+
     constructor(
         private eventManager: JhiEventManager,
         private loginService: LoginService,
@@ -24,7 +26,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
         private elementRef: ElementRef,
         private renderer: Renderer,
         private router: Router,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
     ) {
         this.credentials = {};
     }
