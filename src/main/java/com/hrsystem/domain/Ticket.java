@@ -33,11 +33,11 @@ public class Ticket implements Serializable {
     private Instant acceptanceDate;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn
     private Request request;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn
     private TicketStatus ticketStatus;
 
     @ManyToOne
