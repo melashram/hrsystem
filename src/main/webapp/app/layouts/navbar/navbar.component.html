@@ -14,7 +14,7 @@
 
 
             <li class="nav-item" *jhiHasAnyAuthority="['ROLE_EMPLOYEE','ROLE_HR','ROLE_IT']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="../ticket-hrit" (click) = "reload()">
+                <a class="nav-link" routerLink="../ticket-hrit" >
                     <span>
                         <i class="fa fa-home" aria-hidden="true"></i>
                         <span>Create New Ticket</span>
@@ -23,7 +23,7 @@
             </li>
 
             <li class="nav-item" *jhiHasAnyAuthority="['ROLE_HR']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="../ticket-available" (click) = "reload()" >
+                <a class="nav-link" routerLink="../ticket-available">
                     <span>
                         <i class="fa fa-home" aria-hidden="true"></i>
                         <span>HR Tickets Avaliable</span>
@@ -32,7 +32,7 @@
             </li>
 
             <li class="nav-item" *jhiHasAnyAuthority="['ROLE_IT']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="../ticket-available" (click) = "reload()" >
+                <a class="nav-link" routerLink="../ticket-available">
                     <span>
                         <i class="fa fa-home" aria-hidden="true"></i>
                         <span>IT Tickets Avaliable</span>
@@ -40,14 +40,14 @@
                 </a>
             </li>
 
-            <li class="nav-item" *jhiHasAnyAuthority="['ROLE_IT' , 'ROLE_HR' , 'ROLE_EMPLOYEE']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                   <a>
-                    <span class="nav-link">
-                        <i class="fa fa-home" aria-hidden="true"></i>
-                        <span>{{account.login}}</span>
-                    </span>
-                   </a>
-            </li>
+            <!--<li class="nav-item" *jhiHasAnyAuthority="['ROLE_IT' , 'ROLE_HR' , 'ROLE_EMPLOYEE']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
+                   <!--<a>-->
+                    <!--<span class="nav-link">-->
+                        <!--<i class="fa fa-home" aria-hidden="true"></i>-->
+                        <!--<span>{{account.login}}</span>-->
+                    <!--</span>-->
+                   <!--</a>-->
+            <!--</li>-->
             <li *ngSwitchCase="true"  ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a *jhiHasAnyAuthority="['ROLE_ADMIN']" class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
