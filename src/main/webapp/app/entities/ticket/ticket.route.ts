@@ -68,7 +68,7 @@ export const ticketPopupRoute: Routes = [
         path: 'ticket/:id/edit',
         component: TicketPopupComponent,
         data: {
-            authorities: ['ROLE_HR' , 'ROLE_IT' , 'ROLE_ADMIN'],
+            authorities: ['ROLE_HR' , 'ROLE_IT' , 'ROLE_ADMIN', 'ROLE_EMPLOYEE'],
             pageTitle: 'Tickets'
         },
         canActivate: [UserRouteAccessService],

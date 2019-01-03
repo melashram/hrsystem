@@ -156,10 +156,12 @@
             <input type="text" class="form-control" name="reason" id="field_reason1"
                    [(ngModel)]="ticket.reason"  maxlength="100" />
         </div>
-        <div class="form-group" [hidden]="ticket.id">
+        <div class="form-group" [hidden]="!ticket.id">
             <label class="form-control-label" for="field_comment">Comment</label>
-            <input type="text" class="form-control" name="comment" id="field_comment1"
-                   [(ngModel)]="ticket.comment"  maxlength="100" />
+            <!--<input type="text" class="form-control" name="comment" id="field_comment1"-->
+                   <!--[(ngModel)]="ticket.comment"  maxlength="100" />-->
+            <textarea cols="40" rows="5" type="text" class="form-control" name="comment" id="field_comment1"
+                      [(ngModel)]="ticket.comment"></textarea>
         </div>
 
         <div class="form-group" [hidden]="!ticket.id"  >
